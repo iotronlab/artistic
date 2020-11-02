@@ -18,11 +18,9 @@ class AttributeResource extends JsonResource
             'id'          => $this->id,
             'code'        => $this->code,
             'type'        => $this->type,
-            'name'        => $this->name,
+            'name'        => $this->admin_name,
             'is_configurable' => $this->is_configurable,
             'options'     => AttributeOptionResource::collection($this->options),
-            'created_at'  => $this->created_at,
-            'updated_at'  => $this->updated_at,
         ];
     }
 }

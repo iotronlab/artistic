@@ -4,7 +4,7 @@ namespace App\Models\Traits;
 
 
 
-use App\Cart\Money;
+use App\Helpers\Money;
 
 
 trait HasPrice
@@ -17,7 +17,6 @@ trait HasPrice
 
     public function getFormattedPriceAttribute()
     {
-    return  $this->price->formatted();
+        return  $this->price->formatted();
     }
-
 }

@@ -26,3 +26,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', 'api\auth\AuthController@details');
     Route::get('logout', 'api\auth\AuthController@logout');
 });
+//Attribute routes
+Route::resource('attributes', 'api\Attribute\AttributeController');
+Route::get('/families', 'api\Attribute\AttributeController@families');
+Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
+
+//Product routes
+Route::resource('products', 'api\Product\ProductController');
+Route::post('/products/stock', 'api\Product\ProductController@addStock');
+Route::post('/products/category', 'api\Product\ProductController@addCategory');
+Route::get('/product-configurable-config/{id}', 'api\Product\ProductController@configurableConfig');

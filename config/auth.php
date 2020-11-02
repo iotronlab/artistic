@@ -46,9 +46,20 @@ return [
             'provider' => 'customers',
         ],
 
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'customers',
+            'hash' => false,
+        ],
+
+        'vendor-api' => [
+            'driver' => 'passport',
+            'provider' => 'vendors',
             'hash' => false,
         ],
     ],
@@ -79,7 +90,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Customer\Customer::class,
         ],
-
+        'vendors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Vendor\Vendor::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

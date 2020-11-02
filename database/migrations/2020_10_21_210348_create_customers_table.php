@@ -13,6 +13,11 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
+        Schema::create('customer_groups', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,6 +25,9 @@ class CreateCustomersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->boolean('status')->default('1');
+            $table->boolean('subscribed_to_news_letter')->default('0');
+            $table->bigInteger('customer_group_id')->unsigned()->nullable();
+            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -31,6 +39,7 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('customer_groups');
         Schema::dropIfExists('customers');
     }
 }

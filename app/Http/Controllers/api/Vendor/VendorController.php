@@ -19,7 +19,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::all();
+        $vendors = Vendor::where('status', 1)->get();
         return VendorIndexResource::collection($vendors);
     }
 

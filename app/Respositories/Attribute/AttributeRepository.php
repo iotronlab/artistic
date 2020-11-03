@@ -32,4 +32,11 @@ class AttributeRepository extends Repository
     {
         return Attribute::class;
     }
+    /**
+     * @return array
+     */
+    public function getFilterAttributes()
+    {
+        return $this->model->where('is_filterable', 1)->with('options')->get();
+    }
 }

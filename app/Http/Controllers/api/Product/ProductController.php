@@ -7,22 +7,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductBundle;
 use App\Models\Product\ProductFlat;
 use App\Repositories\Attribute\AttributeFamilyRepository;
+use App\Repositories\Product\ProductFlatRepository;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     protected $productRepository;
+    protected $productFlatRepository;
     protected $attributeFamilyRepository;
 
-    public function __construct(ProductRepository $productRepository, AttributeFamilyRepository $attributeFamilyRepository)
+    public function __construct(ProductRepository $productRepository, ProductFlatRepository $productFlatRepository, AttributeFamilyRepository $attributeFamilyRepository)
     {
         $this->productRepository = $productRepository;
+        $this->productFlatRepository = $productFlatRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
     }
     /**
@@ -30,7 +34,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')));
+        // return response()->json([
+        //     'data' => $this->productRepository->getAll()
+        // ]);
+        return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')))
+            ->additional([
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(1)),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(1))
+            ]);
     }
 
     /**
@@ -93,7 +104,10 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productRepository->findOrFail($id);
-        return new ProductResource($product->flat);
+        return response()->json([
+            'configurable_attributes' => $this->configurableConfig($id),
+            'product' => (new ProductResource($product->flat))
+        ], 200);
     }
 
     /**
@@ -166,8 +180,6 @@ class ProductController extends Controller
      */
     public function configurableConfig($id)
     {
-        return response()->json([
-            'data' => app('App\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id)),
-        ]);
+        return app('App\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id));
     }
 }

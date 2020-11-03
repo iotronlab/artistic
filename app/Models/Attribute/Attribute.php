@@ -32,4 +32,9 @@ class Attribute extends Model
     {
         return $this->hasMany(AttributeOption::class);
     }
+
+    public function scopeFilterableAttributes($query)
+    {
+        return $query->where('is_filterable', 1)->orderBy('position');
+    }
 }

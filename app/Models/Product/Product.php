@@ -164,4 +164,5 @@ class Product extends Model
     {
         return min($this->stockCount(), $count);
     }
+    
 }

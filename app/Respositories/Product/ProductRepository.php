@@ -7,6 +7,7 @@ use App\Models\Product\ProductFlat;
 use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;
+use App\Scoping\Scopes\CategoryScope;
 use Illuminate\Container\Container as App;
 
 
@@ -46,21 +47,28 @@ class ProductRepository extends Repository
         return Product::class;
     }
 
-    public function getAll($categoryId = null)
+    public function getAll()
     {
         $params = request()->input();
 
-        $results = ProductFlat::leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-            ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
-            ->withScopes($this->scopes())->paginate(isset($params['limit']) ? $params['limit'] : 9);
+        $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params) {
+
+            $qb = $query->distinct()
+                ->addSelect('product_flat.*')
+                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id');
+            return $qb;
+        })
+            //->withScopes($this->scopes())
+            ->paginate(isset($params['limit']) ? $params['limit'] : 9);
         return $results;
     }
     protected function scopes()
     {
         return [
 
-            'attribute' => new AttributeScope()
-
+            'attribute' => new AttributeScope(),
+            'categories'  => new CategoryScope()
         ];
     }
 

@@ -68,7 +68,7 @@ class ConfigurableOption
             if ($product instanceof ProductFlat) {
                 $productId = $product->product_id;
             } else {
-                $productId = $product->id;
+                $productId = $product->sku;
             }
 
             foreach ($allowAttributes as $productAttribute) {

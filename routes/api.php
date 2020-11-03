@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', 'api\auth\AuthController@details');
     Route::get('logout', 'api\auth\AuthController@logout');
 });
+//Category routes
+Route::resource('categories', 'api\Category\CategoryController');
+
 //Attribute routes
 Route::resource('attributes', 'api\Attribute\AttributeController');
 Route::get('/families', 'api\Attribute\AttributeController@families');

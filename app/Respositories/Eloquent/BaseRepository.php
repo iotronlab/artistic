@@ -13,6 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class BaseRepository
 {
+    /**
+     * @var \Closure
+     */
+    protected $scopeQuery = null;
+
 
     /**
      * @var Model
@@ -126,5 +131,18 @@ abstract class BaseRepository
         $results = $this->model->{$method}($limit, $columns);
         $results->appends(app('request')->query());
         return $results;
+    }
+    /**
+     * Query Scope
+     *
+     * @param \Closure $scope
+     *
+     * @return $this
+     */
+    public function scopeQuery(\Closure $scope)
+    {
+        $this->scopeQuery = $scope;
+
+        return $this;
     }
 }

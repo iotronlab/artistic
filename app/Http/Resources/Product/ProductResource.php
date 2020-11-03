@@ -3,6 +3,8 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Attribute\AttributeResource;
+use App\Models\Product\Product;
+use App\Models\Product\ProductFlat;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -32,7 +34,8 @@ class ProductResource extends JsonResource
             // 'in_stock'               => $product->isSaleable(),
             // 'stock'                  => $product->stockCount(),
             //'images'                 => ProductImageResource::collection($product->images),
-            'variants'               => Self::collection($this->variants),
+
+            'variants'               => Self::collection($this->variants)
             //For configurable attributes merge super attributes
             // $this->mergeWhen($this->getTypeInstance()->isComposite(), [
             //     'super_attributes' => AttributeResource::collection($product->super_attributes),

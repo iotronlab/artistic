@@ -15,12 +15,8 @@
         "laravel/framework": "^8.0",
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
-<<<<<<< Updated upstream
-        "moneyphp/money": "^3.3",
-=======
         "league/flysystem-aws-s3-v3": "~1.0",
         "league/flysystem-cached-adapter": "~1.0",
->>>>>>> Stashed changes
         "tcg/voyager": "^1.4"
     },
     "require-dev": {

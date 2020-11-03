@@ -58,8 +58,7 @@ class ProductRepository extends Repository
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                 ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id');
             return $qb;
-        })
-            //->withScopes($this->scopes())
+        })->model->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 9);
         return $results;
     }

@@ -11,7 +11,6 @@ class ProductFlatRepository extends Repository
     use CanBeScoped;
     public function model()
     {
-        dd("model");
         return ProductFlat::class;
     }
 

@@ -39,8 +39,8 @@ class ProductController extends Controller
         // ]);
         return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')))
             ->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(1)),
-                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(1))
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(request()->input('category_id'))),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(request()->input('category_id')))
             ]);
     }
 

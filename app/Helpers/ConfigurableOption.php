@@ -86,7 +86,6 @@ class ConfigurableOption
     /**
      * Get product attributes
      *
-     * @param  \Webkul\Product\Contracts\Product|\Webkul\Product\Contracts\ProductFlat  $product
      * @param  array  $options
      * @return array
      */

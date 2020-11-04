@@ -16,8 +16,9 @@ class ProductFlatSeeder extends Seeder
     public function run()
     {
         ProductFlat::factory()
-            ->count(5)
+            ->count(1)
             ->for(Product::factory())
+            ->times(25)
             ->create();
     }
 }

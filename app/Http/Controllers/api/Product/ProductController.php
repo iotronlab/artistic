@@ -34,13 +34,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // return response()->json([
-        //     'data' => $this->productRepository->getAll()
-        // ]);
-        return ProductResource::collection($this->productRepository->getAll(request()->input('category_id')))
+        return ProductResource::collection($this->productRepository->getAll())
             ->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(request()->input('category_id'))),
-                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(request()->input('category_id')))
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(1)),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(1))
             ]);
     }
 
@@ -92,7 +89,7 @@ class ProductController extends Controller
             'sku'                 => ['required', 'unique:products,sku'],
         ]);
         $product = $this->productRepository->create(request()->all());
-        return new ProductResource(Product::find($product->id)->flat);
+        return new ProductResource(Product::find($product->id));
     }
 
     /**
@@ -106,7 +103,7 @@ class ProductController extends Controller
         $product = $this->productRepository->findOrFail($id);
         return response()->json([
             'configurable_attributes' => $this->configurableConfig($id),
-            'product' => (new ProductResource($product->flat))
+            'product' => (new ProductResource($product))
         ], 200);
     }
 
@@ -119,7 +116,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->findOrFail($id);
-        return new ProductResource($product->flat);
+        return new ProductResource($product);
     }
 
     /**

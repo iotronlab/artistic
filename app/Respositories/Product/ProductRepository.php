@@ -50,15 +50,8 @@ class ProductRepository extends Repository
     public function getAll()
     {
         $params = request()->input();
-
-        $results = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params) {
-
-            $qb = $query->distinct()
-                ->addSelect('product_flat.*')
-                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-                ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id');
-            return $qb;
-        })->model->withScopes($this->scopes())
+        $results = Product::with('variants', 'flat')
+            ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 9);
         return $results;
     }
@@ -66,8 +59,8 @@ class ProductRepository extends Repository
     {
         return [
 
-            'attribute' => new AttributeScope(),
-            'categories'  => new CategoryScope()
+            //'attribute' => new AttributeScope(),
+            'category' => new CategoryScope()
         ];
     }
 

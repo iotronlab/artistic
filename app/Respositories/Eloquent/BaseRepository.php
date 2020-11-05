@@ -132,17 +132,4 @@ abstract class BaseRepository
         $results->appends(app('request')->query());
         return $results;
     }
-    /**
-     * Query Scope
-     *
-     * @param \Closure $scope
-     *
-     * @return $this
-     */
-    public function scopeQuery(\Closure $scope)
-    {
-        $this->scopeQuery = $scope;
-
-        return $this;
-    }
 }

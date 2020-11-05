@@ -3,13 +3,14 @@
 namespace App\Models\Product;
 
 use App\Models\Category\Category;
+use App\Models\Traits\CanBeScoped;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, CanBeScoped;
     protected $fillable = [
         'type',
         'attribute_family_id',
@@ -164,5 +165,4 @@ class Product extends Model
     {
         return min($this->stockCount(), $count);
     }
-    
 }

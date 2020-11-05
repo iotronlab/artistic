@@ -17,20 +17,20 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
-        $product = $this->product ? $this->product : $this;
+        $product = $this->product ? $this->product : $this->flat;
 
 
         return [
             'product_id'             => $product->id,
-            // 'type'                   => $product->type,
-            'name'                   => $this->name,
-            'price'                  => $this->formattedPrice,
-            'short_description'      => $this->short_description,
-            'sku'                    => $this->sku,
-            'color'                  => $this->color,
-            'size'                   => $this->size,
-            'color_label'            => $this->color_label,
-            'size_label'             => $this->size_label,
+            'type'                   => $product->type,
+            'name'                   => $this->flat->name,
+            'price'                  => $this->flat->formattedPrice,
+            'short_description'      => $this->flat->short_description,
+            'sku'                    => $this->flat->sku,
+            'color'                  => $this->flat->color,
+            'size'                   => $this->flat->size,
+            'color_label'            => $this->flat->color_label,
+            'size_label'             => $this->flat->size_label,
             // 'in_stock'               => $product->isSaleable(),
             // 'stock'                  => $product->stockCount(),
             //'images'                 => ProductImageResource::collection($product->images),

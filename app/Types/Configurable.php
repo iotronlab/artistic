@@ -139,16 +139,16 @@ class Configurable extends AbstractType
         ]);
 
 
-        //inserting value in Product Attribute value with basic array values
-        foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
-            $attribute = Attribute::where('code', $attributeCode)->pluck('id')->first();
-            $attribute_id = $attribute;
-            $this->attributeValueRepository->create([
-                'product_id'   => $variant->id,
-                'attribute_id' => $attribute_id,
-                'value'        => $data[$attributeCode],
-            ]);
-        }
+        // //inserting value in Product Attribute value with basic array values
+        // foreach (['sku', 'name', 'price', 'weight', 'status'] as $attributeCode) {
+        //     $attribute = Attribute::where('code', $attributeCode)->pluck('id')->first();
+        //     $attribute_id = $attribute;
+        //     $this->attributeValueRepository->create([
+        //         'product_id'   => $variant->id,
+        //         'attribute_id' => $attribute_id,
+        //         'value'        => $data[$attributeCode],
+        //     ]);
+        // }
 
         //create same product variant with null values in Product Flat table 
         $variant_flat = ProductFlat::create([

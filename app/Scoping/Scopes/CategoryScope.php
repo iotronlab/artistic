@@ -9,7 +9,6 @@ class CategoryScope implements Scope
 {
     public function apply(Builder $builder, $value)
     {
-        dd('ca');
         return $builder->whereHas('categories', function ($builder) use ($value) {
 
             $builder->where('slug', $value);

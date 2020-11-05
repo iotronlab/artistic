@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Category\Category;
 use App\Models\Product\ProductFlat;
 use App\Models\Traits\CanBeScoped;
 use App\Repositories\Eloquent\Repository;
@@ -28,6 +29,7 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
+        //$category = Category::where('slug', $category)->get();
         if (!$category) {
             return $this->model->max('price');
         }
@@ -45,6 +47,7 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductAttribute($categoryId)
     {
+
         $qb = $this->model
             ->leftJoin('product_categories', 'product_flat.product_id', 'product_categories.product_id')
             ->where('product_categories.category_id', $categoryId);
@@ -69,6 +72,7 @@ class ProductFlatRepository extends Repository
      */
     public function getFilterableAttributes($category)
     {
+        //$category = Category::where('slug', $category)->get();
         $filterAttributes = [];
 
         if (count($category->filterableAttributes) > 0) {

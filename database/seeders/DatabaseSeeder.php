@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             AttributeGroupTableSeeder::class,
             AttributeTableSeeder::class,
             AttributeOptionTableSeeder::class,
-            ProductFlatSeeder::class
+            ProductFlatSeeder::class,
+            ProductCategorySeeder::class
         ]);
     }
 }

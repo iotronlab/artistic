@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Scoping\Contracts\Scope;
 use App\Scoping\Scopes\AttributeScope;
+use App\Scoping\Scopes\CategoryScope;
 use Illuminate\Database\Eloquent\Builder;
 
 class Scoper
@@ -19,6 +20,7 @@ class Scoper
 
     public function apply(Builder $builder, array $scopes)
     {
+        //dd($scopes['category']);
         if (isset($scopes['attribute'])) {
             $scopes = new AttributeScope();
             $scopes->apply($builder, request()->input());

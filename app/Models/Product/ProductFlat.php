@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Category\Category;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasPrice;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,6 +45,13 @@ class ProductFlat extends Model
         return $this->belongsTo(Product::class);
     }
 
+    /**
+     * The categories that belong to the product.
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'product_id');
+    }
     /**
      * Get the product variants that owns the product.
      */

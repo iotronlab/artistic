@@ -3,7 +3,6 @@
 namespace App\Repositories\Product;
 
 use App\Models\Product\Product;
-use App\Models\Product\ProductFlat;
 use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;

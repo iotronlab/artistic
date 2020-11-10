@@ -4,7 +4,6 @@ namespace App\Helpers;
 
 use App\Helpers\Money;
 use App\Models\Customer\Customer;
-use App\Models\ShippingMethod;
 
 class Cart
 {
@@ -73,6 +72,7 @@ class Cart
     {
         return
             $this->customer->cart->each(function ($product) {
+                dd($product);
                 $quantity = $product->minStock($product->pivot->quantity);
                 $this->changed = $quantity != $product->quantity;
                 $product->pivot->update([

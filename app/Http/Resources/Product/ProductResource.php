@@ -31,8 +31,8 @@ class ProductResource extends JsonResource
             'size'                   => $this->flat->size,
             'color_label'            => $this->flat->color_label,
             'size_label'             => $this->flat->size_label,
-            // 'in_stock'               => $product->isSaleable(),
-            // 'stock'                  => $product->stockCount(),
+            'in_stock'               => $product->isSaleable(),
+            'stock'                  => $product->stockCount(),
             //'images'                 => ProductImageResource::collection($product->images),
 
             'variants'               => Self::collection($this->variants)

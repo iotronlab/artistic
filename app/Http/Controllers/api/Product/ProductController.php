@@ -34,11 +34,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection($this->productRepository->getAll())
-            ->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice(Category::find(1)),
-                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes(Category::find(1))
+        $category = request()->input('category');
+        $products = ProductResource::collection($this->productRepository->getAll());
+        if ($category != null) {
+            $products = $products->additional([
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($category),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($category)
             ]);
+        }
+        return $products;
     }
 
     /**
@@ -95,14 +99,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = $this->productRepository->findOrFail($id);
         return response()->json([
-            'configurable_attributes' => $this->configurableConfig($id),
+            'configurable_attributes' => $this->configurableConfig($product->id),
             'product' => (new ProductResource($product))
         ], 200);
     }
@@ -113,9 +115,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = $this->productRepository->findOrFail($id);
         return new ProductResource($product);
     }
 
@@ -140,9 +141,8 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $product = $this->productRepository->findOrFail($id);
         try {
             ProductFlat::where('product_id', $product->id)->delete();
             ProductAttributeValue::where('product_id', $product->id)->delete();
@@ -160,7 +160,7 @@ class ProductController extends Controller
                     ProductFlat::where('product_id', $p->id)->delete();
                 }
             }
-            $this->productRepository->delete($id);
+            $this->productRepository->delete($product->id);
             return response()->json(['message' => "Deleted Successfully"], 200);
         } catch (\Exception $e) {
             report($e);

@@ -38,4 +38,10 @@ Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 Route::resource('products', 'api\Product\ProductController');
 Route::post('/products/stock', 'api\Product\ProductController@addStock');
 Route::post('/products/category', 'api\Product\ProductController@addCategory');
-Route::get('/product-configurable-config/{id}', 'api\Product\ProductController@configurableConfig');
+
+//Cart
+Route::resource('cart', 'api\Cart\CartController', [
+    'parameters' => [
+        'cart' => 'product'
+    ]
+]);

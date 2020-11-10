@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CategorySeeder::class,
-            // AttributeFamilyTableSeeder::class,
-            // AttributeGroupTableSeeder::class,
-            // AttributeTableSeeder::class,
-            // AttributeOptionTableSeeder::class,
-            // ProductFlatSeeder::class,
-            // ProductCategorySeeder::class
+            AttributeFamilyTableSeeder::class,
+            AttributeGroupTableSeeder::class,
+            AttributeTableSeeder::class,
+            AttributeOptionTableSeeder::class,
+            ProductFlatSeeder::class,
+            ProductCategorySeeder::class
         ]);
     }
 }

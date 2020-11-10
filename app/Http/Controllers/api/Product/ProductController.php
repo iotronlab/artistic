@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
-use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductBundle;

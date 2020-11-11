@@ -6,7 +6,6 @@ use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
@@ -20,17 +19,25 @@ class Customer extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
     public function addresses()
     {
         return $this->hasMany(Address::class);
     }
-    public function orders()
+
+    public function wishlist()
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsToMany(Product::class, 'customer_wishlist');
     }
+
     public function cart()
     {
         return $this->belongsToMany(Product::class, 'cart_user')
             ->withPivot('quantity');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

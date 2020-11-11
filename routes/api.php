@@ -19,12 +19,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('vendors', 'api\Vendor\VendorController');
-
+//Customer auth
 Route::post('login', 'api\auth\AuthController@login');
 Route::post('register', 'api\auth\RegisterController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', 'api\auth\AuthController@details');
     Route::get('logout', 'api\auth\AuthController@logout');
+});
+//Customer account details
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('addresses', 'api\Customer\CustomerController@getAddresses');
+    Route::get('wishlist', 'api\Customer\CustomerController@getWishlist');
+    Route::get('orders', 'api\Customer\CustomerController@getOrders');
 });
 //Category routes
 Route::resource('categories', 'api\Category\CategoryController');

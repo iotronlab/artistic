@@ -24,6 +24,7 @@ class ProductController extends Controller
 
     public function __construct(ProductRepository $productRepository, ProductFlatRepository $productFlatRepository, AttributeFamilyRepository $attributeFamilyRepository)
     {
+        //$this->middleware(['auth:api'])->except(['index']);
         $this->productRepository = $productRepository;
         $this->productFlatRepository = $productFlatRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
@@ -102,8 +103,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        if ($product->parent) {
+            $config = $this->configurableConfig($product->parent->id);
+        } else {
+            $config = $this->configurableConfig($product->id);
+        }
         return response()->json([
-            'configurable_attributes' => $this->configurableConfig($product->id),
+            'configurable_attributes' => $config,
             'product' => (new ProductResource($product))
         ], 200);
     }
@@ -177,5 +183,12 @@ class ProductController extends Controller
     public function configurableConfig($id)
     {
         return app('App\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id));
+    }
+
+    public function upload($id)
+    {
+        return response()->json(
+            $this->productRepository->upload(request()->all(), $id)
+        );
     }
 }

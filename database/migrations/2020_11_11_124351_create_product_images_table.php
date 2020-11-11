@@ -15,6 +15,10 @@ class CreateProductImagesTable extends Migration
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id')->index();
+            $table->string('alt')->default('artistic');
+            $table->string('path');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

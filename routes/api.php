@@ -34,8 +34,12 @@ Route::resource('attributes', 'api\Attribute\AttributeController');
 Route::get('/families', 'api\Attribute\AttributeController@families');
 Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 
-//Product routes
+// Route::group(['middleware' => 'auth:api'], function () {
+
+// });
 Route::resource('products', 'api\Product\ProductController');
+//Product routes
+
 Route::post('/products/stock', 'api\Product\ProductController@addStock');
 Route::post('/products/category', 'api\Product\ProductController@addCategory');
 
@@ -45,3 +49,6 @@ Route::resource('cart', 'api\Cart\CartController', [
         'cart' => 'product'
     ]
 ]);
+
+//images
+Route::post('/products/upload-image/{id}', 'api\Product\ProductController@upload');

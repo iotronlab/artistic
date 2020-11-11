@@ -8,7 +8,7 @@ use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;
 use App\Scoping\Scopes\CategoryScope;
 use Illuminate\Container\Container as App;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -86,5 +86,18 @@ class ProductRepository extends Repository
         $this->typeInstance = app(config('product_types.' . $product['type'] . '.class'));
         $product = $this->typeInstance->update($data, $id, $attribute);
         return $product;
+    }
+
+    public function upload($data, $productId)
+    {
+        $index = 1;
+        if (request()->hasFile('product')) {
+            $extension = request()->file('product')->getClientOriginalExtension();
+            //Filename to store
+            $pic_path = $productId . '-' . $index . '.' . $extension;
+            //Upload Image
+            $path = request()->file('product')->storeAs('/vendors/products', $pic_path);
+        }
+        return 'Image uploaded successfully';
     }
 }

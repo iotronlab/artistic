@@ -14,6 +14,7 @@ class Cart
     public function __construct(Customer $customer)
     {
         $this->customer = $customer;
+        dd($this->customer);
     }
 
     public function products()

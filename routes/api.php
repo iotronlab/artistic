@@ -19,13 +19,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('vendors', 'api\Vendor\VendorController');
-//Customer auth
+//Customer auth and social login
 Route::post('login', 'api\auth\AuthController@login');
 Route::post('register', 'api\auth\RegisterController@register');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('details', 'api\auth\AuthController@details');
     Route::get('logout', 'api\auth\AuthController@logout');
 });
+Route::group(['middleware' => 'web'], function () {
+    Route::get(
+        'login/{service}',
+        'api\auth\SocialLoginController@redirectToProvider'
+    );
+    Route::get(
+        'login/{service}/callback',
+        'api\auth\SocialLoginController@handleProviderCallback'
+    );
+});
+
 //Customer account details
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('addresses', 'api\Customer\CustomerController@getAddresses');

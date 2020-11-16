@@ -20,6 +20,16 @@ class Customer extends Authenticatable
         'password',
     ];
 
+    public function social()
+    {
+        return $this->hasMany(CustomerSocial::class, 'customer_id', 'id');
+    }
+
+    public function hasSocialLinked($service)
+    {
+        return (bool) $this->social->where('service', $service)->count();
+    }
+
     public function addresses()
     {
         return $this->hasMany(Address::class);

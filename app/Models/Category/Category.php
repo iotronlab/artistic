@@ -3,6 +3,7 @@
 namespace App\Models\Category;
 
 use App\Models\Attribute\Attribute;
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\HasChildren;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\Product;
 use App\Helpers\ProductType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
+use App\Http\Resources\Product\ProductAttributeResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
 use App\Models\Product\Product;
@@ -110,7 +111,8 @@ class ProductController extends Controller
         }
         return response()->json([
             'configurable_attributes' => $config,
-            'product' => (new ProductResource($product))
+            'product' => (new ProductResource($product)),
+            'attributes' => ProductAttributeResource::collection($product->attribute_values)
         ], 200);
     }
 
@@ -185,10 +187,10 @@ class ProductController extends Controller
         return app('App\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id));
     }
 
-    public function upload($id)
+    public function upload(Product $product)
     {
         return response()->json(
-            $this->productRepository->upload(request()->all(), $id)
+            $this->productRepository->upload(request()->all(), $product)
         );
     }
 }

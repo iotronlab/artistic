@@ -160,9 +160,9 @@ class Configurable extends AbstractType
         //inserting value in Product Attribute value with the attributeId
         foreach ($permutation as $attributeId => $optionId) {
             $this->attributeValueRepository->create([
-                'product_id'   => $variant->id,
-                'attribute_id' => $attributeId,
-                'value'        => $optionId,
+                'product_id'    => $variant->id,
+                'attribute_id'  => $attributeId,
+                'value' => $optionId,
             ]);
 
             $att_value = AttributeOption::where('id', $optionId)->pluck('admin_name')->first();

@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Attribute\AttributeFamily;
 use App\Models\Category\Category;
 use App\Models\Traits\CanBeScoped;
 use App\Repositories\Product\ProductRepository;
@@ -34,7 +35,7 @@ class Product extends Model
 
     public function attribute_family()
     {
-        return $this->belongsTo('App\Models\Attribute\AttributeFamily');
+        return $this->belongsTo(AttributeFamily::class);
     }
 
     /**

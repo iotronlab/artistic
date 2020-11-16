@@ -2,6 +2,7 @@
 
 namespace App\Types;
 
+use App\Models\Product\ProductAttributeValue;
 use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductAttributeValueRepository;
@@ -126,6 +127,35 @@ abstract class AbstractType
         $product = $this->productRepository->find($id);
         //update product
         $product->update($data);
+
+        //update attribute-value table
+        foreach ($product->attribute_family->filterable_attributes() as $attribute) {
+
+            if (!isset($data[$attribute->code])) {
+                continue;
+            }
+
+            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
+                $data[$attribute->code] = null;
+            }
+            $attributeValue = ProductAttributeValue::where([
+                'product_id'   => $product->id,
+                'attribute_id' => $attribute->id
+            ])->first();
+
+            if (!$attributeValue) {
+                $this->attributeValueRepository->create([
+                    'product_id'   => $product->id,
+                    'attribute_id' => $attribute->id,
+                    'value'        => $data[$attribute->code],
+                ]);
+            } else {
+                $this->attributeValueRepository->update([
+                    ProductAttributeValue::$attributeTypeFields[$attribute->type] => $data[$attribute->code]
+                ], $attributeValue->id);
+            }
+        }
+
         //update product flat
         $inputData = Arr::except($data, ['variants']);
         $prod_flat = $this->productFlatRepository->update($inputData, $id);
@@ -179,21 +209,6 @@ abstract class AbstractType
     public function isChildrenCalculated()
     {
         return $this->isChildrenCalculated;
-    }
-    /**
-     * Retrieve product attributes
-     **/
-    public function getEditableAttributes($group = null, $skipSuperAttribute = true)
-    {
-        if ($skipSuperAttribute) {
-            $this->skipAttributes = array_merge($this->product->super_attributes->pluck('code')->toArray(), $this->skipAttributes);
-        }
-
-        if (!$group) {
-            return $this->product->attribute_family->custom_attributes()->whereNotIn('attributes.code', $this->skipAttributes)->get();
-        }
-
-        return $group->custom_attributes()->whereNotIn('code', $this->skipAttributes)->get();
     }
 
 

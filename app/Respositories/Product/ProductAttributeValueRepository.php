@@ -40,4 +40,20 @@ class ProductAttributeValueRepository extends Repository
     {
         return ProductAttributeValue::class;
     }
+    public function create(array $data)
+    {
+        if (isset($data['attribute_id'])) {
+            $attribute = $this->attributeRepository->find($data['attribute_id']);
+        } else {
+            $attribute = $this->attributeRepository->findOneByField('code', $data['attribute_code']);
+        }
+
+        if (!$attribute) {
+            return;
+        }
+
+        $data[ProductAttributeValue::$attributeTypeFields[$attribute->type]] = $data['value'];
+
+        return $this->model->create($data);
+    }
 }

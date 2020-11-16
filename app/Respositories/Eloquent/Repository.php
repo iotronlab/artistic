@@ -31,6 +31,22 @@ abstract class Repository extends BaseRepository
         return $model;
     }
     /**
+     * Find data by field and value
+     *
+     * @param  string  $field
+     * @param  string  $value
+     * @param  array  $columns
+     * @return mixed
+     */
+    public function findOneByField($field, $value = null, $columns = ['*'])
+    {
+        $model = $this->findOneByField($field, $value, $columns = ['*']);
+        return $model->first();
+    }
+
+
+
+    /**
      * @return mixed
      */
     public function getModel()

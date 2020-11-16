@@ -132,4 +132,13 @@ abstract class BaseRepository
         $results->appends(app('request')->query());
         return $results;
     }
+    public function update(array $attributes, $id)
+    {
+        $model = $this->model->findOrFail($id);
+
+        $model->fill($attributes);
+        $model->save();
+
+        return $model;
+    }
 }

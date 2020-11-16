@@ -3,6 +3,7 @@
 namespace App\Repositories\Product;
 
 use App\Models\Product\Product;
+use App\Models\Product\ProductImage;
 use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;
@@ -51,7 +52,7 @@ class ProductRepository extends Repository
         $params = request()->input();
         $results = Product::with('variants', 'flat')
             ->withScopes($this->scopes())
-            ->paginate(isset($params['limit']) ? $params['limit'] : 9);
+            ->paginate(isset($params['limit']) ? $params['limit'] : 20);
         return $results;
     }
     protected function scopes()
@@ -88,15 +89,26 @@ class ProductRepository extends Repository
         return $product;
     }
 
-    public function upload($data, $productId)
+    public function upload(array $data, $product)
     {
         $index = 1;
+        $vendorId = 1;
+        $images = request()->file('product');
+
         if (request()->hasFile('product')) {
-            $extension = request()->file('product')->getClientOriginalExtension();
-            //Filename to store
-            $pic_path = $productId . '-' . $index . '.' . $extension;
-            //Upload Image
-            $path = request()->file('product')->storeAs('/vendors/products', $pic_path);
+            foreach ($images as $item) {
+                $extension = $item->getClientOriginalExtension();
+                //Filename to store
+                $pic_path = $product->sku . '-' . $index . '.' . $extension;
+                //Upload Image
+                $path = $item->storeAs('/' . $vendorId . '/' . $product->sku, $pic_path);
+                ProductImage::create([
+                    'alt' => $product->sku,
+                    'path' => $path,
+                    'product_id' => $product->id
+                ]);
+                $index = $index + 1;
+            }
         }
         return 'Image uploaded successfully';
     }

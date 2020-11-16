@@ -57,4 +57,4 @@ Route::resource('cart', 'api\Cart\CartController', [
 ]);
 
 //images
-Route::post('/products/upload-image/{id}', 'api\Product\ProductController@upload');
+Route::post('/products/upload-image/{product}', 'api\Product\ProductController@upload');

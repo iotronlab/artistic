@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Vendor\VendorIndexResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductIndexResource extends JsonResource
@@ -33,6 +34,7 @@ class ProductIndexResource extends JsonResource
             'sku'                    => $product->sku,
             'in_stock'               => $product->isSaleable(),
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'vendor'                 => new VendorIndexResource($this->vendor)
         ];
     }
 }

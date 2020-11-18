@@ -25,7 +25,7 @@ class VendorFactory extends Factory
             'display_name'     => $this->faker->name,
             'contact_name'     => $this->faker->name,
             'email'            => $this->faker->unique()->email,
-            'slug'             => $this->faker->unique()->slug,
+            'slug'             => $this->faker->unique()->word,
             'password'         => bcrypt('123456'),
             'contact'          => '1234567890',
         ];

@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use App\Models\Attribute\AttributeFamily;
 use App\Models\Category\Category;
 use App\Models\Traits\CanBeScoped;
+use App\Models\Vendor\Vendor;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -165,5 +166,12 @@ class Product extends Model
     public function minStock($count)
     {
         return min($this->stockCount(), $count);
+    }
+    /**
+     * The images that belong to the product.
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id');
     }
 }

@@ -25,6 +25,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '1',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -36,6 +37,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '2',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -47,6 +49,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '3',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -58,6 +61,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '4',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -69,6 +73,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '5',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -80,6 +85,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '6',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -91,6 +97,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '7',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -102,6 +109,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '8',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -113,6 +121,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '9',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -124,6 +133,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '10',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -135,6 +145,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '11',
                 'is_filterable'       => '1',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -146,6 +157,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '13',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -157,6 +169,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '16',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -168,6 +181,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '17',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -179,6 +193,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '18',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -190,6 +205,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '19',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -201,6 +217,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '20',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -212,6 +229,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '21',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -223,6 +241,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '22',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -234,6 +253,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '23',
                 'is_filterable'       => '1',
                 'is_configurable'     => '1',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -245,6 +265,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '24',
                 'is_filterable'       => '1',
                 'is_configurable'     => '1',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -256,6 +277,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '25',
                 'is_filterable'       => '1',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
@@ -267,6 +289,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '26',
                 'is_filterable'       => '0',
                 'is_configurable'     => '0',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ],
@@ -279,6 +302,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '27',
                 'is_filterable'       => '1',
                 'is_configurable'     => '1',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ],
@@ -291,6 +315,7 @@ class AttributeTableSeeder extends Seeder
                 'position'            => '28',
                 'is_filterable'       => '1',
                 'is_configurable'     => '1',
+                'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ]

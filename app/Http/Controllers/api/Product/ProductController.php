@@ -6,6 +6,7 @@ use App\Helpers\ProductType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
 use App\Http\Resources\Product\ProductAttributeResource;
+use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
 use App\Models\Product\Product;
@@ -36,7 +37,7 @@ class ProductController extends Controller
     public function index()
     {
         $category = request()->input('category');
-        $products = ProductResource::collection($this->productRepository->getAll());
+        $products = ProductIndexResource::collection($this->productRepository->getAll());
         if ($category != null) {
             $products = $products->additional([
                 'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($category),
@@ -109,11 +110,20 @@ class ProductController extends Controller
         } else {
             $config = $this->configurableConfig($product->id);
         }
-        return response()->json([
-            'configurable_attributes' => $config,
-            'product' => (new ProductResource($product)),
-            'attributes' => ProductAttributeResource::collection($product->attribute_values)
-        ], 200);
+        if ($product->type == 'simple') {
+            return response()->json([
+                'product' => (new ProductResource($product)),
+                'attributes' => ProductAttributeResource::collection($product->attribute_values)
+            ], 200);
+        } else {
+            return response()->json(
+                [
+                    'configurable_attributes' => $config,
+                    'product' => (new ProductResource($product))
+                ],
+                200
+            );
+        }
     }
 
     /**

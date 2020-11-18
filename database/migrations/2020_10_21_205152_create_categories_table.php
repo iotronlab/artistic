@@ -18,8 +18,10 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('restrict');
             $table->string('meta_title')->nullable();
+            $table->string('meta_keyword')->nullable();
             $table->text('meta_desc')->nullable();
             $table->string('name');
+            $table->string('image_path')->nullable();
             $table->string('slug')->unique();
             $table->boolean('status')->default('0');
             $table->boolean('is_visible_on_front')->default('0');

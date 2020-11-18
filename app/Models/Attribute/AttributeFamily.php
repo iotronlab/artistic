@@ -20,7 +20,6 @@ class AttributeFamily extends Model
      */
     public function custom_attributes()
     {
-
         return Attribute::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
             ->join('attribute_groups', 'attribute_group_mappings.attribute_group_id', '=', 'attribute_groups.id')
             ->join('attribute_families', 'attribute_groups.attribute_family_id', '=', 'attribute_families.id')
@@ -57,5 +56,12 @@ class AttributeFamily extends Model
     public function filterable_attributes()
     {
         return $this->custom_attributes()->where('attributes.is_filterable', 1)->get();
+    }
+    /**
+     * Get user defined attributes for the attribute groups.
+     */
+    public function is_user_defined()
+    {
+        return $this->custom_attributes()->where('attributes.is_user_defined', 1)->get();
     }
 }

@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'sku'                   => $this->faker->unique()->word,
             'type'                  => 'simple',
             'attribute_family_id'   => '1',
-            // 'vendor_id'             => $this->faker->numberBetween(1, 2)
+            'vendor_id'             => $this->faker->numberBetween(1, 18)
         ];
     }
 }

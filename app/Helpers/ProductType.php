@@ -2,11 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Product\ProductRepository;
-use App\Types\AbstractType;
-use App\Types\Configurable;
-use App\Types\Simple;
 
 class ProductType
 {

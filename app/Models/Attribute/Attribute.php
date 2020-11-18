@@ -21,7 +21,8 @@ class Attribute extends Model
         'is_filterable',
         'is_configurable',
         'is_visible_on_front',
-        'is_required'
+        'is_required',
+        'is_user_defined'
     ];
     // protected $with = ['options'];
 

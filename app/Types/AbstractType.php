@@ -129,15 +129,12 @@ abstract class AbstractType
         $product->update($data);
 
         //update attribute-value table
-        foreach ($product->attribute_family->filterable_attributes() as $attribute) {
+        foreach ($product->attribute_family->is_user_defined() as $attribute) {
 
             if (!isset($data[$attribute->code])) {
                 continue;
             }
 
-            if ($attribute->type == 'price' && isset($data[$attribute->code]) && $data[$attribute->code] == '') {
-                $data[$attribute->code] = null;
-            }
             $attributeValue = ProductAttributeValue::where([
                 'product_id'   => $product->id,
                 'attribute_id' => $attribute->id

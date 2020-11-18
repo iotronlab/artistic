@@ -2,12 +2,9 @@
 
 namespace App\Http\Resources\Product;
 
-use App\Http\Resources\Attribute\AttributeResource;
-use App\Models\Product\Product;
-use App\Models\Product\ProductFlat;
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Vendor\VendorReviewResource;
 
-class ProductResource extends JsonResource
+class ProductResource extends ProductIndexResource
 {
     /**
      * Transform the resource into an array.
@@ -20,26 +17,22 @@ class ProductResource extends JsonResource
         $product = $this->product ? $this->product : $this->flat;
 
 
-        return [
-            'product_id'             => $product->id,
-            'type'                   => $product->type,
-            'name'                   => $this->flat->name,
-            'price'                  => $this->flat->formattedPrice,
+        return array_merge(parent::toArray($request), [
             'short_description'      => $this->flat->short_description,
-            'sku'                    => $product->sku,
-            'color'                  => $this->flat->color,
-            'size'                   => $this->flat->size,
-            'color_label'            => $this->flat->color_label,
-            'size_label'             => $this->flat->size_label,
-            'in_stock'               => $product->isSaleable(),
-            'stock'                  => $product->stockCount(),
-            //'images'                 => ProductImageResource::collection($product->images),
+            'attributes' => [
+                'color'                  => $this->flat->color,
+                'size'                   => $this->flat->size,
+                'material'                  => $this->flat->material,
+                'medium'                   => $this->flat->medium,
+            ],
 
-            'variants'               => Self::collection($this->variants)
-            //For configurable attributes merge super attributes
-            // $this->mergeWhen($this->getTypeInstance()->isComposite(), [
-            //     'super_attributes' => AttributeResource::collection($product->super_attributes),
-            // ]),
-        ];
+            'stock'                  => $product->stockCount(),
+            'images'                 => ProductImageResource::collection($product->images),
+            'reviews'                => VendorReviewResource::collection($product->vendor->reviews),
+            //merge variants for configurable product
+            $this->mergeWhen($product->getTypeInstance()->isComposite(), [
+                'variants'               => Self::collection($this->variants),
+            ])
+        ]);
     }
 }

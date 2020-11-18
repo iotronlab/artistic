@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Vendor\VendorReview;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,13 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // CategorySeeder::class,
-            // AttributeFamilyTableSeeder::class,
+            CustomerSeeder::class,
+            VendorSeeder::class,
+            //VendorReview::class
+            CategorySeeder::class,
+            AttributeFamilyTableSeeder::class,
             AttributeGroupTableSeeder::class,
-            // AttributeTableSeeder::class,
-            // AttributeOptionTableSeeder::class,
-            // ProductFlatSeeder::class,
-            // ProductCategorySeeder::class
+            AttributeTableSeeder::class,
+            AttributeOptionTableSeeder::class,
+            ProductFlatSeeder::class,
+            ProductCategorySeeder::class
         ]);
     }
 }

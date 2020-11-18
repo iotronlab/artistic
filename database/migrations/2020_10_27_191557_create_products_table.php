@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('sku')->unique();
             $table->string('type');
+            $table->integer('popularity')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('attribute_family_id')->nullable();

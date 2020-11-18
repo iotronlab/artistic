@@ -52,7 +52,7 @@ class Product extends Model
      */
     public function variants()
     {
-        return $this->hasMany('App\Models\Product\Product', 'parent_id');
+        return $this->hasMany(Product::class, 'parent_id');
     }
 
     /**

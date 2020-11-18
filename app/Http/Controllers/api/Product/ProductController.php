@@ -38,12 +38,12 @@ class ProductController extends Controller
     {
         $category = request()->input('category');
         $products = ProductIndexResource::collection($this->productRepository->getAll());
-        if ($category != null) {
-            $products = $products->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($category),
-                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($category)
-            ]);
-        }
+        // if ($category != null ) {
+        //     $products = $products->additional([
+        //         'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($category),
+        //         'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($category)
+        //     ]);
+        // }
         return $products;
     }
 

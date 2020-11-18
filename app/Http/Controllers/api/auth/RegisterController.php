@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\auth;
 
+use App\Events\CustomerRegistered;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,8 @@ class RegisterController extends Controller
             Auth::login($user);
             $accessToken = Auth::user()->createToken('authToken')->accessToken;
             // Mail::to($request->email)->send(new WelcomeUser($input));
+            //Triggers event queue
+            event(new CustomerRegistered($user));
             return response()->json([
                 'success' => true, 'message' => 'Account created successfully.',
                 'token' => $accessToken

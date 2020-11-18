@@ -14,11 +14,13 @@ class VendorIndexResource extends JsonResource
      */
     public function toArray($request)
     {
+        $vendor = $this->vendor ? $this->vendor : $this;
         return [
 
-            'id'       => $this->id,
-            'name'     => $this->display_name,
-            'slug'    => $this->slug,
+            'id'       => $vendor->id,
+            'name'     => $vendor->display_name,
+            'slug'    => $vendor->slug,
+            'popularity' => $vendor->popularity
         ];
     }
 }

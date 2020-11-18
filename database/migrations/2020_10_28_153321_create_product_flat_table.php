@@ -23,8 +23,6 @@ class CreateProductFlatTable extends Migration
             $table->boolean('featured')->nullable();
             $table->boolean('status')->nullable();
             $table->string('thumbnail')->nullable();
-            $table->string('material')->nullable();
-            $table->string('medium')->nullable();
 
             $table->decimal('price', 12, 4)->nullable();
             $table->decimal('special_price', 12, 4)->nullable();
@@ -36,12 +34,12 @@ class CreateProductFlatTable extends Migration
             $table->decimal('width', 12, 4)->nullable();
             $table->decimal('height', 12, 4)->nullable();
             $table->decimal('depth', 12, 4)->nullable();
-
             $table->decimal('weight', 12, 4)->nullable();
+
             $table->integer('color')->nullable();
-            $table->string('color_label')->nullable();
             $table->integer('size')->nullable();
-            $table->string('size_label')->nullable();
+            $table->string('material')->nullable();
+            $table->string('medium')->nullable();
 
             $table->unsignedBigInteger('product_id')->unique();
             $table->foreign('product_id')->references('id')->on('products');

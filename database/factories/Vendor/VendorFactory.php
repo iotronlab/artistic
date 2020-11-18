@@ -28,6 +28,7 @@ class VendorFactory extends Factory
             'slug'             => $this->faker->unique()->word,
             'password'         => bcrypt('123456'),
             'contact'          => '1234567890',
+            'popularity'       => $this->faker->numberBetween(20, 100)
         ];
     }
 }

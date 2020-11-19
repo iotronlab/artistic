@@ -22,6 +22,12 @@ class Vendor extends Authenticatable
     /**
      * Get the vendor reviews.
      */
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function reviews()
     {
         return $this->hasMany(VendorReview::class, 'vendor_id');

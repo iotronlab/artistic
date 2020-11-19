@@ -51,7 +51,7 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
         $results = Product::with('variants', 'flat')
-            ->withScopes($this->scopes())
+            ->withScopes($this->scopes())->newest()
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
         return $results;
     }

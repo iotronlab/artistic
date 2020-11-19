@@ -169,7 +169,6 @@ class Configurable extends AbstractType
             $att_name = Attribute::where('id', $attributeId)->pluck('code')->first();
             //create same product variant with null values in Product Flat table 
             ProductFlat::where('id', $variant_flat->id)->update([
-                $att_name . '_label' =>  $att_value,
                 $att_name         =>  $optionId,
             ]);
         }

@@ -17,10 +17,11 @@ class VendorIndexResource extends JsonResource
         $vendor = $this->vendor ? $this->vendor : $this;
         return [
 
-            'id'       => $vendor->id,
-            'name'     => $vendor->display_name,
-            'slug'    => $vendor->slug,
-            'popularity' => $vendor->popularity
+            'id'          => $vendor->id,
+            'name'        => $vendor->display_name,
+            'slug'        => $vendor->slug,
+            'rating'      => $vendor->rating,
+            'popularity'  => $vendor->popularity
         ];
     }
 }

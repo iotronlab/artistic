@@ -9,7 +9,6 @@ use App\Http\Resources\Attribute\AttributeResource;
 use App\Models\Attribute\AttributeFamily;
 use App\Repositories\Attribute\AttributeFamilyRepository;
 use App\Repositories\Attribute\AttributeRepository;
-use Illuminate\Http\Request;
 
 class AttributeController extends Controller
 {

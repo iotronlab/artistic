@@ -27,7 +27,6 @@ class ProductFlatFactory extends Factory
             'name'                  => $this->faker->name,
             'description'           => $this->faker->text,
             'url_key'               => $this->faker->slug,
-            'new'                   => $this->faker->boolean,
             'featured'              => $this->faker->boolean,
             'status'                => $this->faker->boolean,
             'price'                 => $this->faker->numberBetween(100, 2000),

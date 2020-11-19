@@ -35,7 +35,8 @@ class ProductIndexResource extends JsonResource
             'sku'                    => $product->sku,
             'in_stock'               => $product->isSaleable(),
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),
-            'vendor'                 => new VendorIndexResource($this->vendor)
+            'vendor'                 => new VendorIndexResource($this->vendor),
+            'featured'               => $this->flat->featured,
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Vendor\VendorReviewResource;
+use App\Models\Attribute\AttributeOption;
 
 class ProductResource extends ProductIndexResource
 {
@@ -20,12 +21,11 @@ class ProductResource extends ProductIndexResource
         return array_merge(parent::toArray($request), [
             'short_description'      => $this->flat->short_description,
             'attributes' => [
-                'color'                  => $this->flat->color,
-                'size'                   => $this->flat->size,
-                'material'                  => $this->flat->material,
-                'medium'                   => $this->flat->medium,
+                'color'                  => /*$product->option(*/ $this->flat->color,
+                'size'                   => /*$product->option(*/ $this->flat->size,
+                'material'                  => /*$product->option(*/ $this->flat->material,
+                'medium'                   => /*$product->option(*/ $this->flat->medium,
             ],
-
             'stock'                  => $product->stockCount(),
             'images'                 => ProductImageResource::collection($product->images),
             'reviews'                => VendorReviewResource::collection($product->vendor->reviews),

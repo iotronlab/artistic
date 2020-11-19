@@ -26,7 +26,7 @@ class ProductFactory extends Factory
             'type'                  => 'simple',
             'attribute_family_id'   => '1',
             'vendor_id'             => $this->faker->numberBetween(1, 18),
-            'popularity'       => $this->faker->numberBetween(20, 100)
+            'popularity'            => $this->faker->numberBetween(20, 100),
         ];
     }
 }

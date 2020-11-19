@@ -3,6 +3,7 @@
 namespace App\Models\Product;
 
 use App\Models\Attribute\AttributeFamily;
+use App\Models\Attribute\AttributeOption;
 use App\Models\Category\Category;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Vendor\Vendor;
@@ -173,5 +174,22 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');
+    }
+    /**
+     * Get the value of the attribute option.
+     */
+    public function option($id)
+    {
+        return AttributeOption::find($id)->pluck('admin_name');
+    }
+    /**
+     * Scoping new products.
+     */
+    public function scopeNewest($query)
+    {
+        if (request()->has('new')) {
+            return $query->where('created_at', '>', now()->subDays(3));
+        }
+        return $query;
     }
 }

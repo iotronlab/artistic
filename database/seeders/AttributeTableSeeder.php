@@ -66,18 +66,6 @@ class AttributeTableSeeder extends Seeder
                 'updated_at'          => $now,
             ], [
                 'id'                  => '5',
-                'code'                => 'new',
-                'admin_name'          => 'New',
-                'type'                => 'boolean',
-                'validation'          => NULL,
-                'position'            => '5',
-                'is_filterable'       => '0',
-                'is_configurable'     => '0',
-                'is_user_defined'     => '0',
-                'created_at'          => $now,
-                'updated_at'          => $now,
-            ], [
-                'id'                  => '6',
                 'code'                => 'featured',
                 'admin_name'          => 'Featured',
                 'type'                => 'boolean',
@@ -89,7 +77,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '7',
+                'id'                  => '6',
                 'code'                => 'visible_individually',
                 'admin_name'          => 'Visible Individually',
                 'type'                => 'boolean',
@@ -101,7 +89,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '8',
+                'id'                  => '7',
                 'code'                => 'status',
                 'admin_name'          => 'Status',
                 'type'                => 'boolean',
@@ -113,7 +101,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '9',
+                'id'                  => '8',
                 'code'                => 'short_description',
                 'admin_name'          => 'Short Description',
                 'type'                => 'textarea',
@@ -125,7 +113,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '10',
+                'id'                  => '9',
                 'code'                => 'description',
                 'admin_name'          => 'Description',
                 'type'                => 'textarea',
@@ -137,7 +125,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '11',
+                'id'                  => '10',
                 'code'                => 'price',
                 'admin_name'          => 'Price',
                 'type'                => 'price',
@@ -149,7 +137,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '13',
+                'id'                  => '11',
                 'code'                => 'special_price',
                 'admin_name'          => 'Special Price',
                 'type'                => 'price',
@@ -161,7 +149,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '16',
+                'id'                  => '12',
                 'code'                => 'meta_title',
                 'admin_name'          => 'Meta Title',
                 'type'                => 'textarea',
@@ -173,7 +161,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '17',
+                'id'                  => '13',
                 'code'                => 'meta_keywords',
                 'admin_name'          => 'Meta Keywords',
                 'type'                => 'textarea',
@@ -185,7 +173,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '18',
+                'id'                  => '14',
                 'code'                => 'meta_description',
                 'admin_name'          => 'Meta Description',
                 'type'                => 'textarea',
@@ -197,7 +185,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '19',
+                'id'                  => '15',
                 'code'                => 'width',
                 'admin_name'          => 'Width',
                 'type'                => 'text',
@@ -209,7 +197,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '20',
+                'id'                  => '16',
                 'code'                => 'height',
                 'admin_name'          => 'Height',
                 'type'                => 'text',
@@ -221,7 +209,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '21',
+                'id'                  => '17',
                 'code'                => 'depth',
                 'admin_name'          => 'Depth',
                 'type'                => 'text',
@@ -233,7 +221,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '22',
+                'id'                  => '18',
                 'code'                => 'weight',
                 'admin_name'          => 'Weight',
                 'type'                => 'text',
@@ -245,7 +233,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '23',
+                'id'                  => '19',
                 'code'                => 'color',
                 'admin_name'          => 'Color',
                 'type'                => 'select',
@@ -257,7 +245,7 @@ class AttributeTableSeeder extends Seeder
                 'created_at'          => $now,
                 'updated_at'          => $now,
             ], [
-                'id'                  => '24',
+                'id'                  => '20',
                 'code'                => 'size',
                 'admin_name'          => 'Size',
                 'type'                => 'select',
@@ -268,33 +256,9 @@ class AttributeTableSeeder extends Seeder
                 'is_user_defined'     => '0',
                 'created_at'          => $now,
                 'updated_at'          => $now,
-            ], [
-                'id'                  => '25',
-                'code'                => 'brand',
-                'admin_name'          => 'Brand',
-                'type'                => 'select',
-                'validation'          => NULL,
-                'position'            => '25',
-                'is_filterable'       => '1',
-                'is_configurable'     => '0',
-                'is_user_defined'     => '0',
-                'created_at'          => $now,
-                'updated_at'          => $now,
-            ], [
-                'id'                  => '26',
-                'code'                => 'guest_checkout',
-                'admin_name'          => 'Guest Checkout',
-                'type'                => 'boolean',
-                'validation'          => NULL,
-                'position'            => '26',
-                'is_filterable'       => '0',
-                'is_configurable'     => '0',
-                'is_user_defined'     => '0',
-                'created_at'          => $now,
-                'updated_at'          => $now,
             ],
             [
-                'id'                  => '27',
+                'id'                  => '21',
                 'code'                => 'material',
                 'admin_name'          => 'Material',
                 'type'                => 'select',
@@ -307,7 +271,7 @@ class AttributeTableSeeder extends Seeder
                 'updated_at'          => $now,
             ],
             [
-                'id'                  => '28',
+                'id'                  => '22',
                 'code'                => 'medium',
                 'admin_name'          => 'Medium',
                 'type'                => 'select',

@@ -16,8 +16,14 @@ class AttributeFamilyTableSeeder extends Seeder
         DB::table('attribute_families')->insert([
             [
                 'id'              => '1',
-                'code'            => 'default',
-                'name'            => 'Default',
+                'code'            => 'default-1',
+                'name'            => 'Default(color, material, medium, size)',
+                'status'          => '0',
+            ],
+            [
+                'id'              => '2',
+                'code'            => 'default-2',
+                'name'            => 'Default Artworks(color, material, medium)',
                 'status'          => '0',
             ]
         ]);

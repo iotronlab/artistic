@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Vendor;
 
+use App\Http\Resources\Product\ProductIndexResource;
+use App\Http\Resources\Product\ProductResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
 
 class VendorResource extends VendorIndexResource
@@ -16,10 +18,15 @@ class VendorResource extends VendorIndexResource
     {
         return array_merge(parent::toArray($request), [
 
-            'products' => 'product data'
-            // Product::collection(
-            //     $this->products
-            // ),
+            'products' =>
+            ProductIndexResource::collection(
+                $this->products
+            ),
+
+            'reviews' =>
+            VendorReviewResource::collection(
+                $this->reviews
+            ),
 
         ]);
     }

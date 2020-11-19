@@ -2,6 +2,7 @@
 
 namespace App\Models\Vendor;
 
+use App\Models\Product\Product;
 use App\Models\Vendor\VendorReview;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,5 +32,10 @@ class Vendor extends Authenticatable
     public function reviews()
     {
         return $this->hasMany(VendorReview::class, 'vendor_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'vendor_id');
     }
 }

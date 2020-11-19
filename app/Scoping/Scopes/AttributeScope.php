@@ -9,6 +9,7 @@ class AttributeScope implements Scope
 {
     public function apply(Builder $query, $params)
     {
+        dd('scope');
         if (isset($params['featured'])) {
             $query->where('featured', $params['featured']);
         }

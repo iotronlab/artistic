@@ -21,17 +21,17 @@ class Scoper
     public function apply(Builder $builder, array $scopes)
     {
         //dd($scopes['category']);
-        if (isset($scopes['attribute'])) {
-            $scopes = new AttributeScope();
-            $scopes->apply($builder, request()->input());
-        } else {
-            foreach ($this->limitScopes($scopes) as $key => $scope) {
-                if (!$scope instanceof Scope) {
-                    continue;
-                }
-                $scope->apply($builder, $this->request->get($key));
+        // if (isset($scopes['attribute'])) {
+        //     $scopes = new AttributeScope();
+        //     $scopes->apply($builder, request()->input());
+        // } else {
+        foreach ($this->limitScopes($scopes) as $key => $scope) {
+            if (!$scope instanceof Scope) {
+                continue;
             }
+            $scope->apply($builder, $this->request->get($key));
         }
+        //}
 
         return $builder;
     }

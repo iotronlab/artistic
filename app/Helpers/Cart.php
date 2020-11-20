@@ -11,9 +11,9 @@ class Cart
     protected $customer;
     protected $shipping;
 
-    public function __construct()
+    public function __construct(Customer $customer)
     {
-        $this->customer = request()->user('api');
+        $this->customer = $customer;
     }
 
     public function products()

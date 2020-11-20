@@ -36,13 +36,14 @@ class ProductController extends Controller
     public function index()
     {
         $category = request()->input('category');
+        $arr = explode(',', $category);
         $products = ProductIndexResource::collection($this->productRepository->getAll());
-        // if ($category != null ) {
-        //     $products = $products->additional([
-        //         'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($category),
-        //         'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($category)
-        //     ]);
-        // }
+        if ($category != null) {
+            $products = $products->additional([
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
+            ]);
+        }
         return $products;
     }
 

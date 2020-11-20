@@ -17,9 +17,7 @@ class CreateAttributeGroupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('position');
-            $table->unsignedBigInteger('attribute_family_id');
-            $table->unique(['attribute_family_id', 'name']);
-            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('cascade');
+            $table->unique(['name']);
         });
 
         Schema::create('attribute_group_mappings', function (Blueprint $table) {

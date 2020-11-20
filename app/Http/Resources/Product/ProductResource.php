@@ -21,18 +21,20 @@ class ProductResource extends ProductIndexResource
         return array_merge(parent::toArray($request), [
             'short_description'      => $this->flat->short_description,
             'attributes' => [
-                'color'                  => /*$product->option(*/ $this->flat->color,
-                'size'                   => /*$product->option(*/ $this->flat->size,
-                'material'                  => /*$product->option(*/ $this->flat->material,
-                'medium'                   => /*$product->option(*/ $this->flat->medium,
+                'color'    => $this->flat->color ? $product->option($this->flat->color) : null,
+                'size'     => $this->flat->size ? $product->option($this->flat->size) : null,
+                'material' => $this->flat->material ? $product->option($this->flat->material) : null,
+                'medium'   => $this->flat->medium ? $product->option($this->flat->medium) : null,
             ],
             'stock'                  => $product->stockCount(),
             'images'                 => ProductImageResource::collection($product->images),
             'reviews'                => VendorReviewResource::collection($product->vendor->reviews),
             //merge variants for configurable product
             $this->mergeWhen($product->getTypeInstance()->isComposite(), [
-                'variants'               => Self::collection($this->variants),
-            ])
+                'variants'           => Self::collection($this->variants),
+            ]),
+            'attributes' => ProductAttributeResource::collection($this->attribute_values),
+
         ]);
     }
 }

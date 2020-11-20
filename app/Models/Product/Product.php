@@ -180,7 +180,8 @@ class Product extends Model
      */
     public function option($id)
     {
-        return AttributeOption::find($id)->pluck('admin_name');
+        $option_value = AttributeOption::where('id', $id)->first();
+        return $option_value->admin_name;
     }
     /**
      * Scoping new products.

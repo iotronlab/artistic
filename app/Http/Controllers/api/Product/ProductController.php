@@ -5,7 +5,6 @@ namespace App\Http\Controllers\api\Product;
 use App\Helpers\ProductType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
-use App\Http\Resources\Product\ProductAttributeResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
@@ -111,9 +110,9 @@ class ProductController extends Controller
             $config = $this->configurableConfig($product->id);
         }
         if ($product->type == 'simple') {
+            //$product->load(['attribute_values']);
             return response()->json([
                 'product' => (new ProductResource($product)),
-                'attributes' => ProductAttributeResource::collection($product->attribute_values)
             ], 200);
         } else {
             return response()->json(

@@ -4,6 +4,7 @@ namespace App\Http\Resources\Cart;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Helpers\Money;
+use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
 
 class ProductCartResource extends JsonResource
@@ -17,7 +18,7 @@ class ProductCartResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'product' => new ProductResource($this),
+            'product' => new ProductIndexResource($this),
             'quantity' => $this->pivot->quantity,
             'total' => $this->getTotal()->formatted(),
         ];

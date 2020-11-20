@@ -14,8 +14,10 @@ class CreateAttributeFamilyMappingsTable extends Migration
     public function up()
     {
         Schema::create('attribute_family_mappings', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('attribute_family_id')->index();
+            $table->unsignedBigInteger('attribute_group_id')->index();
+            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('cascade');
+            $table->foreign('attribute_group_id')->references('id')->on('attribute_groups')->onDelete('cascade');
         });
     }
 

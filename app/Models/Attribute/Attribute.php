@@ -24,7 +24,6 @@ class Attribute extends Model
         'is_required',
         'is_user_defined'
     ];
-    // protected $with = ['options'];
 
     /**
      * Get the options.

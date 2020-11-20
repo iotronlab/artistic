@@ -39,7 +39,9 @@ class ProductFlatFactory extends Factory
             'depth'                 => $this->faker->numberBetween(10, 20),
             'weight'                => $this->faker->numberBetween(70, 100),
             'color'                 => $this->faker->numberBetween(1, 5),
-            'size'                  => $this->faker->numberBetween(6, 10),
+            'size'                  => $this->faker->numberBetween(6, 9),
+            'material'              => $this->faker->numberBetween(10, 17),
+            'medium'                => $this->faker->numberBetween(18, 19),
             'visible_individually'  => $this->faker->boolean,
             'product_id'            => Product::factory(),
         ];

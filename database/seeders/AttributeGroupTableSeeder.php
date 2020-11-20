@@ -14,6 +14,7 @@ class AttributeGroupTableSeeder extends Seeder
         DB::table('attribute_groups')->delete();
 
         DB::table('attribute_group_mappings')->delete();
+        DB::table('attribute_family_mappings')->delete();
 
         DB::table('attribute_groups')->delete();
 
@@ -22,39 +23,32 @@ class AttributeGroupTableSeeder extends Seeder
                 'id'                  => '1',
                 'name'                => 'General',
                 'position'            => '1',
-                'attribute_family_id' => '1',
             ], [
                 'id'                  => '2',
                 'name'                => 'Description',
                 'position'            => '2',
-                'attribute_family_id' => '1',
             ], [
                 'id'                  => '3',
                 'name'                => 'Meta Description',
                 'position'            => '3',
-                'attribute_family_id' => '1',
             ], [
                 'id'                  => '4',
                 'name'                => 'Price',
                 'position'            => '4',
-                'attribute_family_id' => '1',
             ], [
                 'id'                  => '5',
                 'name'                => 'Shipping',
                 'position'            => '5',
-                'attribute_family_id' => '1'
             ],
             [
                 'id'                  => '6',
                 'name'                => 'Default Features',
                 'position'            => '6',
-                'attribute_family_id' => '1'
             ],
             [
                 'id'                  => '7',
                 'name'                => 'Artwork Features',
                 'position'            => '6',
-                'attribute_family_id' => '2'
             ]
         ]);
 
@@ -147,7 +141,65 @@ class AttributeGroupTableSeeder extends Seeder
                 'attribute_id'        => '22',
                 'attribute_group_id'  => '6',
                 'position'            => '4',
+            ],
+            [
+                'attribute_id'        => '19',
+                'attribute_group_id'  => '7',
+                'position'            => '1',
+            ], [
+                'attribute_id'        => '21',
+                'attribute_group_id'  => '7',
+                'position'            => '2',
+            ], [
+                'attribute_id'        => '22',
+                'attribute_group_id'  => '7',
+                'position'            => '3',
             ]
+        ]);
+
+        DB::table('attribute_family_mappings')->insert([
+            [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '1',
+            ], [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '2',
+            ],
+            [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '3',
+            ], [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '4',
+            ],
+            [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '5',
+            ], [
+                'attribute_family_id' => '1',
+                'attribute_group_id'  => '6',
+            ],
+            [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '1',
+            ], [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '2',
+            ],
+            [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '3',
+            ], [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '4',
+            ],
+            [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '5',
+            ], [
+                'attribute_family_id' => '2',
+                'attribute_group_id'  => '7',
+            ],
         ]);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');

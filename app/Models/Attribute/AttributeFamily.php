@@ -5,7 +5,6 @@ namespace App\Models\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Attribute\AttributeGroup;
-use Illuminate\Support\Facades\DB;
 
 class AttributeFamily extends Model
 {
@@ -22,7 +21,8 @@ class AttributeFamily extends Model
     {
         return Attribute::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
             ->join('attribute_groups', 'attribute_group_mappings.attribute_group_id', '=', 'attribute_groups.id')
-            ->join('attribute_families', 'attribute_groups.attribute_family_id', '=', 'attribute_families.id')
+            ->join('attribute_family_mapping', 'attribute_groups.id', '=', 'attribute_family_mapping.attribut_group_id')
+            ->join('attribute_families', 'attribute_family_mapping.attribute_family_id', '=', 'attribute_families.id')
             ->where('attribute_families.id', $this->id)
             ->select('attributes.*');
     }
@@ -40,7 +40,7 @@ class AttributeFamily extends Model
      */
     public function attribute_groups()
     {
-        return $this->hasMany(AttributeGroup::class)->orderBy('position');
+        return $this->belongsToMany(AttributeGroup::class, 'attribute_family_mappings');
     }
 
     /**

@@ -28,6 +28,6 @@ class CustomerWelcomeMail implements ShouldQueue
      */
     public function handle(CustomerRegistered $event)
     {
-        Mail::to($event->customer)->send(new WelcomeCustomer($event->customer));
+        // Mail::to($event->customer)->send(new WelcomeCustomer($event->customer));
     }
 }

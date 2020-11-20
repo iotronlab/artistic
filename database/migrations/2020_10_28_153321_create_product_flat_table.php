@@ -30,6 +30,7 @@ class CreateProductFlatTable extends Migration
             $table->text('meta_title')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
+
             $table->decimal('width', 12, 4)->nullable();
             $table->decimal('height', 12, 4)->nullable();
             $table->decimal('depth', 12, 4)->nullable();

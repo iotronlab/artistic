@@ -42,7 +42,10 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        //  dd($vendor);
+        //dd($vendor->products());
+        $vendor->load(['products', 'reviews']);
+
+
         return new VendorResource($vendor);
     }
 

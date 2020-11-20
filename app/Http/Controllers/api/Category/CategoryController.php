@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category\Category;
 
 use App\Http\Resources\Category\CategoryIndexResource;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
 
@@ -58,10 +59,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         //Sort by popularities and then top 3 rows are fetched
-        return response()->json([
-            'products' => ProductIndexResource::Collection($category->products->sortByDesc('popularity')->splice(0, 3)),
-            'artists'  => VendorIndexResource::collection($category->products->sortByDesc('vendor.popularity')->splice(0, 3))
-        ]);
+        $category->load(['children', 'children.children', 'products', 'products.vendor']);
+        return new CategoryResource($category);
     }
 
     /**

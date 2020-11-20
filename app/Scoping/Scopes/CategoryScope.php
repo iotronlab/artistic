@@ -11,7 +11,7 @@ class CategoryScope implements Scope
     {
         return $builder->whereHas('categories', function ($builder) use ($value) {
 
-            $builder->where('slug', $value);
+            $builder->whereIn('slug', explode(',', $value));
         });
     }
 }

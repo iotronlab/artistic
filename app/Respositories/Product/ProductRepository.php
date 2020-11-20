@@ -59,7 +59,7 @@ class ProductRepository extends Repository
     {
         return [
 
-            //'attribute' => new AttributeScope(),
+            'attribute' => new AttributeScope(),
             'category' => new CategoryScope()
         ];
     }

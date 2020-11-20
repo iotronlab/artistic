@@ -57,14 +57,6 @@ class Product extends Model
     }
 
     /**
-     * Get the product reviews that owns the product.
-     */
-    public function reviews()
-    {
-        return $this->hasMany(ProductReview::class);
-    }
-
-    /**
      * Get the product that owns the product.
      */
     public function parent()

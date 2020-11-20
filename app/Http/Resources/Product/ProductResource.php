@@ -33,8 +33,6 @@ class ProductResource extends ProductIndexResource
             $this->mergeWhen($product->getTypeInstance()->isComposite(), [
                 'variants'           => Self::collection($this->variants),
             ]),
-            'attributes' => ProductAttributeResource::collection($this->attribute_values),
-
         ]);
     }
 }

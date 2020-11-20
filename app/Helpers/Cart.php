@@ -11,10 +11,9 @@ class Cart
     protected $customer;
     protected $shipping;
 
-    public function __construct(Customer $customer)
+    public function __construct()
     {
-        $this->customer = $customer;
-        //dd($this->customer);
+        $this->customer = request()->user('api');
     }
 
     public function products()
@@ -32,7 +31,6 @@ class Cart
     {
         $this->customer->cart()->updateExistingPivot($productId, [
             'quantity' => $quantity,
-
         ]);
     }
 
@@ -73,7 +71,6 @@ class Cart
     {
         return
             $this->customer->cart->each(function ($product) {
-                dd($product);
                 $quantity = $product->minStock($product->pivot->quantity);
                 $this->changed = $quantity != $product->quantity;
                 $product->pivot->update([
@@ -102,7 +99,6 @@ class Cart
         if ($product = $this->customer->cart->where('id', $productId)->first()) {
             return $product->pivot->quantity;
         }
-
         return 0;
     }
 }

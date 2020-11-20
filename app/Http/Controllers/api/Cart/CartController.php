@@ -20,6 +20,7 @@ class CartController extends Controller
     public function index(Request $request, Cart $cart)
     {
         $cart->sync();
+        //dd($request->user('api'));
         $request->user('api')->load(['cart', 'cart.stock']);
         return (new CartResource($request->user('api')))
             ->additional([

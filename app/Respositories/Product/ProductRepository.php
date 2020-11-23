@@ -8,6 +8,13 @@ use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;
 use App\Scoping\Scopes\CategoryScope;
+use App\Scoping\Scopes\ColorScope;
+use App\Scoping\Scopes\FeaturedScope;
+use App\Scoping\Scopes\MaterialScope;
+use App\Scoping\Scopes\MediumScope;
+use App\Scoping\Scopes\NewScope;
+use App\Scoping\Scopes\PriceScope;
+use App\Scoping\Scopes\SizeScope;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,15 +58,21 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
         $results = Product::with('variants', 'flat')
-            ->withScopes($this->scopes())->newest()
+            ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
         return $results;
     }
     protected function scopes()
     {
         return [
-
-            'attribute' => new AttributeScope(),
+            'price' => new PriceScope(),
+            'new' => new NewScope(),
+            'featured' => new FeaturedScope(),
+            'color' => new ColorScope(),
+            'size' => new SizeScope(),
+            'material' => new MaterialScope(),
+            'medium' => new MediumScope(),
+            // 'attribute' => new AttributeScope(),
             'category' => new CategoryScope()
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Vendor\VendorIndexResource;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductIndexResource extends JsonResource
@@ -25,6 +26,9 @@ class ProductIndexResource extends JsonResource
      */
     public function toArray($request)
     {
+        if ($this->resource instanceof Collection) {
+            return ProductIndexResource::collection($this->resource);
+        }
         $product = $this->product ? $this->product : $this->flat;
         return [
             'product_id'             => $product->id,

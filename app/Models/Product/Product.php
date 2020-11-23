@@ -175,14 +175,4 @@ class Product extends Model
         $option_value = AttributeOption::where('id', $id)->first();
         return $option_value->admin_name;
     }
-    /**
-     * Scoping new products.
-     */
-    public function scopeNewest($query)
-    {
-        if (request()->has('new')) {
-            return $query->where('created_at', '>', now()->subDays(3));
-        }
-        return $query;
-    }
 }

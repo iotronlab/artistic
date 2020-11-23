@@ -39,7 +39,7 @@ class ProductController extends Controller
         $category = request()->input('category');
         $arr = explode(',', $category);
         $product = $this->productRepository->getAll();
-        $product->load(['vendor', 'images']);
+        $product->load(['vendor', 'images', 'stock']);
 
         $products = ProductIndexResource::collection($product);
         if ($category != null) {

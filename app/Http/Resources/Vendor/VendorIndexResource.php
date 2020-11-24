@@ -21,7 +21,8 @@ class VendorIndexResource extends JsonResource
             'name'        => $vendor->display_name,
             'slug'        => $vendor->slug,
             'rating'      => $vendor->rating,
-            'popularity'  => $vendor->popularity
+            'popularity'  => $vendor->popularity,
+            'avatar'      => $vendor->avatarimage
         ];
     }
 }

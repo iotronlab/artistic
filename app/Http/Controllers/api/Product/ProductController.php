@@ -21,14 +21,12 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     protected $productRepository;
-    protected $productFlatRepository;
     protected $attributeFamilyRepository;
 
-    public function __construct(ProductRepository $productRepository, ProductFlatRepository $productFlatRepository, AttributeFamilyRepository $attributeFamilyRepository)
+    public function __construct(ProductRepository $productRepository,  AttributeFamilyRepository $attributeFamilyRepository)
     {
         //$this->middleware(['auth:api'])->except(['index']);
         $this->productRepository = $productRepository;
-        $this->productFlatRepository = $productFlatRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
     }
     /**
@@ -36,18 +34,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $category = request()->input('category');
-        $arr = explode(',', $category);
-        $product = $this->productRepository->getAll();
-        $product->load(['vendor', 'images', 'stock']);
-
-        $products = ProductIndexResource::collection($product);
-        if ($category != null) {
-            $products = $products->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
-                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
-            ]);
-        }
+        $products = $this->productRepository->getAll();
         return $products;
     }
 

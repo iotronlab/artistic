@@ -11,11 +11,11 @@ class Stock extends Model
     public $timestamps = false;
     public $table = 'stocks';
     protected $fillable = [
-        'qunatity',
+        'quantity',
         'product_id',
     ];
     /**
-     * Get the product that owns the product inventory.
+     * Get the product that owns the product stock.
      */
     public function product()
     {

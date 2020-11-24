@@ -175,4 +175,25 @@ class Product extends Model
         $option_value = AttributeOption::where('id', $id)->first();
         return $option_value->admin_name;
     }
+    /**
+     * Get the bundle options that owns the product.
+     */
+    public function bundle_options()
+    {
+        return $this->hasMany(ProductBundle::class);
+    }
+    /**
+     * The product that belong to the bundle.
+     */
+    public function bundle_products()
+    {
+        return $this->hasManyThrough(
+            'App\Models\Product\Product',
+            'App\Models\Product\ProductBundle',
+            'product_bundle_id', // Foreign key on bundle table...
+            'id', // Foreign key on products table...
+            'id', // Local key on products table...
+            'product_id' // Local key on bundle table...
+        );
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Product;
 
+use App\Http\Resources\Product\ProductIndexResource;
 use App\Models\Product\Product;
 use App\Models\Product\ProductImage;
 use App\Repositories\Attribute\AttributeRepository;
@@ -26,6 +27,7 @@ class ProductRepository extends Repository
      * @var \App\Repositories\Attribute\AttributeRepository
      */
     public $attributeRepository;
+    protected $productFlatRepository;
 
     /**
      * Create a new repository instance.
@@ -37,9 +39,12 @@ class ProductRepository extends Repository
 
     public function __construct(
         AttributeRepository $attributeRepository,
+        ProductFlatRepository $productFlatRepository,
         App $app
     ) {
         $this->attributeRepository = $attributeRepository;
+
+        $this->productFlatRepository = $productFlatRepository;
 
         parent::__construct($app);
     }
@@ -57,10 +62,20 @@ class ProductRepository extends Repository
     public function getAll()
     {
         $params = request()->input();
-        $results = Product::with('variants', 'flat')
+        $results = Product::with('variants', 'flat', 'vendor', 'images', 'ordered_inventories', 'inventories')
             ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
-        return $results;
+
+        $products = ProductIndexResource::collection($results);
+
+        if (request()->input('category') != null) {
+            $arr = explode(',', request()->input('category'));
+            $products = $products->additional([
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
+                'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
+            ]);
+        }
+        return $products;
     }
     protected function scopes()
     {
@@ -72,7 +87,6 @@ class ProductRepository extends Repository
             'size' => new SizeScope(),
             'material' => new MaterialScope(),
             'medium' => new MediumScope(),
-            // 'attribute' => new AttributeScope(),
             'category' => new CategoryScope()
         ];
     }
@@ -105,7 +119,7 @@ class ProductRepository extends Repository
     public function upload(array $data, $product)
     {
         $index = 1;
-        $vendorId = 1;
+        $vendorId = $product->vendor_id;
         $images = request()->file('product');
 
         if (request()->hasFile('product')) {

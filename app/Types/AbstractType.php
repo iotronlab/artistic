@@ -19,7 +19,7 @@ abstract class AbstractType
     protected $productRepository;
 
     protected $attributeValueRepository;
-
+    protected $isBundle = false;
     /**
      * ProductInventoryRepository instance
      *
@@ -186,6 +186,16 @@ abstract class AbstractType
     public function isComposite()
     {
         return $this->isComposite;
+    }
+
+    /**
+     * Return true if this product can be bundled
+     *
+     * @return bool
+     */
+    public function isBundle()
+    {
+        return $this->isBundle;
     }
 
     /**

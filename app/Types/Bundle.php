@@ -18,7 +18,8 @@ class Bundle extends AbstractType
      *
      * @var bool
      */
-    protected $isComposite = true;
+    protected $isComposite = false;
+    protected $isBundle = true;
 
     /**
      * Product children price can be calculated or not
@@ -49,5 +50,20 @@ class Bundle extends AbstractType
             $product_bundle->save();
         }
         return $new_product;
+    }
+    /**
+     * Return true if this product type is saleable
+     *
+     * @return bool
+     */
+    public function isSaleable()
+    {
+        foreach ($this->product->bundle_options as $bundle) {
+            if ($bundle->isSaleable()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -69,3 +69,6 @@ Route::resource('cart', 'api\Cart\CartController', [
 
 //images
 Route::post('/products/upload-image/{product}', 'api\Product\ProductController@upload');
+
+//catalog-rule
+Route::resource('catalog-rules', 'api\CatalogRule\CatalogRuleController');

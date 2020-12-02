@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Product;
 
+use App\Helpers\Money;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Models\Product\Product;
 use App\Models\Product\ProductImage;
@@ -17,7 +18,6 @@ use App\Scoping\Scopes\NewScope;
 use App\Scoping\Scopes\PriceScope;
 use App\Scoping\Scopes\SizeScope;
 use Illuminate\Container\Container as App;
-use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -71,7 +71,7 @@ class ProductRepository extends Repository
         if (request()->input('category') != null) {
             $arr = explode(',', request()->input('category'));
             $products = $products->additional([
-                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
+                'max_price' => (new Money($this->productFlatRepository->getCategoryProductMaximumPrice($arr[0])))->formatted(),
                 'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
             ]);
         }

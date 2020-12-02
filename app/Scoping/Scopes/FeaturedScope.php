@@ -10,7 +10,7 @@ class FeaturedScope implements Scope
     public function apply(Builder $builder, $value)
     {
         return $builder->whereHas('flat', function ($builder) use ($value) {
-            $builder->where('featured', $value);
+            $builder->where('featured', 1);
         });
     }
 }

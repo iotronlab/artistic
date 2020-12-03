@@ -17,6 +17,7 @@ use App\Repositories\Attribute\AttributeFamilyRepository;
 use App\Repositories\Product\ProductFlatRepository;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ProductController extends Controller
 {
@@ -34,6 +35,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        dd(App::make('App\Helpers\ShipRocket'));
         $products = $this->productRepository->getAll();
         return $products;
     }

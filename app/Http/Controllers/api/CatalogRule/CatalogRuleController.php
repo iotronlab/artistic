@@ -27,7 +27,6 @@ class CatalogRuleController extends Controller
         CatalogRuleRepository $catalogRuleRepository,
         CatalogRuleIndex $catalogRuleIndexHelper
     ) {
-        $this->_config = request('_config');
 
         $this->catalogRuleRepository = $catalogRuleRepository;
 
@@ -71,6 +70,7 @@ class CatalogRuleController extends Controller
         ]);
 
         $data = request()->all();
+        dd($data);
 
         $catalogRule = $this->catalogRuleRepository->create($data);
         dd("here");

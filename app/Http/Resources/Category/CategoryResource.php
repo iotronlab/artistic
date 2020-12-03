@@ -20,6 +20,9 @@ class CategoryResource extends CategoryIndexResource
 
             'products' => ProductIndexResource::Collection(
                 $this->products->groupBy('vendor.display_name')
+                ->sortByDesc(function ($products, $key) {
+                    return count($products);
+                })
             ),
             // 'artists'  => VendorIndexResource::collection($this->products->sortByDesc('vendor.popularity'))
         ]);

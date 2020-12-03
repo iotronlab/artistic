@@ -3,7 +3,10 @@
 namespace App\Repositories\Product;
 
 use App\Helpers\Money;
+use App\Http\Resources\Category\CategoryIndexResource;
+use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Product\ProductIndexResource;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductImage;
 use App\Repositories\Attribute\AttributeRepository;
@@ -70,7 +73,9 @@ class ProductRepository extends Repository
 
         if (request()->input('category') != null) {
             $arr = explode(',', request()->input('category'));
+            $category = Category::where('slug', $arr[0])->first();
             $products = $products->additional([
+                'category_children' => CategoryIndexResource::collection($category->children),
                 'max_price' => (new Money($this->productFlatRepository->getCategoryProductMaximumPrice($arr[0])))->formatted(),
                 'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
             ]);

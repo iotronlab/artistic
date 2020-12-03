@@ -35,7 +35,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        dd(App::make('App\Helpers\ShipRocket'));
         $products = $this->productRepository->getAll();
         return $products;
     }

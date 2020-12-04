@@ -76,7 +76,7 @@ class ProductRepository extends Repository
             $category = Category::where('slug', $arr[0])->first();
             $products = $products->additional([
                 'category_children' => CategoryIndexResource::collection($category->children),
-                'max_price' => (new Money($this->productFlatRepository->getCategoryProductMaximumPrice($arr[0])))->formatted(),
+                'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
                 'filterable_attributes' => $this->productFlatRepository->getFilterableAttributes($arr[0])
             ]);
         }

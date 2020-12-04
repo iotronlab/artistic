@@ -70,14 +70,12 @@ class CatalogRuleController extends Controller
         ]);
 
         $data = request()->all();
-        dd($data);
 
         $catalogRule = $this->catalogRuleRepository->create($data);
-        dd("here");
         $this->catalogRuleIndexHelper->reindexComplete();
 
         return response()->json([
-            'Catalog Rule created Successfully' . $catalogRule
+            $catalogRule
         ], 200);
     }
 

@@ -18,7 +18,7 @@ class CatalogRuleRepository extends Repository
     }
     /**
      * @param  array  $data
-     * @return \Webkul\CatalogRule\Contracts\CatalogRule
+     * @return \CatalogRule\Contracts\CatalogRule
      */
     public function create(array $data)
     {

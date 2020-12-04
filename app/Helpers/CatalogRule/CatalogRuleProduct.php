@@ -143,8 +143,7 @@ class CatalogRuleProduct
 
     /**
      * Returns catalog rule products
-     *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     *  $product
      * @return \Illuminate\Support\Collection
      */
     public function getCatalogRuleProducts($product = null)

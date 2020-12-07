@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api\Category;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 use App\Models\Category\Category;
 
@@ -26,7 +26,7 @@ class CategoryController extends Controller
                 'children',
                 'children.children'
             )->parents()->get()
-        );
+        )->additional(["shipping_token" => (string)App::make('App\Helpers\ShipRocket')->token]);
     }
 
     /**

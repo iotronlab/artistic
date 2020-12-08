@@ -42,7 +42,7 @@ class CatalogRuleProductPrice
         $catalogRuleProducts = $this->catalogRuleProductHelper->getCatalogRuleProducts($product);
 
         foreach ($catalogRuleProducts as $row) {
-            $productKey = $row->product_id . '-' . $row->channel_id . '-' . $row->customer_group_id;
+            $productKey = $row->product_id . '-' . $row->customer_group_id;
 
             if ($previousKey && $previousKey != $productKey) {
                 $endRuleFlags = [];
@@ -68,7 +68,6 @@ class CatalogRuleProductPrice
                         $prices[$priceKey] = [
                             'rule_date'         => $date,
                             'catalog_rule_id'   => $row->catalog_rule_id,
-                            'channel_id'        => $row->channel_id,
                             'customer_group_id' => $row->customer_group_id,
                             'product_id'        => $row->product_id,
                             'price'             => $this->calculate($row),

@@ -197,6 +197,15 @@ abstract class AbstractType
     {
         return $this->isBundle;
     }
+    /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return true;
+    }
 
     /**
      * Return true if this product can have variants

@@ -8,6 +8,15 @@ use App\Models\Product\ProductFlat;
 class Bundle extends AbstractType
 {
     /**
+     * Check if catalog rule can be applied
+     *
+     * @return bool
+     */
+    public function priceRuleCanBeApplied()
+    {
+        return false;
+    }
+    /**
      * Skip attribute for Bundle product type
      *
      * @var array

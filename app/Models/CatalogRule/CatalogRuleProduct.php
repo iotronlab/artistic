@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CatalogRuleProduct extends Model
 {
     use HasFactory;
+    public $table = "catalog_rule_products";
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,7 +19,6 @@ class CatalogRuleProduct extends Model
         'end_other_rules',
         'sort_order',
         'catalog_rule_id',
-        'channel_id',
         'customer_group_id',
         'product_id',
     ];

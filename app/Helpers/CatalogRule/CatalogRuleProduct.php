@@ -2,12 +2,34 @@
 
 namespace App\Helpers\CatalogRule;
 
+use App\Helpers\Validator;
 use App\Models\Product\ProductAttributeValue;
+use App\Repositories\Attribute\AttributeRepository;
+use App\Repositories\CatalogRule\CatalogRuleProductRepository;
+use App\Repositories\Product\ProductRepository;
 use Carbon\Carbon;
 
 class CatalogRuleProduct
 {
+    protected $catalogRuleProductRepository;
+    protected $productRepository;
+    protected $validator;
+    protected $attributeRepository;
 
+    public function __construct(
+        AttributeRepository $attributeRepository,
+        ProductRepository $productRepository,
+        CatalogRuleProductRepository $catalogRuleProductRepository,
+        Validator $validator
+    ) {
+        $this->attributeRepository = $attributeRepository;
+
+        $this->productRepository = $productRepository;
+
+        $this->catalogRuleProductRepository = $catalogRuleProductRepository;
+
+        $this->validator = $validator;
+    }
     /**
      * Collect discount on cart
      *
@@ -60,7 +82,7 @@ class CatalogRuleProduct
      */
     public function getMatchingProductIds($rule, $product = null)
     {
-        $qb = $this->productRepository->scopeQuery(function ($query) use ($rule, $product) {
+        $qb = app(ProductRepository::class)->scopeQuery(function ($query) use ($rule, $product) {
             $qb = $query->distinct()
                 ->addSelect('products.*')
                 ->leftJoin('product_flat', 'products.id', '=', 'product_flat.product_id');
@@ -152,7 +174,6 @@ class CatalogRuleProduct
             $qb = $query->distinct()
                 ->select('catalog_rule_products.*')
                 ->leftJoin('products', 'catalog_rule_products.product_id', '=', 'products.id')
-                ->orderBy('channel_id', 'asc')
                 ->orderBy('customer_group_id', 'asc')
                 ->orderBy('product_id', 'asc')
                 ->orderBy('sort_order', 'asc')
@@ -187,9 +208,9 @@ class CatalogRuleProduct
         if (count($productIds)) {
             $this->catalogRuleProductRepository->getModel()->whereIn('product_id', $productIds)->delete();
         } else {
-            $this->catalogRuleProductRepository->deleteWhere([
+            $this->catalogRuleProductRepository->getModel()->where([
                 ['product_id', 'like', '%%']
-            ]);
+            ])->delete();
         }
     }
 }

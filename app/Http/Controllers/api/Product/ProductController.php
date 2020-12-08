@@ -18,6 +18,7 @@ use App\Repositories\Product\ProductFlatRepository;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -194,5 +195,10 @@ class ProductController extends Controller
         return response()->json(
             $this->productRepository->upload(request()->all(), $product)
         );
+    }
+    public function featured()
+    {
+        $featured_products = DB::table('featured_products')->where('is_active', '1')->pluck('product_id');
+        return ProductIndexResource::collection(Product::whereIn('id', $featured_products)->get());
     }
 }

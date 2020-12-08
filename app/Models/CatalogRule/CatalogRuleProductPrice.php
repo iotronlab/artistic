@@ -16,7 +16,6 @@ class CatalogRuleProductPrice extends Model
         'starts_from',
         'ends_till',
         'catalog_rule_id',
-        'channel_id',
         'customer_group_id',
     ];
 }

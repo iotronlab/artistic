@@ -44,8 +44,6 @@ class VendorController extends Controller
     {
         //dd($vendor->products());
         $vendor->load(['products', 'reviews']);
-
-
         return new VendorResource($vendor);
     }
 

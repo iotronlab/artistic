@@ -35,14 +35,14 @@ class CatalogRuleIndex
     {
         try {
             $this->cleanIndexes();
-
             foreach ($this->getCatalogRules() as $rule) {
                 $this->catalogRuleProductHelper->insertRuleProduct($rule);
             }
 
             $this->catalogRuleProductPriceHelper->indexRuleProductPrice(1000);
         } catch (\Exception $e) {
-            report($e);
+            //report($e);
+            dd($e);
         }
     }
     /**
@@ -81,8 +81,8 @@ class CatalogRuleIndex
                         ->orWhereNull('catalog_rules.ends_till');
                 })
                 ->orderBy('sort_order', 'asc');
-        })->findWhere(['status' => 1]);
-
+        })->findWhere(['status' => 0]);
+        // dd($catalogRules);
         return $catalogRules;
     }
 }

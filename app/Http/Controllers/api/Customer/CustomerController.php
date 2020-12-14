@@ -83,6 +83,17 @@ class CustomerController extends Controller
     {
         //
     }
+
+    public function subscribeVendor()
+    {
+        //
+    }
+    public function unsubscribeVendor()
+    {
+        //
+    }
+
+
     public function getAddresses(Request $request)
     {
         return AddressResource::collection(
@@ -106,7 +117,4 @@ class CustomerController extends Controller
             $request->user()->orders
         );
     }
-
-
-
 }

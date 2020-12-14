@@ -3,6 +3,7 @@
 namespace App\Models\Customer;
 
 use App\Models\Product\Product;
+use App\Models\Vendor\Vendor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,6 +46,11 @@ class Customer extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'cart_user')
             ->withPivot('quantity');
+    }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Vendor::class, 'customer_subscription');
     }
 
     public function orders()

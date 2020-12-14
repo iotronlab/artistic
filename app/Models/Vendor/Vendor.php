@@ -2,6 +2,7 @@
 
 namespace App\Models\Vendor;
 
+use App\Models\Customer\Customer;
 use App\Models\Product\Product;
 use App\Models\Vendor\VendorReview;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,5 +38,10 @@ class Vendor extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class, 'vendor_id');
+    }
+
+    public function subscribers()
+    {
+        return $this->hasMany(Customer::class, 'customer_subscription');
     }
 }

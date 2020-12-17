@@ -48,6 +48,14 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('wishlist', 'api\Customer\CustomerController@getWishlist');
     Route::get('orders', 'api\Customer\CustomerController@getOrders');
 });
+
+//;vendor login
+Route::post('vendor/login', 'api\auth\VendorAuthController@login');
+
+Route::group(['middleware' => 'auth:vendor-api'], function () {
+    Route::get('vendor/details', 'api\auth\VendorAuthController@details');
+    Route::get('vendor/logout', 'api\auth\VendorAuthController@logout');
+});
 //Category routes
 Route::resource('categories', 'api\Category\CategoryController');
 

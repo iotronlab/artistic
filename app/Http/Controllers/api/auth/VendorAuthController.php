@@ -18,8 +18,8 @@ class VendorAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('vendor')->attempt($credentials)) {
-            // $user = auth()->guard('customer')->user();
-            $user = Auth::user();
+            $user = auth()->guard('vendor')->user();
+            //$user = Auth::user();
             $accessToken = $user->createToken('authToken')->accessToken;
 
             return response()->json(['success' => true, 'accessToken' => $accessToken], 200);

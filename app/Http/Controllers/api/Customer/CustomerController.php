@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\api\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Address\AddressResource;
 use App\Models\Customer\Customer;
+use App\Models\Vendor\Vendor;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth:api']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,13 +90,21 @@ class CustomerController extends Controller
         //
     }
 
-    public function subscribeVendor()
+    public function subscribeVendor(Request $request, Vendor $vendor)
     {
-        //
+        $request->user('api')->subscriptions()->attach([
+            $vendor->id
+        ]);
+        return response()->json(['success' => 'Customer subscribed successfully'], 400);
     }
-    public function unsubscribeVendor()
+
+    public function unsubscribeVendor(Request $request, Vendor $vendor)
     {
-        //
+        $request->user('api')->subscriptions()->detach([
+            $vendor->id
+        ]);
+        return
+            response()->json(['success' => 'Customer Unsubscribed successfully'], 400);
     }
 
 

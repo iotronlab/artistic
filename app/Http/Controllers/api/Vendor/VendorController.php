@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\Vendor\VendorIndexResource;
 use App\Http\Resources\Vendor\VendorResource;
-
+use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
@@ -68,5 +68,11 @@ class VendorController extends Controller
     public function destroy(Vendor $vendor)
     {
         //
+    }
+    //To get featured artists
+    public function featured()
+    {
+        $featured_artists = DB::table('featured_artists')->where('is_active', '1')->pluck('vendor_id');
+        return VendorIndexResource::collection(Vendor::whereIn('id', $featured_artists)->get());
     }
 }

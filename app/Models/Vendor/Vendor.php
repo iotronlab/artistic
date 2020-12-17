@@ -44,4 +44,8 @@ class Vendor extends Authenticatable
     {
         return $this->hasMany(Customer::class, 'customer_subscription');
     }
+    public function addresses()
+    {
+        return $this->hasMany(VendorAddress::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use App\Models\Attribute\AttributeFamily;
 use App\Models\Attribute\AttributeOption;
 use App\Models\Category\Category;
+use App\Models\Customer\Customer;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Vendor\Vendor;
 use App\Repositories\Product\ProductRepository;
@@ -195,5 +196,14 @@ class Product extends Model
             'id', // Local key on products table...
             'product_id' // Local key on bundle table...
         );
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'product_id');
+    }
+    public function wishlist()
+    {
+        return $this->belongsToMany(Customer::class, 'customer_wishlist');
     }
 }

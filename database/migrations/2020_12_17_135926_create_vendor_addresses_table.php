@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressesTable extends Migration
+class CreateVendorAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('vendor_addresses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id')->unsigned()->index();
+            $table->bigInteger('vendor_id')->unsigned()->index();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
             $table->string('name');
@@ -25,7 +25,7 @@ class CreateAddressesTable extends Migration
             $table->string('postal_code');
             $table->boolean('default')->default(false);
             $table->timestamps();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
 
@@ -36,6 +36,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('vendor_addresses');
     }
 }

@@ -50,7 +50,7 @@ class Customer extends Authenticatable
 
     public function subscriptions()
     {
-        return $this->belongsToMany(Vendor::class, 'customer_subscription');
+        return $this->belongsToMany(Vendor::class, 'customer_subscription')->withTimestamps();
     }
 
     public function orders()

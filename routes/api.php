@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\Customer\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('wishlist', 'api\Customer\CustomerController@getWishlist');
     Route::get('orders', 'api\Customer\CustomerController@getOrders');
 });
+
+//Customer address
+Route::resource('address', 'api\Customer\AddressController');
+//Vendor address
+Route::resource('vendor-address', 'api\Vendor\VendorAddressController');
+
 //Category routes
 Route::resource('categories', 'api\Category\CategoryController');
 
@@ -74,7 +81,28 @@ Route::resource('cart', 'api\Cart\CartController', [
 
 //images
 Route::post('/products/upload-image/{product}', 'api\Product\ProductController@upload');
+
+//featured artist & products
+Route::get('featured_artists', 'api\Vendor\VendorController@featured');
 Route::get('featured_products', 'api\Product\ProductController@featured');
 
 //catalog-rule
 Route::resource('catalog-rules', 'api\CatalogRule\CatalogRuleController');
+
+//subscriptions
+Route::post('/subscribe/{vendor}', [CustomerController::class, 'subscribeVendor']);
+Route::post('/unsubscribe/{vendor}', [CustomerController::class, 'unsubscribeVendor']);
+
+//product-comments
+Route::apiResource('comments', 'api\Product\CommentController', [
+    'parameters' => [
+        'comments' => 'product'
+    ]
+]);
+
+//Whishlists
+Route::apiResource('wishlists', 'api\Customer\WishlistController', [
+    'parameters' => [
+        'wishlists' => 'product'
+    ]
+]);

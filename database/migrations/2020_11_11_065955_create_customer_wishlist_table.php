@@ -14,7 +14,6 @@ class CreateCustomerWishlistTable extends Migration
     public function up()
     {
         Schema::create('customer_wishlist', function (Blueprint $table) {
-            $table->id();
             $table->bigInteger('customer_id')->unsigned()->index();
             $table->bigInteger('product_id')->unsigned()->index();
             $table->foreign('customer_id')->references('id')->on('customers');

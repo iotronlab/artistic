@@ -25,10 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->command('products:weekly')
-            ->everyMinute();
-        // ->weekly();
+        $schedule->command('products:featured')
+            ->weekly();
+        $schedule->command('artists:featured')
+            ->weekly();
     }
 
     /**

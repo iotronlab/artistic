@@ -196,6 +196,7 @@ class ProductController extends Controller
             $this->productRepository->upload(request()->all(), $product)
         );
     }
+    //To get featured products
     public function featured()
     {
         $featured_products = DB::table('featured_products')->where('is_active', '1')->pluck('product_id');

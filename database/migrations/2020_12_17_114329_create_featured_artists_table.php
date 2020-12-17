@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeaturedProductsTable extends Migration
+class CreateFeaturedArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateFeaturedProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('featured_products', function (Blueprint $table) {
+        Schema::create('featured_artists', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->bigInteger('vendor_id')->unsigned();
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->boolean('is_active')->default('0');
             $table->bigInteger('order')->nullable();
         });
@@ -29,6 +29,6 @@ class CreateFeaturedProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('featured_products');
+        Schema::dropIfExists('featured_artists');
     }
 }

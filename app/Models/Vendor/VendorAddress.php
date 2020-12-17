@@ -9,7 +9,7 @@ class VendorAddress extends Model
 {
     use HasFactory;
     use HasFactory;
-    protected $table = "addresses";
+    protected $table = "vendor_addresses";
     protected $fillable = [
         'name',
         'address_1',

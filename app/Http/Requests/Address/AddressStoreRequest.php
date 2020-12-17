@@ -28,9 +28,9 @@ class AddressStoreRequest extends FormRequest
             'name' => 'required',
             'address_1' => 'required',
             'city' => 'required',
-            'postal_code' => 'required',
-            'state' => 'required',
-            'country' => 'required'
+            'postal_code' => 'required'
+            // 'state' => 'required',
+            // 'country' => 'required'
         ];
     }
 }

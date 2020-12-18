@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ProductFlatSeeder::class,
             ProductCategorySeeder::class,
             CategoryFilterAttributesSeeder::class,
-            StockSeeder::class,
+            //StockSeeder::class,
             CustomerGroupSeeder::class,
         ]);
     }

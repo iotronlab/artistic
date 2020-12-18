@@ -21,8 +21,8 @@ class AttributeFamily extends Model
     {
         return Attribute::join('attribute_group_mappings', 'attributes.id', '=', 'attribute_group_mappings.attribute_id')
             ->join('attribute_groups', 'attribute_group_mappings.attribute_group_id', '=', 'attribute_groups.id')
-            ->join('attribute_family_mapping', 'attribute_groups.id', '=', 'attribute_family_mapping.attribut_group_id')
-            ->join('attribute_families', 'attribute_family_mapping.attribute_family_id', '=', 'attribute_families.id')
+            ->join('attribute_family_mappings', 'attribute_groups.id', '=', 'attribute_family_mappings.attribute_group_id')
+            ->join('attribute_families', 'attribute_family_mappings.attribute_family_id', '=', 'attribute_families.id')
             ->where('attribute_families.id', $this->id)
             ->select('attributes.*');
     }

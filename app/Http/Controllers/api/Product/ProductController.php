@@ -137,9 +137,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $this->productRepository->update(request()->all(), $id);
+        $this->productRepository->update(request()->all(), $product->id);
         return response()->json([
             'Updated Successfully'
         ], 200);

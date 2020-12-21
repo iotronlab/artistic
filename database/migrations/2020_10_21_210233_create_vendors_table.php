@@ -22,11 +22,7 @@ class CreateVendorsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('contact')->nullable();
-            $table->string('address_1')->nullable();
-            $table->string('address_2')->nullable();
-            $table->string('pincode')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
+
             $table->string('avatarimg')->nullable();
             $table->string('coverimg')->nullable();
             $table->text('description')->nullable();
@@ -35,6 +31,8 @@ class CreateVendorsTable extends Migration
             $table->float('rating', 2, 1)->nullable();
             $table->unsignedBigInteger('popularity')->nullable();
             $table->boolean('sponsored')->default('0');
+            $table->boolean('is_freelance')->default('0');
+            $table->boolean('is_commisioned')->default('0');
             $table->boolean('status')->default('0');
             $table->timestamps();
         });

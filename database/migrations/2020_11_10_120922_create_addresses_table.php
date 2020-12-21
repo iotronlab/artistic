@@ -16,13 +16,18 @@ class CreateAddressesTable extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('customer_id')->unsigned()->index();
-            $table->string('state')->nullable();
-            $table->string('country')->nullable();
             $table->string('name');
+            $table->string('contact');
+
+            $table->enum('type', ['Home', 'Work', 'Other'])->nullable();
             $table->string('address_1');
             $table->string('address_2')->nullable();
+
+            $table->string('landmark')->nullable();
             $table->string('city');
             $table->string('postal_code');
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
             $table->boolean('default')->default(false);
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');

@@ -26,7 +26,7 @@ class AddressController extends Controller
     public function store(AddressStoreRequest $request)
     {
         $address = Address::make($request->only([
-            'name', 'address_1', 'city', 'postal_code', 'default'
+            'name', 'contact', 'address_1', 'address_2', 'city', 'postal_code', 'default'
         ]));
         $request->user()->addresses()->save($address);
         return new AddressResource(

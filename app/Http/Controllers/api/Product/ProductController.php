@@ -13,11 +13,11 @@ use App\Models\Product\Product;
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductBundle;
 use App\Models\Product\ProductFlat;
+use App\Models\Product\Stock;
 use App\Repositories\Attribute\AttributeFamilyRepository;
-use App\Repositories\Product\ProductFlatRepository;
 use App\Repositories\Product\ProductRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function __construct(ProductRepository $productRepository,  AttributeFamilyRepository $attributeFamilyRepository)
     {
-        //$this->middleware(['auth:api'])->except(['index']);
+        $this->middleware(['auth:vendor-api'])->except(['index', 'show']);
         $this->productRepository = $productRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
     }
@@ -85,10 +85,10 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
-            'sku'                 => ['required', 'unique:products,sku'],
+            'sku'                 => ['required', 'unique:products,sku']
         ]);
         $product = $this->productRepository->create(request()->all());
-        return new ProductResource(Product::find($product->id));
+        return new ProductIndexResource(Product::find($product->id));
     }
 
     /**
@@ -201,5 +201,33 @@ class ProductController extends Controller
     {
         $featured_products = DB::table('featured_products')->where('is_active', '1')->pluck('product_id');
         return ProductIndexResource::collection(Product::whereIn('id', $featured_products)->get());
+    }
+
+    //To add stock
+    public function addStock(Request $request)
+    {
+        try {
+            $product = $this->productRepository->findOrFail($request->product_id);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['Failure' => 'Product does not exist'], 404);
+        }
+        $prod_stock = Stock::create([
+            'product_id' => $request->product_id,
+            'quantity'   => $request->quantity,
+        ]);
+        return response()->json([
+            'Stock added successfully'
+        ], 200);
+    }
+
+    //To assign category to product
+    public function addCategory(Product $product, $category_id)
+    {
+        $product->categories()->attach([
+            $category_id
+        ]);
+        return response()->json([
+            'Category assigned to product successfully'
+        ], 200);
     }
 }

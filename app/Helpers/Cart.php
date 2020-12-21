@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Helpers\Money;
 use App\Models\Customer\Customer;
+use App\Models\Order\ShippingMethod;
 
 class Cart
 {
@@ -16,6 +17,11 @@ class Cart
         $this->customer = $customer;
     }
 
+    public function WithShipping($id)
+    {
+        $this->shipping = ShippingMethod::find($id);
+        return $this;
+    }
     public function products()
     {
         return $this->customer->cart;

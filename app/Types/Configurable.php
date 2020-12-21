@@ -5,11 +5,8 @@ namespace App\Types;
 use App\Models\Attribute\Attribute;
 use App\Models\Attribute\AttributeOption;
 use App\Models\Product\Product;
-use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductFlat;
-use Illuminate\Support\Str;
 use Illuminate\Container\Container as App;
-use Illuminate\Support\Arr;
 
 class Configurable extends AbstractType
 {
@@ -118,7 +115,6 @@ class Configurable extends AbstractType
 
     public function createVariant($product, $flat_id, $permutation, $data = [])
     {
-        //dD($permutation);
         if (!count($data)) {
             $data = [
                 'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
@@ -136,6 +132,7 @@ class Configurable extends AbstractType
             'type'                => $typeOfVariants,
             'attribute_family_id' => $product->attribute_family_id,
             'sku'                 => $data['sku'],
+            'vendor_id'           => $product->vendor_id
         ]);
 
 
@@ -150,7 +147,7 @@ class Configurable extends AbstractType
         //     ]);
         // }
 
-        //create same product variant with null values in Product Flat table 
+        //create same product variant with null values in Product Flat table
         $variant_flat = ProductFlat::create([
             'sku'               =>   $data['sku'],
             'product_id'        =>   $variant->id,
@@ -167,7 +164,7 @@ class Configurable extends AbstractType
 
             $att_value = AttributeOption::where('id', $optionId)->pluck('admin_name')->first();
             $att_name = Attribute::where('id', $attributeId)->pluck('code')->first();
-            //create same product variant with null values in Product Flat table 
+            //create same product variant with null values in Product Flat table
             ProductFlat::where('id', $variant_flat->id)->update([
                 $att_name         =>  $optionId,
             ]);

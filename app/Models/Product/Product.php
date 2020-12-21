@@ -20,6 +20,7 @@ class Product extends Model
         'attribute_family_id',
         'sku',
         'parent_id',
+        'vendor_id'
     ];
 
     protected $typeInstance;

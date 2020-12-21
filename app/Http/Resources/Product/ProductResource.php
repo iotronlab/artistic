@@ -20,6 +20,7 @@ class ProductResource extends ProductIndexResource
         return array_merge(parent::toArray($request), [
             'short_description'      => $this->flat->short_description,
             'comments'  => ProductCommentResource::collection($this->comments),
+            'family_id' => $this->attribute_family_id,
             'attributes' => [
                 'color'    => $this->flat->color ? $product->option($this->flat->color) : null,
                 'size'     => $this->flat->size ? $product->option($this->flat->size) : null,

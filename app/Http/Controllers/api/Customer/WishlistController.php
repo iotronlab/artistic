@@ -29,10 +29,10 @@ class WishlistController extends Controller
         return response()->json(['success' => 'Product added to whishlist successfully'], 400);
     }
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        Auth::user()->wishlist()->detach([
-            $product->id
+        request()->user()->wishlist()->detach([
+            $id
         ]);
         return
             response()->json(['success' => 'Product deleted from whishlist successfully'], 400);

@@ -11,10 +11,12 @@ class Address extends Model
     use HasFactory;
     protected $table = "addresses";
     protected $fillable = [
-
         'name',
         'address_1',
         'address_2',
+        'landmark',
+        'type',
+        'contact',
         'city',
         'state',
         'country',
@@ -26,8 +28,8 @@ class Address extends Model
     {
 
         parent::boot();
-
-        static::creating(function ($address) {
+        //For update & create functions
+        static::saving(function ($address) {
 
             if ($address->default) {
                 $address->customer->addresses()->update([

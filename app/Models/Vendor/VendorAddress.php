@@ -14,6 +14,9 @@ class VendorAddress extends Model
         'name',
         'address_1',
         'address_2',
+        'landmark',
+        'type',
+        'contact',
         'city',
         'state',
         'country',
@@ -26,12 +29,15 @@ class VendorAddress extends Model
 
         parent::boot();
 
-        static::creating(function ($address) {
+        //For update & create functions
+        static::saving(function ($address) {
 
             if ($address->default) {
-                $address->vendor->addresses()->update([
-                    'default' => false
-                ]);
+                if ($address->customer != null) {
+                    $address->customer->addresses()->update([
+                        'default' => false
+                    ]);
+                }
             }
         });
     }

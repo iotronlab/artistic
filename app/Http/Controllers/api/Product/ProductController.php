@@ -9,16 +9,19 @@ use App\Http\Resources\Product\ProductAttributeResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
 use App\Models\Attribute\Attribute;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductAttributeValue;
 use App\Models\Product\ProductBundle;
 use App\Models\Product\ProductFlat;
+use App\Models\Product\ProductImage;
 use App\Models\Product\Stock;
 use App\Repositories\Attribute\AttributeFamilyRepository;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -170,6 +173,12 @@ class ProductController extends Controller
                     ProductFlat::where('product_id', $p->id)->delete();
                 }
             }
+            //Deleting image if exist
+            $images = ProductImage::where('product_id', $product->id)->get();
+            foreach ($images as $image) {
+                $this->delete_image($image->id);
+            }
+
             $this->productRepository->delete($product->id);
             return response()->json(['message' => "Deleted Successfully"], 200);
         } catch (\Exception $e) {
@@ -190,12 +199,25 @@ class ProductController extends Controller
         return app('App\Helpers\ConfigurableOption')->getConfigurationConfig($this->productRepository->findOrFail($id));
     }
 
+    //Image upload
     public function upload(Product $product)
     {
         return response()->json(
             $this->productRepository->upload(request()->all(), $product)
         );
     }
+    //Delete image
+    public function delete_image($id)
+    {
+        $image = ProductImage::find($id);
+        Storage::delete($image->path);
+        //Delete
+        $image->delete();
+        return response()->json([
+            'Image deleted successfully'
+        ], 200);
+    }
+
     //To get featured products
     public function featured()
     {
@@ -223,6 +245,7 @@ class ProductController extends Controller
     //To assign category to product
     public function addCategory(Product $product, $category_id)
     {
+        //Category::find($category_id)->parent
         $product->categories()->attach([
             $category_id
         ]);

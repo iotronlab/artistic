@@ -26,6 +26,14 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
+    /**
+     * Get the category that owns the category.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(static::class, 'parent_id');
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'product_categories');

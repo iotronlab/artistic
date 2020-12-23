@@ -9,6 +9,7 @@ use App\Http\Resources\Product\ProductIndexResource;
 use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductImage;
+use App\Models\Vendor\Vendor;
 use App\Repositories\Attribute\AttributeRepository;
 use App\Repositories\Eloquent\Repository;
 use App\Scoping\Scopes\AttributeScope;
@@ -123,8 +124,14 @@ class ProductRepository extends Repository
 
     public function upload(array $data, $product)
     {
-        $index = 1;
-        $vendorId = $product->vendor_id;
+        $images = ProductImage::where('product_id', $product->id)->get();
+        if ($images == null) {
+            $index = 1;
+        } else {
+            $index = count($images) + 1;
+        }
+
+        $vendor = Vendor::find($product->vendor_id)->slug;
         $images = request()->file('product');
 
         if (request()->hasFile('product')) {
@@ -133,7 +140,7 @@ class ProductRepository extends Repository
                 //Filename to store
                 $pic_path = $product->sku . '-' . $index . '.' . $extension;
                 //Upload Image
-                $path = $item->storeAs('/' . $vendorId . '/' . $product->sku, $pic_path);
+                $path = $item->storeAs('/' . $vendor . '/' . $product->sku, $pic_path);
                 ProductImage::create([
                     'alt' => $product->sku,
                     'path' => $path,

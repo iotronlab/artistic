@@ -55,7 +55,7 @@ Route::resource('address', 'api\Customer\AddressController');
 //Vendor address
 Route::resource('vendor-address', 'api\Vendor\VendorAddressController');
 
-//;vendor login
+//vendor login
 Route::post('vendor/login', 'api\auth\VendorAuthController@login');
 
 Route::group(['middleware' => 'auth:vendor-api'], function () {
@@ -74,10 +74,10 @@ Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 
 // });
 Route::resource('products', 'api\Product\ProductController');
-//Product routes
 
-Route::post('/products/stock', 'api\Product\ProductController@addStock');
-Route::post('/products/category', 'api\Product\ProductController@addCategory');
+//Product routes
+Route::post('/products-stock/{product}', 'api\Product\ProductController@addStock');
+Route::post('/products-category/{product}', 'api\Product\ProductController@addCategory');
 
 //Cart
 Route::resource('cart', 'api\Cart\CartController', [

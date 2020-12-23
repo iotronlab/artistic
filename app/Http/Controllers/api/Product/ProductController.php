@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -226,15 +227,15 @@ class ProductController extends Controller
     }
 
     //To add stock
-    public function addStock(Request $request)
+    public function addStock(Product $product, Request $request)
     {
         try {
-            $product = $this->productRepository->findOrFail($request->product_id);
+            $product = $this->productRepository->findOrFail($product->id);
         } catch (ModelNotFoundException $e) {
             return response()->json(['Failure' => 'Product does not exist'], 404);
         }
         $prod_stock = Stock::create([
-            'product_id' => $request->product_id,
+            'product_id' => $product->id,
             'quantity'   => $request->quantity,
         ]);
         return response()->json([
@@ -243,14 +244,32 @@ class ProductController extends Controller
     }
 
     //To assign category to product
-    public function addCategory(Product $product, $category_id)
+    public function addCategory(Product $product, Request $request)
     {
-        //Category::find($category_id)->parent
-        $product->categories()->attach([
-            $category_id
-        ]);
-        return response()->json([
-            'Category assigned to product successfully'
-        ], 200);
+        try {
+            $category_id = $request->category_id;
+            $parent_category = Category::find($category_id)->parent;
+            //Attach parents if exist
+            if ($parent_category != null) {
+                $product->categories()->attach([
+                    $parent_category->id
+                ]);
+                if ($parent_category->parent != null) {
+                    $product->categories()->attach([
+                        $parent_category->perent->id
+                    ]);
+                }
+            }
+            $product->categories()->attach([
+                $category_id
+            ]);
+            return response()->json([
+                'Category assigned to product successfully'
+            ], 200);
+        } catch (Throwable $e) {
+            return response()->json([
+                'failure' => 'Category already assigned to product'
+            ], 200);
+        }
     }
 }

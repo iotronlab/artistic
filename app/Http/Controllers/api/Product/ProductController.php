@@ -201,8 +201,11 @@ class ProductController extends Controller
     }
 
     //Image upload
-    public function upload(Product $product)
+    public function upload(Request $request, Product $product)
     {
+        $request->validate([
+            'product.*' => 'required|image|mimes:jpg,png,jpeg|max:1024',
+        ]);
         return response()->json(
             $this->productRepository->upload(request()->all(), $product)
         );

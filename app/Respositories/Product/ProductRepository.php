@@ -22,6 +22,7 @@ use App\Scoping\Scopes\NewScope;
 use App\Scoping\Scopes\PriceScope;
 use App\Scoping\Scopes\SizeScope;
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\Storage;
 
 class ProductRepository extends Repository
 {
@@ -122,6 +123,7 @@ class ProductRepository extends Repository
         return $product;
     }
 
+    //Function to upload image
     public function upload(array $data, $product)
     {
         $images = ProductImage::where('product_id', $product->id)->get();
@@ -141,9 +143,11 @@ class ProductRepository extends Repository
                 $pic_path = $product->sku . '-' . $index . '.' . $extension;
                 //Upload Image
                 $path = $item->storeAs('/' . $vendor . '/' . $product->sku, $pic_path);
+                $url = Storage::url($path);
                 ProductImage::create([
                     'alt' => $product->sku,
                     'path' => $path,
+                    'url' => $url,
                     'product_id' => $product->id
                 ]);
                 $index = $index + 1;

@@ -23,7 +23,7 @@ class AttributeFamilyTableSeeder extends Seeder
             [
                 'id'              => '2',
                 'code'            => 'default-2',
-                'name'            => 'Default Artworks(color, material, medium)',
+                'name'            => 'Default Artworks(color, material, medium, orientation)',
                 'status'          => '0',
             ]
         ]);

@@ -6,6 +6,8 @@ use App\Models\Attribute\Attribute;
 use App\Models\Attribute\AttributeOption;
 use App\Models\Product\Product;
 use App\Models\Product\ProductFlat;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Container\Container as App;
 
 class Configurable extends AbstractType
@@ -30,7 +32,7 @@ class Configurable extends AbstractType
      * @var boolean
      */
     protected $hasVariants = true;
-    public App $app;
+    //public App $app;
     /**
      * product options
      */

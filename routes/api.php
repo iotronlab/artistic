@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth:vendor-api'], function () {
 Route::resource('categories', 'api\Category\CategoryController');
 
 //Attribute routes
-Route::resource('attributes', 'api\Attribute\AttributeController');
+Route::apiResource('attributes', 'api\Attribute\AttributeController');
 Route::get('/families', 'api\Attribute\AttributeController@families');
 Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 

@@ -177,6 +177,18 @@ class AttributeOptionTableSeeder extends Seeder
                 'admin_name'   => 'Digital',
                 'sort_order'   => null,
                 'attribute_id' => '22',
+            ],
+            [
+                'id'           => '30',
+                'admin_name'   => 'Landscape',
+                'sort_order'   => null,
+                'attribute_id' => '23',
+            ],
+            [
+                'id'           => '31',
+                'admin_name'   => 'Portrait',
+                'sort_order'   => null,
+                'attribute_id' => '23',
             ]
         ]);
     }

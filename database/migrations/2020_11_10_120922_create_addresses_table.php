@@ -27,8 +27,9 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('postal_code');
             $table->string('state')->nullable();
-            $table->string('country')->nullable();
             $table->boolean('default')->default(false);
+            $table->unsignedBigInteger('country_id')->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
         });

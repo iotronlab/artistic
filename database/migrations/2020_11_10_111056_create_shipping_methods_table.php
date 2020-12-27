@@ -16,7 +16,15 @@ class CreateShippingMethodsTable extends Migration
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('price')->default(0);
             $table->timestamps();
+        });
+
+        Schema::create('country_shipping_method', function (Blueprint $table) {
+            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('shipping_method_id');
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('shipping_method_id')->references('id')->on('shipping_methods');
         });
     }
 
@@ -28,5 +36,6 @@ class CreateShippingMethodsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('shipping_methods');
+        Schema::dropIfExists('country_shipping_method');
     }
 }

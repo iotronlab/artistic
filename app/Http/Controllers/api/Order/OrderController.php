@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\Order;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderStoreRequest;
+use App\Models\Customer\Address;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -30,7 +31,10 @@ class OrderController extends Controller
      */
     public function store(OrderStoreRequest $request)
     {
-        //
+        $request->user()->orders()->create(
+            $request->only(['address_id', 'shipping_method_id'])
+        );
+        dd("here");
     }
 
     /**

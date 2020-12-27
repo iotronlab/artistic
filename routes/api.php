@@ -114,3 +114,5 @@ Route::apiResource('wishlists', 'api\Customer\WishlistController', [
         'wishlists' => 'product'
     ]
 ]);
+
+Route::apiResource('orders', 'api\Order\OrderController');

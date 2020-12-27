@@ -18,6 +18,7 @@ class CreateCustomerWishlistTable extends Migration
             $table->bigInteger('product_id')->unsigned()->index();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->unique(['customer_id', 'product_id']);
         });
     }
 

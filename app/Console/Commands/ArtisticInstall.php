@@ -51,19 +51,25 @@ class ArtisticInstall extends Command
         $migrate = $this->call('migrate:fresh');
         $this->info($migrate);
 
-        // running `php artisan db:seed`
-        $this->warn('Step: seeding basic data for artistic kickstart...');
-        $result = $this->call('db:seed');
-        $this->info($result);
-
         // running `php artisan shiprocket:fetch`
         $this->warn('Step: Fetching Countries from ShipRocketApi');
         $result = $this->call('shiprocket:fetch');
         $this->info($result);
 
+        // running `php artisan db:seed`
+        $this->warn('Step: seeding basic data for artistic kickstart...');
+        $result = $this->call('db:seed');
+        $this->info($result);
+
+
         // running `php artisan passport:install`
         $this->warn('Step: Installing Passport');
         $result = $this->call('passport:install');
+        $this->info($result);
+
+        // running `php artisan voyager:install`
+        $this->warn('Step: Installing Admin Package Voyager');
+        $result = $this->call('voyager:install');
         $this->info($result);
 
         // running `php artisan storage:link`

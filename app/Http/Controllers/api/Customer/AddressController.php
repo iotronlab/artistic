@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Address\AddressStoreRequest;
 use App\Http\Resources\Address\AddressResource;
 use App\Models\Customer\Address;
-use App\Models\Customer\Customer;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -27,7 +26,7 @@ class AddressController extends Controller
     public function store(AddressStoreRequest $request)
     {
         $address = Address::make($request->only([
-            'name', 'contact', 'address_1', 'address_2', 'city', 'postal_code', 'default', 'state', 'country'
+            'name', 'contact', 'address_1', 'address_2', 'city', 'postal_code', 'default', 'state', 'country_id'
         ]));
         $request->user()->addresses()->save($address);
         return new AddressResource(

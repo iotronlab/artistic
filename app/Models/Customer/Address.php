@@ -5,6 +5,7 @@ namespace App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Customer\Customer;
+use App\Models\Locale\Country;
 
 class Address extends Model
 {
@@ -19,7 +20,7 @@ class Address extends Model
         'contact',
         'city',
         'state',
-        'country',
+        'country_id',
         'postal_code',
         'default'
     ];
@@ -48,5 +49,10 @@ class Address extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function country()
+    {
+        return $this->hasOne(Country::class, 'id', 'country');
     }
 }

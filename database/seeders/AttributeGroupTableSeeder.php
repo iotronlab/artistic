@@ -29,12 +29,12 @@ class AttributeGroupTableSeeder extends Seeder
                 'position'            => '2',
             ], [
                 'id'                  => '3',
-                'name'                => 'Meta Description',
-                'position'            => '3',
-            ], [
-                'id'                  => '4',
                 'name'                => 'Price',
                 'position'            => '4',
+            ], [
+                'id'                  => '4',
+                'name'                => 'Meta Description',
+                'position'            => '3',
             ], [
                 'id'                  => '5',
                 'name'                => 'Shipping',
@@ -48,7 +48,7 @@ class AttributeGroupTableSeeder extends Seeder
             [
                 'id'                  => '7',
                 'name'                => 'Artwork Features',
-                'position'            => '6',
+                'position'            => '7',
             ]
         ]);
 
@@ -152,6 +152,10 @@ class AttributeGroupTableSeeder extends Seeder
                 'position'            => '2',
             ], [
                 'attribute_id'        => '22',
+                'attribute_group_id'  => '7',
+                'position'            => '3',
+            ], [
+                'attribute_id'        => '23',
                 'attribute_group_id'  => '7',
                 'position'            => '3',
             ]

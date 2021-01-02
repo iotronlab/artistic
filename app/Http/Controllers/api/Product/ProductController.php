@@ -144,6 +144,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        //check if product belongs to vendor or not
+        if ($request->user()->id != $product->vendor_id) {
+            return response()->json([
+                'failure' => 'Vendor can only edit his/her own products'
+            ], 400);
+        }
         $this->productRepository->update(request()->all(), $product->id);
         return response()->json([
             'Updated Successfully'

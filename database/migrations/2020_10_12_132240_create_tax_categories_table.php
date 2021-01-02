@@ -16,9 +16,8 @@ class CreateTaxCategoriesTable extends Migration
         Schema::create('tax_categories', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
-
             $table->string('name')->unique();
-
+            $table->decimal('percent', 12, 4)->default(0);
             $table->longtext('description');
             $table->timestamps();
         });

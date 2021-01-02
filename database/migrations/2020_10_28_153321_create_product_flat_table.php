@@ -15,7 +15,6 @@ class CreateProductFlatTable extends Migration
     {
         Schema::create('product_flat', function (Blueprint $table) {
             $table->id();
-            $table->string('sku');
             $table->string('name')->nullable();
             $table->text('description')->nullable();
             $table->string('url_key')->nullable();
@@ -45,7 +44,9 @@ class CreateProductFlatTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->boolean('visible_individually')->nullable();
+            $table->unsignedBigInteger('tax_category_id')->nullable();
 
+            $table->foreign('tax_category_id')->references('id')->on('tax_categories');
             $table->foreign('parent_id')->references('id')->on('product_flat')->onDelete('cascade');
 
             $table->timestamps();

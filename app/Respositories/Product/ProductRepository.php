@@ -71,6 +71,7 @@ class ProductRepository extends Repository
             ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
 
+
         $products = ProductIndexResource::collection($results);
 
         if (request()->input('category') != null) {

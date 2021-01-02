@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\Cart;
 
 use App\Helpers\Cart;
+use App\Helpers\Money;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateRequest;
@@ -33,7 +34,9 @@ class CartController extends Controller
         return [
             'empty' => $cart->IsEmpty(),
             'subtotal' => $cart->subtotal()->formatted(),
-            'total' => $cart->withShipping($request->shipping_method_id)->total()->formatted(),
+            'tax' => $cart->applyTax()->formatted(),
+            'discount' => $cart->ApplyCoupon($request->coupon_code)->formatted(),
+            'total' => $cart->withShipping($request->shipping_method_id)->total($request->coupon_code)->formatted(),
             'changed' => $cart->hasChanged(),
         ];
     }

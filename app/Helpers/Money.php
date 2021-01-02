@@ -39,6 +39,12 @@ class Money
 
         return $this;
     }
+    public function subtract(Money $money)
+    {
+        $this->money = $this->money->subtract($money->instance());
+
+        return $this;
+    }
 
     public function instance()
     {

@@ -21,5 +21,6 @@ class TaxCategory extends Model
         'code',
         'name',
         'description',
+        'percent'
     ];
 }

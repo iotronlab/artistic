@@ -99,11 +99,11 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @return \App\Contracts\Product\Product
      */
     public function create(array $data)
     {
+        $data['vendor_id'] = request()->user()->id;
         $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
         $product = $typeInstance->create($data);
         return $product;

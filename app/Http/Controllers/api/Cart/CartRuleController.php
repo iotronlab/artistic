@@ -1,19 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\api\Category;
+namespace App\Http\Controllers\api\Cart;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\App;
+use App\Repositories\CartRule\CartRuleRepository;
 use Illuminate\Http\Request;
-use App\Models\Category\Category;
 
-use App\Http\Resources\Category\CategoryIndexResource;
-use App\Http\Resources\Category\CategoryResource;
-use App\Http\Resources\Product\ProductIndexResource;
-use App\Http\Resources\Vendor\VendorIndexResource;
-
-class CategoryController extends Controller
+class CartRuleController extends Controller
 {
+    /**
+     * To hold Catalog repository instance
+     */
+    protected $cartRuleRepository;
+
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(
+        CartRuleRepository $cartRuleRepository
+    ) {
+
+        $this->cartRuleRepository = $cartRuleRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +30,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryIndexResource::collection(
-            Category::with(
-                'children',
-                'children.children'
-            )->parents()->get()
-        )->additional(["shipping_token" => (string)App::make('App\Helpers\ShipRocket')->token]);
+        //
     }
 
     /**
@@ -47,7 +51,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'name'            => 'required',
+            'customer_groups' => 'required|array|min:1',
+            'action_type'     => 'required',
+            'discount_amount' => 'required|numeric',
+            'coupon_code'     => ['required', 'unique:cart_rules,coupon_code']
+        ]);
+
+        $data = request()->all();
+        $cartRule = $this->cartRuleRepository->create($data);
+
+        return response()->json([
+            $cartRule
+        ], 200);
     }
 
     /**
@@ -56,13 +73,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //Sort by popularities and then top 3 rows are fetched\
-        $category->load(['children', 'children.children', 'products', 'products.vendor']);
-        //incrememt view count
-        $category->increment('view_count', 1);
-        return new CategoryResource($category);
+        //
     }
 
     /**

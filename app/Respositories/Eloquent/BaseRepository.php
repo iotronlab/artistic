@@ -201,4 +201,19 @@ abstract class BaseRepository
         $deleted = $this->model->delete();
         return $deleted;
     }
+
+    /**
+     * Find data by excluding multiple values in one field
+     *
+     * @param       $field
+     * @param array $values
+     * @param array $columns
+     *
+     * @return mixed
+     */
+    public function findWhereNotIn($field, array $values, $columns = ['*'])
+    {
+        $model = $this->model->whereNotIn($field, $values)->get($columns);
+        return $model;
+    }
 }

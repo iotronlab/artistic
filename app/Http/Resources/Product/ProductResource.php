@@ -3,7 +3,6 @@
 namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Vendor\VendorReviewResource;
-use App\Models\Attribute\AttributeOption;
 
 class ProductResource extends ProductIndexResource
 {

@@ -16,16 +16,9 @@ class CreateCatalogRuleProductPricesTable extends Migration
         Schema::create('catalog_rule_product_prices', function (Blueprint $table) {
             $table->id();
             $table->decimal('price', 12, 4)->default(0);
-            $table->date('rule_date');
-            $table->datetime('starts_from')->nullable();
-            $table->datetime('ends_till')->nullable();
 
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-
-            $table->bigInteger('customer_group_id')->unsigned();
-            $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('cascade');
-
             $table->bigInteger('catalog_rule_id')->unsigned();
             $table->foreign('catalog_rule_id')->references('id')->on('catalog_rules')->onDelete('cascade');
 

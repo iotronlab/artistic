@@ -107,6 +107,7 @@ class ProductController extends Controller
         } else {
             $config = $this->configurableConfig($product->id);
         }
+        $product->increment('view_count', 1);
         if ($product->type == 'simple') {
             return response()->json([
                 'product' => (new ProductResource($product)),
@@ -272,7 +273,7 @@ class ProductController extends Controller
         } catch (Throwable $e) {
             return response()->json([
                 'failure' => 'Category already assigned to product'
-            ], 200);
+            ], 400);
         }
     }
 }

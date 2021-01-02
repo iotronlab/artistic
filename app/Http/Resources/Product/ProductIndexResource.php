@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Helpers\Money;
 use App\Http\Resources\Vendor\VendorIndexResource;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -36,6 +37,7 @@ class ProductIndexResource extends JsonResource
             'popularity'             => $product->popularity,
             'name'                   => $this->flat->name,
             'price'                  => $this->flat->formattedPrice,
+            'special_price'          => $this->flat->special_price ? (new Money($this->flat->special_price))->formatted() : null,
             'sku'                    => $product->sku,
             'in_stock'               => $product->isSaleable(),
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),

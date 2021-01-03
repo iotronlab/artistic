@@ -62,97 +62,97 @@ class CatalogRuleRepository extends Repository
         return $catalogRule;
     }
 
-    /**
-     * Returns attributes for catalog rule conditions
-     *
-     * @return array
-     */
-    public function getConditionAttributes()
-    {
-        $attributes = [
-            [
-                'key'      => 'product',
-                'label'    => trans('admin::app.promotions.catalog-rules.product-attribute'),
-                'children' => [
-                    [
-                        'key'     => 'product|category_ids',
-                        'type'    => 'multiselect',
-                        'label'   => trans('admin::app.promotions.catalog-rules.categories'),
-                        'options' => $this->categoryRepository->getCategoryTree(),
-                    ], [
-                        'key'     => 'product|attribute_family_id',
-                        'type'    => 'select',
-                        'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
-                        'options' => $this->getAttributeFamilies(),
-                    ]
-                ]
-            ]
-        ];
+    // /**
+    //  * Returns attributes for catalog rule conditions
+    //  *
+    //  * @return array
+    //  */
+    // public function getConditionAttributes()
+    // {
+    //     $attributes = [
+    //         [
+    //             'key'      => 'product',
+    //             'label'    => trans('admin::app.promotions.catalog-rules.product-attribute'),
+    //             'children' => [
+    //                 [
+    //                     'key'     => 'product|category_ids',
+    //                     'type'    => 'multiselect',
+    //                     'label'   => trans('admin::app.promotions.catalog-rules.categories'),
+    //                     'options' => $this->categoryRepository->getCategoryTree(),
+    //                 ], [
+    //                     'key'     => 'product|attribute_family_id',
+    //                     'type'    => 'select',
+    //                     'label'   => trans('admin::app.promotions.catalog-rules.attribute_family'),
+    //                     'options' => $this->getAttributeFamilies(),
+    //                 ]
+    //             ]
+    //         ]
+    //     ];
 
-        foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
-            $attributeType = $attribute->type;
+    //     foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
+    //         $attributeType = $attribute->type;
 
-            if ($attribute->code == 'tax_category_id') {
-                $options = $this->getTaxCategories();
-            } else {
-                if ($attribute->type === 'select') {
-                    $options = $attribute->options()->orderBy('sort_order')->get();
-                } else {
-                    $options = $attribute->options;
-                }
-            }
+    //         if ($attribute->code == 'tax_category_id') {
+    //             $options = $this->getTaxCategories();
+    //         } else {
+    //             if ($attribute->type === 'select') {
+    //                 $options = $attribute->options()->orderBy('sort_order')->get();
+    //             } else {
+    //                 $options = $attribute->options;
+    //             }
+    //         }
 
-            if ($attribute->validation == 'decimal')
-                $attributeType = 'decimal';
+    //         if ($attribute->validation == 'decimal')
+    //             $attributeType = 'decimal';
 
-            if ($attribute->validation == 'numeric')
-                $attributeType = 'integer';
+    //         if ($attribute->validation == 'numeric')
+    //             $attributeType = 'integer';
 
-            $attributes[0]['children'][] = [
-                'key'     => 'product|' . $attribute->code,
-                'type'    => $attribute->type,
-                'label'   => $attribute->name,
-                'options' => $options,
-            ];
-        }
+    //         $attributes[0]['children'][] = [
+    //             'key'     => 'product|' . $attribute->code,
+    //             'type'    => $attribute->type,
+    //             'label'   => $attribute->name,
+    //             'options' => $options,
+    //         ];
+    //     }
 
-        return $attributes;
-    }
-    /**
-     * Returns all tax categories
-     *
-     * @return array
-     */
-    public function getTaxCategories()
-    {
-        $taxCategories = [];
+    //     return $attributes;
+    // }
+    // /**
+    //  * Returns all tax categories
+    //  *
+    //  * @return array
+    //  */
+    // public function getTaxCategories()
+    // {
+    //     $taxCategories = [];
 
-        foreach ($this->taxCategoryRepository->all() as $taxCategory) {
-            $taxCategories[] = [
-                'id'         => $taxCategory->id,
-                'admin_name' => $taxCategory->name,
-            ];
-        }
+    //     foreach ($this->taxCategoryRepository->all() as $taxCategory) {
+    //         $taxCategories[] = [
+    //             'id'         => $taxCategory->id,
+    //             'admin_name' => $taxCategory->name,
+    //         ];
+    //     }
 
-        return $taxCategories;
-    }
+    //     return $taxCategories;
+    // }
 
-    /**
-     * Returns all attribute families
-     *
-     * @return array
-     */
-    public function getAttributeFamilies()
-    {
-        $attributeFamilies = [];
+    // /**
+    //  * Returns all attribute families
+    //  *
+    //  * @return array
+    //  */
+    // public function getAttributeFamilies()
+    // {
+    //     $attributeFamilies = [];
 
-        foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
-            $attributeFamilies[] = [
-                'id'         => $attributeFamily->id,
-                'admin_name' => $attributeFamily->name,
-            ];
-        }
+    //     foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
+    //         $attributeFamilies[] = [
+    //             'id'         => $attributeFamily->id,
+    //             'admin_name' => $attributeFamily->name,
+    //         ];
+    //     }
 
-        return $attributeFamilies;
-    }
+    //     return $attributeFamilies;
+    // }
 }

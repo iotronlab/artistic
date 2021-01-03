@@ -5,13 +5,11 @@ namespace App\Scoping\Scopes;
 use App\Scoping\Contracts\Scope;
 use Illuminate\Database\Eloquent\Builder;
 
-class MediumScope implements
+class StockScope implements
     Scope
 {
     public function apply(Builder $builder, $value)
     {
-        return $builder->whereHas('flat', function ($builder) use ($value) {
-            $builder->whereIn('Medium', explode(',', $value));
-        });
+        return $builder->append('in_stock')->where('in_stock', 'true');
     }
 }

@@ -21,6 +21,7 @@ use App\Scoping\Scopes\MediumScope;
 use App\Scoping\Scopes\NewScope;
 use App\Scoping\Scopes\PriceScope;
 use App\Scoping\Scopes\SizeScope;
+use App\Scoping\Scopes\StockScope;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\Storage;
 
@@ -95,7 +96,8 @@ class ProductRepository extends Repository
             'size' => new SizeScope(),
             'material' => new MaterialScope(),
             'medium' => new MediumScope(),
-            'category' => new CategoryScope()
+            'category' => new CategoryScope(),
+            'stock' => new StockScope()
         ];
     }
 

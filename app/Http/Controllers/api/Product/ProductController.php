@@ -51,11 +51,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $configurableFamily = null;
-        if ($familyId = request()->get('family')) { //for configurable type
-            $configurableFamily = AttributeResource::collection(Attribute::where('is_configurable', 1)->get());
-        }
-        return $configurableFamily;
+        // $configurableFamily = null;
+        // if ($familyId = request()->get('family')) { //for configurable type
+        //     $configurableFamily = AttributeResource::collection(Attribute::where('is_configurable', 1)->get());
+        // }
+        // return $configurableFamily;
     }
 
     /**

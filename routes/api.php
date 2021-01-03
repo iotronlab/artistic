@@ -95,7 +95,7 @@ Route::get('featured_artists', 'api\Vendor\VendorController@featured');
 Route::get('featured_products', 'api\Product\ProductController@featured');
 
 //catalog-rule
-Route::resource('catalog-rules', 'api\CatalogRule\CatalogRuleController')->name('store', 'catalog-rules.store');
+Route::resource('catalog-rules', 'api\CatalogRule\CatalogRuleController');
 
 //cart-rule
 Route::resource('cart-rules', 'api\Cart\CartRuleController');

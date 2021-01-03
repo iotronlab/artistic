@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api\CatalogRule;
 
-use App\Helpers\CatalogRule\CatalogRuleIndex;
 use App\Http\Controllers\Controller;
 use App\Models\CatalogRule\CatalogRule;
 use App\Models\CatalogRule\CatalogRuleProductPrice;
@@ -20,22 +19,15 @@ class CatalogRuleController extends Controller
      */
     protected $catalogRuleRepository;
 
-    /**
-     * CatalogRuleIndex
-     */
-    protected $catalogRuleIndexHelper;
 
     /**
      * Create a new controller instance.
      */
     public function __construct(
-        CatalogRuleRepository $catalogRuleRepository,
-        CatalogRuleIndex $catalogRuleIndexHelper
+        CatalogRuleRepository $catalogRuleRepository
     ) {
 
         $this->catalogRuleRepository = $catalogRuleRepository;
-
-        $this->catalogRuleIndexHelper = $catalogRuleIndexHelper;
     }
     /**
      * Display a listing of the resource.

@@ -43,6 +43,7 @@ class ProductIndexResource extends JsonResource
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),
             'vendor'                 => new VendorIndexResource($this->vendor),
             'featured'               => $this->flat->featured,
+            //'stock' => $this->in_stock,
         ];
     }
 }

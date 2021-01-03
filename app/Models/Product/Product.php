@@ -23,6 +23,8 @@ class Product extends Model
         'vendor_id'
     ];
 
+    protected $appends = ['in_stock'];
+
     protected $typeInstance;
 
     protected $table = 'products';
@@ -88,7 +90,7 @@ class Product extends Model
      *
      * @return AbstractType
      */
-    public function getTypeInstance(ProductRepository $productRepository = null)
+    public function getTypeInstance()
     {
         if ($this->typeInstance) {
             return $this->typeInstance;
@@ -138,6 +140,10 @@ class Product extends Model
     public function isSaleable()
     {
         return $this->getTypeInstance()->isSaleable();
+    }
+    public function getInStockAttribute()
+    {
+        return $this->isSaleable();
     }
 
     /**

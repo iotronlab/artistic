@@ -34,7 +34,6 @@ class OrderController extends Controller
         $request->user()->orders()->create(
             $request->only(['address_id', 'shipping_method_id'])
         );
-        dd("here");
     }
 
     /**

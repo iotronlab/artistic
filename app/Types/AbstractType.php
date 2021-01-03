@@ -110,7 +110,7 @@ abstract class AbstractType
     {
         $new_product = $this->productRepository->getModel()->create($data);
         $product_flat = ProductFlat::create([
-            'sku' => $data['sku'],
+            //'sku' => $data['sku'],
             'product_id' => $new_product->id
         ]);
         $product_flat->save();

@@ -137,6 +137,7 @@ class Product extends Model
      *
      * @return bool
      */
+    //returns if product is in stock data
     public function isSaleable()
     {
         return $this->getTypeInstance()->isSaleable();
@@ -149,6 +150,7 @@ class Product extends Model
     /**
      * @return integer
      */
+    //returns total quantity
     public function stockCount()
     {
         return $this->getTypeInstance()->totalQuantity();

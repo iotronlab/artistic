@@ -31,14 +31,14 @@ return [
     ],
 
     'google' => [
-        'client_id' => '721735602553-4j9094laq0ctap2qp0lo228rlkoo87np.apps.googleusercontent.com',
-        'client_secret' => 'G0tMRfj_bv7R7NGrQZUZ0gnJ',
+        'client_id' => '667895825276-ssk3fkah9oc2dhm441aait5d96rmmao9.apps.googleusercontent.com',
+        'client_secret' => 'XH1A8krfIDoHhWlxndd9WNo_',
         'redirect' => 'http://localhost:8000/api/login/google/callback',
     ],
 
     'facebook' => [
-        'client_id' => '2434292290158494',
-        'client_secret' => 'aabf96d2270ddaaa7b9959bba679ced0',
+        'client_id' => '442196260524362',
+        'client_secret' => 'fa2b444781bd9513a9503e40d480b005',
         'redirect' => 'http://localhost:8000/api/login/facebook/callback',
     ],
 ];

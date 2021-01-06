@@ -45,7 +45,7 @@ class SocialLoginController extends Controller
 
         if ($this->needsToCreateSocial($user, $service)) {
             CustomerSocial::create([
-                'user_id' => $user->id,
+                'customer_id' => $user->id,
                 'social_id' => $serviceUser->getId(),
                 'service' => $service
             ]);

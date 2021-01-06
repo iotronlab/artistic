@@ -68,7 +68,7 @@ class ProductRepository extends Repository
     public function getAll()
     {
         $params = request()->input();
-        $results = Product::with('variants', 'flat', 'vendor', 'images', 'ordered_inventories', 'inventories')
+        $results = Product::with('variants', 'categories', 'flat', 'vendor', 'images', 'ordered_inventories', 'inventories')
             ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
 
@@ -97,7 +97,7 @@ class ProductRepository extends Repository
             'material' => new MaterialScope(),
             'medium' => new MediumScope(),
             'category' => new CategoryScope(),
-            'stock' => new StockScope()
+            // 'stock' => new StockScope()
         ];
     }
 

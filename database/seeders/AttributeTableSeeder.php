@@ -328,7 +328,7 @@ class AttributeTableSeeder extends Seeder
             ],
             [
                 'id'                  => '23',
-                'code'                => 'orientaion',
+                'code'                => 'orientation',
                 'admin_name'          => 'Orientation',
                 'type'                => 'select',
                 'validation'          => NULL,

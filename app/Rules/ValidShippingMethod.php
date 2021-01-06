@@ -31,8 +31,8 @@ class ValidShippingMethod implements Rule
         if (!$address = $this->getAddress()) {
             return false;
         }
-        //return $address->country->shippingMethods->contains('id', $value);
-        return Country::find($address->country)->shippingMethods->contains('id', $value);
+        return $address->country->shippingMethods->contains('id', $value);
+        // return Country::find($address->country)->shippingMethods->contains('id', $value);
     }
 
     /**

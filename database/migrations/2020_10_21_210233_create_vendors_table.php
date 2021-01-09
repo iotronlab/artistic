@@ -19,7 +19,7 @@ class CreateVendorsTable extends Migration
             $table->string('contact_name');
             $table->string('email')->unique();
             $table->string('slug')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+
             $table->string('password');
             $table->string('contact')->nullable();
 
@@ -30,9 +30,12 @@ class CreateVendorsTable extends Migration
             $table->text('meta_desc')->nullable();
             $table->float('rating', 2, 1)->nullable();
             $table->unsignedBigInteger('popularity')->nullable();
+            $table->unsignedBigInteger('view_count')->nullable();
             $table->boolean('sponsored')->default('0');
             $table->boolean('is_freelance')->default('0');
             $table->boolean('is_commisioned')->default('0');
+            $table->boolean('auto_approve')->default('0');
+            $table->boolean('show_display_name')->default('0');
             $table->boolean('status')->default('0');
             $table->timestamps();
         });

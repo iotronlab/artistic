@@ -31,7 +31,7 @@ class ProductController extends Controller
 
     public function __construct(ProductRepository $productRepository,  AttributeFamilyRepository $attributeFamilyRepository)
     {
-        $this->middleware(['auth:vendor-api'])->except(['index', 'show']);
+        $this->middleware('auth:vendor-api')->except(['index', 'show']);
         $this->productRepository = $productRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
     }
@@ -256,8 +256,49 @@ class ProductController extends Controller
     //To assign category to product
     public function addCategory(Product $product, Request $request)
     {
+
         try {
             $category_id = $request->category_id;
+            $user = $request->user();
+            // dd($user);
+            $user->categories()->attach([
+                $category_id
+            ]);
+            $parent_category = Category::find($category_id)->parent;
+            //Attach parents if exist
+            if ($parent_category != null) {
+                $product->categories()->attach([
+                    $parent_category->id
+                ]);
+                // if ($parent_category->parent != null) {
+                //     $product->categories()->attach([
+                //         $parent_category->perent->id
+                //     ]);
+                // }
+            }
+            $product->categories()->attach([
+                $category_id
+            ]);
+            return response()->json([
+                'Category assigned to product successfully'
+            ], 200);
+        } catch (Throwable $e) {
+            return response()->json([
+                'failure' => 'Category already assigned to product'
+            ], 400);
+        }
+    }
+
+    public function removeCategory(Product $product, Request $request)
+    {
+
+        try {
+            $category_id = $request->category_id;
+            $user = $request->user();
+            // dd($user);
+            $user->categories()->attach([
+                $category_id
+            ]);
             $parent_category = Category::find($category_id)->parent;
             //Attach parents if exist
             if ($parent_category != null) {
@@ -266,7 +307,7 @@ class ProductController extends Controller
                 ]);
                 if ($parent_category->parent != null) {
                     $product->categories()->attach([
-                        $parent_category->perent->id
+                        $parent_category->parent->id
                     ]);
                 }
             }

@@ -43,7 +43,7 @@
     },
     "autoload": {
         "classmap": [
-            "app/*"
+            "app/"
         ],
         "psr-4": {
             "App\\": "app/",

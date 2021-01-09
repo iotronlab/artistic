@@ -2,8 +2,10 @@
 
 namespace App\Models\Vendor;
 
+use App\Models\Category\Category;
 use App\Models\Customer\Customer;
 use App\Models\Product\Product;
+
 use App\Models\Vendor\VendorReview;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +40,11 @@ class Vendor extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class, 'vendor_id');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'vendor_categories');
     }
 
     public function subscribers()

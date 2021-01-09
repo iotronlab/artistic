@@ -14,6 +14,8 @@ class CategoryIndexResource extends JsonResource
      */
     public function toArray($request)
     {
+        $children =  Self::collection($this->whenLoaded('children'));
+
         return [
             "id" => $this->id,
             "parent_id" => $this->parent_id,
@@ -23,7 +25,11 @@ class CategoryIndexResource extends JsonResource
             "name" => $this->name,
             "image_path" => $this->image_path,
             "slug" => $this->slug,
-            "children" => $this->children->isNotEmpty() ? Self::collection($this->children) : null
+            "views" => $this->view_count,
+            "children" => $children
+            // example of n+1 problem
+            // $this->children->isNotEmpty() ? Self::collection($this->whenLoaded('children')) : null,
+
         ];
     }
 }

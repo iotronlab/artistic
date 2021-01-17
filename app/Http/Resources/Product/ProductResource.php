@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Category\CategoryIndexResource;
 use App\Http\Resources\Vendor\VendorReviewResource;
 
 class ProductResource extends ProductIndexResource
@@ -17,7 +18,7 @@ class ProductResource extends ProductIndexResource
         $product = $this->product ? $this->product : $this->flat;
 
         return array_merge(parent::toArray($request), [
-            'categories'      => $this->categories,
+            //  'categories'      => CategoryIndexResource::collection($this->categories),
             'short_description'      => $this->flat->short_description,
             'comments'  => ProductCommentResource::collection($this->comments),
             'family_id' => $this->attribute_family_id,

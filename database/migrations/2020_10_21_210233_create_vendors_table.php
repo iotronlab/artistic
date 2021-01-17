@@ -27,6 +27,7 @@ class CreateVendorsTable extends Migration
             $table->string('coverimg')->nullable();
             $table->text('description')->nullable();
             $table->string('meta_title')->nullable();
+            //change to meta_keyword json
             $table->text('meta_desc')->nullable();
             $table->float('rating', 2, 1)->nullable();
             $table->unsignedBigInteger('popularity')->nullable();

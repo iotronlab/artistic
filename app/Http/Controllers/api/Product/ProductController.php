@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\Product;
 use App\Helpers\ProductType;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Attribute\AttributeResource;
+use App\Http\Resources\Category\CategoryIndexResource;
 use App\Http\Resources\Product\ProductAttributeResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
@@ -18,10 +19,12 @@ use App\Models\Product\ProductImage;
 use App\Models\Product\Stock;
 use App\Repositories\Attribute\AttributeFamilyRepository;
 use App\Repositories\Product\ProductRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
 use Throwable;
 
 class ProductController extends Controller
@@ -109,8 +112,19 @@ class ProductController extends Controller
         }
         $product->increment('view_count', 1);
         if ($product->type == 'simple') {
+
+            $categories = $product->categories;
+            foreach ($categories as $key => $category) {
+                $parent = $categories->where('parent_id', $category->id);
+                if ($parent->isNotEmpty()) {
+                    $categories->forget($key);
+                }
+            }
+
+
             return response()->json([
                 'product' => (new ProductResource($product)),
+                'categories' => CategoryIndexResource::collection($categories),
                 'attributes' => ProductAttributeResource::collection($product->attribute_values),
             ], 200);
         } else {
@@ -254,49 +268,15 @@ class ProductController extends Controller
     }
 
     //To assign category to product
+    //issue: validation from front end, database has unique column combination validation
     public function addCategory(Product $product, Request $request)
     {
 
         try {
             $category_id = $request->category_id;
-            $user = $request->user();
-            // dd($user);
-            $user->categories()->attach([
-                $category_id
-            ]);
-            $parent_category = Category::find($category_id)->parent;
-            //Attach parents if exist
-            if ($parent_category != null) {
-                $product->categories()->attach([
-                    $parent_category->id
-                ]);
-                // if ($parent_category->parent != null) {
-                //     $product->categories()->attach([
-                //         $parent_category->perent->id
-                //     ]);
-                // }
-            }
-            $product->categories()->attach([
-                $category_id
-            ]);
-            return response()->json([
-                'Category assigned to product successfully'
-            ], 200);
-        } catch (Throwable $e) {
-            return response()->json([
-                'failure' => 'Category already assigned to product'
-            ], 400);
-        }
-    }
+            $vendor = $request->user();
 
-    public function removeCategory(Product $product, Request $request)
-    {
-
-        try {
-            $category_id = $request->category_id;
-            $user = $request->user();
-            // dd($user);
-            $user->categories()->attach([
+            $vendor->categories()->attach([
                 $category_id
             ]);
             $parent_category = Category::find($category_id)->parent;
@@ -315,11 +295,46 @@ class ProductController extends Controller
                 $category_id
             ]);
             return response()->json([
-                'Category assigned to product successfully'
+                'message' => 'Category assigned to product successfully'
             ], 200);
         } catch (Throwable $e) {
             return response()->json([
-                'failure' => 'Category already assigned to product'
+                'message' => 'Error assigning categories. Contact admin.'
+            ], 400);
+        }
+    }
+
+    public function removeCategory(Product $product, Request $request)
+    {
+
+        try {
+            $category_id = $request->category_id;
+            $vendor = $request->user();
+
+            $vendor->categories()->detach([
+                $category_id
+            ]);
+            $parent_category = Category::find($category_id)->parent;
+            //Attach parents if exist
+            if ($parent_category != null) {
+                $product->categories()->detach([
+                    $parent_category->id
+                ]);
+                if ($parent_category->parent != null) {
+                    $product->categories()->detach([
+                        $parent_category->parent->id
+                    ]);
+                }
+            }
+            $product->categories()->detach([
+                $category_id
+            ]);
+            return response()->json([
+                'message' => 'Category remove from product successfully'
+            ], 200);
+        } catch (Throwable $e) {
+            return response()->json([
+                'message' => 'Error removing categories. Contact admin.'
             ], 400);
         }
     }

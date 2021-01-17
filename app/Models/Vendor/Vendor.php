@@ -17,7 +17,13 @@ class Vendor extends Authenticatable
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'display_name',
+        'contact_name',
+        'slug',
+        'email',
+        'password',
+        'contact',
+        'description',
     ];
 
     protected $hidden = [

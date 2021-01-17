@@ -23,6 +23,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('vendor')->group(function () {
+    Route::post('/upload-image', 'api\vendor\VendorProfileController@uploadImage');
+    Route::post('/profile-update', 'api\vendor\VendorProfileController@updateProfile');
+});
+
 Route::resource('vendors', 'api\Vendor\VendorController');
 //Customer auth and social login
 Route::post('login', 'api\auth\AuthController@login');
@@ -76,7 +81,9 @@ Route::resource('products', 'api\Product\ProductController');
 
 //Product routes
 Route::post('/products-stock/{product}', 'api\Product\ProductController@addStock');
-Route::post('/products-category/{product}', 'api\Product\ProductController@addCategory');
+//Product add/remove category
+Route::post('/products-category/add/{product}', 'api\Product\ProductController@addCategory');
+Route::post('/products-category/del/{product}', 'api\Product\ProductController@removeCategory');
 
 //Cart
 Route::resource('cart', 'api\Cart\CartController', [

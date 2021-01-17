@@ -18,7 +18,10 @@ class VendorIndexResource extends JsonResource
         return [
 
             'id'          => $vendor->id,
-            'name'        => $vendor->display_name,
+            'display_name'        => $vendor->display_name,
+            'contact_name'        => $vendor->display_name,
+            'email'        => $vendor->display_name,
+
             'slug'        => $vendor->slug,
             'rating'      => $vendor->rating,
             'popularity'  => $vendor->popularity,

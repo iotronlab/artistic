@@ -145,17 +145,20 @@ class ProductRepository extends Repository
                 //Filename to store
                 $pic_path = $product->sku . '-' . $index . '.' . $extension;
                 //Upload Image
-                $path = $item->storeAs('/' . $vendor . '/' . $product->sku, $pic_path);
+                $path = $item->storeAs('/product-images/' . $vendor . '/' . $product->sku, $pic_path, 'public');
                 $url = Storage::url($path);
+                $web_url = asset($url);
                 ProductImage::create([
                     'alt' => $product->sku,
                     'path' => $path,
-                    'url' => $url,
+                    'url' => $web_url,
                     'product_id' => $product->id
                 ]);
                 $index = $index + 1;
             }
         }
-        return 'Image uploaded successfully';
+        return response()->json([
+            'message' => 'uploaded successfully. :)'
+        ], 200);
     }
 }

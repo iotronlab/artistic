@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Vendor\VendorIndexResource;
 use App\Http\Resources\Vendor\VendorResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class VendorController extends Controller
 {
@@ -56,7 +57,15 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-        //
+        $image = request()->file('profile');
+        $image = request()->file('cover');
+        $extension = $image->getClientOriginalExtension();
+        //Filename to store
+        $pic_path = $vendor->slug . '.' . $extension;
+        //Upload Image
+        $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
+        $url = Storage::url($path);
+        $web_url = asset($url);
     }
 
     /**
@@ -68,6 +77,20 @@ class VendorController extends Controller
     public function destroy(Vendor $vendor)
     {
         //
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $image = request()->file('profile');
+        $image = request()->file('cover');
+        $extension = $image->getClientOriginalExtension();
+        //Filename to store
+        $pic_path = $vendor->slug . '.' . $extension;
+        //Upload Image
+        $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
+        $url = Storage::url($path);
+        $web_url = asset($url);
+      
     }
     //To get featured artists
     public function featured()

@@ -29,7 +29,7 @@ class ProductFlatRepository extends Repository
      */
     public function getCategoryProductMaximumPrice($category = null)
     {
-        $category = Category::where('slug', $category)->first();
+        $category = Category::where('url', $category)->first();
         if (!$category) {
             return $this->model->max('price');
         }
@@ -72,7 +72,7 @@ class ProductFlatRepository extends Repository
      */
     public function getFilterableAttributes($category)
     {
-        $category = Category::where('slug', $category)->first();
+        $category = Category::where('url', $category)->first();
         $filterAttributes = [];
 
         if (count($category->filterableAttributes) > 0) {

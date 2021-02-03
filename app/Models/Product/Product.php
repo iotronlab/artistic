@@ -34,6 +34,11 @@ class Product extends Model
         return 'sku';
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
     /**
      * Get the product attribute family that owns the product.
      */
@@ -73,9 +78,12 @@ class Product extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'product_categories');
+        return $this->belongsToMany(Category::class, 'product_categories')->withPivot('base_category');
     }
-
+    // public function baseCategory()
+    // {
+    //     return $this->belongsToMany(Category::class, 'product_categories')->wherePivot('base_category', 1);
+    // }
     /**
      * The super attributes that belong to the product.
      */
@@ -118,7 +126,7 @@ class Product extends Model
     }
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class);
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
     /**
      * The inventories that belong to the product.

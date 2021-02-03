@@ -18,17 +18,17 @@ class CreateVendorsTable extends Migration
             $table->string('display_name');
             $table->string('contact_name');
             $table->string('email')->unique();
-            $table->string('slug')->unique();
+            $table->string('url')->unique();
 
             $table->string('password');
             $table->string('contact')->nullable();
 
             $table->string('avatarimg')->nullable();
             $table->string('coverimg')->nullable();
-            $table->text('description')->nullable();
-            $table->string('meta_title')->nullable();
+            $table->text('bio')->nullable();
+
             //change to meta_keyword json
-            $table->text('meta_desc')->nullable();
+            $table->json('meta_keywords')->nullable();
             $table->float('rating', 2, 1)->nullable();
             $table->unsignedBigInteger('popularity')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();

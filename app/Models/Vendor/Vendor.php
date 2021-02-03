@@ -19,7 +19,7 @@ class Vendor extends Authenticatable
     protected $fillable = [
         'display_name',
         'contact_name',
-        'slug',
+        'url',
         'email',
         'password',
         'contact',
@@ -35,7 +35,7 @@ class Vendor extends Authenticatable
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'url';
     }
 
     public function reviews()

@@ -56,8 +56,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 //Customer address
 Route::resource('address', 'api\Customer\AddressController');
-//Vendor address
-Route::resource('vendor-address', 'api\Vendor\VendorAddressController');
+
 
 //vendor login
 Route::post('vendor/login', 'api\auth\VendorAuthController@login');
@@ -66,6 +65,9 @@ Route::group(['middleware' => 'auth:vendor-api'], function () {
     Route::get('vendor/details', 'api\auth\VendorAuthController@details');
     Route::get('vendor/logout', 'api\auth\VendorAuthController@logout');
 });
+//Vendor address
+Route::resource('vendor-address', 'api\Vendor\VendorAddressController');
+Route::get('tax', 'api\Tax\TaxCategoryController@index');
 //Category routes
 Route::resource('categories', 'api\Category\CategoryController');
 

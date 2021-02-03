@@ -18,7 +18,7 @@ class TaxCategory extends Model
     protected $table = 'tax_categories';
 
     protected $fillable = [
-        'code',
+
         'name',
         'description',
         'percent'

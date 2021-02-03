@@ -189,6 +189,12 @@ class AttributeOptionTableSeeder extends Seeder
                 'admin_name'   => 'Portrait',
                 'sort_order'   => null,
                 'attribute_id' => '23',
+            ],
+            [
+                'id'           => '32',
+                'admin_name'   => 'Square',
+                'sort_order'   => null,
+                'attribute_id' => '23',
             ]
         ]);
     }

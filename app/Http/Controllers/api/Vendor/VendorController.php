@@ -44,7 +44,8 @@ class VendorController extends Controller
     public function show(Vendor $vendor)
     {
         //dd($vendor->products());
-        $vendor->load(['products', 'reviews']);
+        $vendor->load(['products', 'products.categories', 'reviews']);
+        $vendor->increment('view_count', 1);
         return new VendorResource($vendor);
     }
 
@@ -57,15 +58,15 @@ class VendorController extends Controller
      */
     public function update(Request $request, Vendor $vendor)
     {
-        $image = request()->file('profile');
-        $image = request()->file('cover');
-        $extension = $image->getClientOriginalExtension();
-        //Filename to store
-        $pic_path = $vendor->slug . '.' . $extension;
-        //Upload Image
-        $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
-        $url = Storage::url($path);
-        $web_url = asset($url);
+        // $image = request()->file('profile');
+        // $image = request()->file('cover');
+        // $extension = $image->getClientOriginalExtension();
+        // //Filename to store
+        // $pic_path = $vendor->slug . '.' . $extension;
+        // //Upload Image
+        // $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
+        // $url = Storage::url($path);
+        // $web_url = asset($url);
     }
 
     /**
@@ -81,16 +82,16 @@ class VendorController extends Controller
 
     public function uploadImage(Request $request)
     {
-        $image = request()->file('profile');
-        $image = request()->file('cover');
-        $extension = $image->getClientOriginalExtension();
-        //Filename to store
-        $pic_path = $vendor->slug . '.' . $extension;
-        //Upload Image
-        $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
-        $url = Storage::url($path);
-        $web_url = asset($url);
-      
+        // $image = request()->file('profile');
+        // $image = request()->file('cover');
+        // $extension = $image->getClientOriginalExtension();
+        // //Filename to store
+        // $pic_path = $vendor->slug . '.' . $extension;
+        // //Upload Image
+        // $path = $image->storeAs('/profile-images/' . $vendor . '/' . $vendor->sku, $pic_path, 'public');
+        // $url = Storage::url($path);
+        // $web_url = asset($url);
+
     }
     //To get featured artists
     public function featured()

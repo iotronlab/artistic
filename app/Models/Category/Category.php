@@ -14,14 +14,14 @@ class Category extends Model
     use HasFactory, HasChildren;
     protected $fillable = [
         'name',
-        'slug',
+        'url',
         'parent_id',
 
     ];
 
     public function getRouteKeyName()
     {
-        return 'slug';
+        return 'url';
     }
     public function children()
     {

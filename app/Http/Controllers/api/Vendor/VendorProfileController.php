@@ -23,7 +23,7 @@ class VendorProfileController extends Controller
             [
                 'display_name',
                 'contact_name',
-                'slug',
+                'url',
                 'email',
                 'contact',
                 'description',
@@ -48,9 +48,9 @@ class VendorProfileController extends Controller
             //$image = request()->file('cover');
             $extension = $image->getClientOriginalExtension();
             //Filename to store
-            $pic_path = $vendor->slug . '-profile.' . $extension;
+            $pic_path = $vendor->url . '-profile.' . $extension;
             //Upload Image
-            $path = $image->storeAs('/profile-images/' . $vendor->slug, $pic_path, 'public');
+            $path = $image->storeAs('/profile-images/' . $vendor->url, $pic_path, 'public');
             $url = Storage::url($path);
             $web_url = asset($url);
             $vendor['avatarimg'] = $web_url;
@@ -63,9 +63,9 @@ class VendorProfileController extends Controller
             $image = request()->file('cover');
             $extension = $image->getClientOriginalExtension();
             //Filename to store
-            $pic_path = $vendor->slug . '-cover.' . $extension;
+            $pic_path = $vendor->url . '-cover.' . $extension;
             //Upload Image
-            $path = $image->storeAs('/profile-images/' . $vendor->slug, $pic_path, 'public');
+            $path = $image->storeAs('/profile-images/' . $vendor->url, $pic_path, 'public');
             $url = Storage::url($path);
             $web_url = asset($url);
             $vendor['coverimg'] = $web_url;

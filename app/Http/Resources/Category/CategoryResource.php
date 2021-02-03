@@ -6,7 +6,7 @@ use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends CategoryIndexResource
+class CategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,15 +16,15 @@ class CategoryResource extends CategoryIndexResource
      */
     public function toArray($request)
     {
-        return array_merge(parent::toArray($request), [
+        return  [
 
+            // 'category' => CategoryIndexResource::Collection(
+            //     $this->with('children, children.children')
+            // ),
             'products' => ProductIndexResource::Collection(
-                $this->products->groupBy('vendor.display_name')
-                ->sortByDesc(function ($products, $key) {
-                    return count($products);
-                })
+                $this->groupBy('vendor.display_name')
             ),
             // 'artists'  => VendorIndexResource::collection($this->products->sortByDesc('vendor.popularity'))
-        ]);
+        ];
     }
 }

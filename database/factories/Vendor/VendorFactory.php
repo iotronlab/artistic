@@ -25,11 +25,11 @@ class VendorFactory extends Factory
             'display_name'     => $this->faker->name,
             'contact_name'     => $this->faker->name,
             'email'            => $this->faker->unique()->email,
-            'slug'             => $this->faker->unique()->word,
+            'url'             => $this->faker->unique()->word,
             'password'         => bcrypt('123456'),
             'contact'          => '1234567890',
             'popularity'       => $this->faker->numberBetween(20, 100),
-            'rating'                => $this->faker->numberBetween(1, 5),
+            'rating'           => $this->faker->numberBetween(1, 5),
         ];
     }
 }

@@ -36,14 +36,19 @@ class ProductIndexResource extends JsonResource
             'type'                   => $product->type,
             'popularity'             => $product->popularity,
             'name'                   => $this->flat->name,
-            'price'                  => $this->flat->formattedPrice,
-            //'special_price'          => $this->flat->special_price ? (new Money($this->flat->special_price))->formatted() : null,
+            'price'                  => $this->flat->rawPrice,
+            'formatted_price'        => $this->flat->formattedPrice,
+            'special_price'          => $this->flat->rawSpecialPrice,
+            'formatted_special_price'          => $this->flat->formattedSpecialPrice,
             'sku'                    => $product->sku,
+            'url_key'                => $product->url_key,
             'in_stock'               => $product->isSaleable(),
             'base_image'             => $this->productImageHelper->getProductBaseImage($product),
             'vendor'                 => new VendorIndexResource($this->vendor),
             'featured'               => $this->flat->featured,
             'views'                  => $this->view_count,
+
+            'base_category' =>   $this->productImageHelper->getProductBaseCategory($this->whenLoaded('categories')),
             //'stock' => $this->in_stock,
         ];
     }

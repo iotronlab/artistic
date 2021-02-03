@@ -18,7 +18,7 @@ class ProductFlat extends Model
     ];
 
     public $timestamps = false;
-
+    //protected $appends = ['special_price'];
     /**
      * Retrieve type instance
      *

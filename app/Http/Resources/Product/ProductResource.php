@@ -18,8 +18,9 @@ class ProductResource extends ProductIndexResource
         $product = $this->product ? $this->product : $this->flat;
 
         return array_merge(parent::toArray($request), [
-            //  'categories'      => CategoryIndexResource::collection($this->categories),
+            'categories'      => CategoryIndexResource::collection($this->categories),
             'short_description'      => $this->flat->short_description,
+            'description'      => $this->flat->description,
             'comments'  => ProductCommentResource::collection($this->comments),
             'family_id' => $this->attribute_family_id,
             'attributes' => [
@@ -31,6 +32,7 @@ class ProductResource extends ProductIndexResource
             'stock'                  => $product->stockCount(),
             'images'                 => ProductImageResource::collection($product->images),
             'reviews'                => VendorReviewResource::collection($product->vendor->reviews),
+            'categories' => CategoryIndexResource::collection($product->categories),
             //merge variants for configurable product
             $this->mergeWhen($product->getTypeInstance()->isComposite(), [
                 'variants'           => Self::collection($this->variants),

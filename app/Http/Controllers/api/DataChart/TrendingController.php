@@ -9,6 +9,7 @@ use App\Http\Resources\Category\CategoryIndexResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
 use App\Models\Product\Product;
+use App\Models\Vendor\Vendor;
 
 class TrendingController extends Controller
 {
@@ -21,14 +22,27 @@ class TrendingController extends Controller
         //
 
         // }
-        $categories = Category::select("*")->orderByDesc("view_count")->get();
-        // $categories->trending()->get();
-        $products = Product::select("*")->orderByDesc("view_count")->get();
+        //should be category where status is true
+        $categories = Category::with('children')->orderByDesc("view_count")->get();
+        //Category::doesntHave increases sql
+        $filter = $categories->filter(function ($category) {
+            if ($category->children->isEmpty()) {
+                return $category;
+            }
+            // $category->children->whenEmpty(function ($category) {
+            //     return $category;
+            // });
+        })->take(4);
+
+
+        //  $filter = $categories->whereNull('children');
+        $products = Product::select("*")->orderByDesc("view_count")->take(4)->get();
+        $vendors = Vendor::select("*")->orderByDesc("view_count")->take(4)->get();
         return [
 
-            // 'products' => ProductIndexResource::collection($products),
-            // 'artists' =>  VendorIndexResource::collection($artists),
-            'categories' =>  CategoryIndexResource::collection($categories),
+            'products' => ProductIndexResource::collection($products),
+            'vendors' =>  VendorIndexResource::collection($vendors),
+            'categories' =>  CategoryIndexResource::collection($filter),
         ];
     }
 }

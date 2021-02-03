@@ -16,6 +16,7 @@ class CreateVendorCategoriesTable extends Migration
         Schema::create('vendor_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('category_id');
+            $table->boolean('base_category')->default(false);
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unique(['vendor_id', 'category_id']);

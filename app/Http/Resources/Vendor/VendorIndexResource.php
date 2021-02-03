@@ -20,12 +20,14 @@ class VendorIndexResource extends JsonResource
             'id'          => $vendor->id,
             'display_name'        => $vendor->display_name,
             'contact_name'        => $vendor->display_name,
-            'email'        => $vendor->display_name,
+            // 'email'        => $vendor->display_name,
 
-            'slug'        => $vendor->slug,
+            'url'        => $vendor->url,
             'rating'      => $vendor->rating,
             'popularity'  => $vendor->popularity,
-            'avatar'      => $vendor->avatarimage
+            'avatar'      => $vendor->avatarimg,
+            'cover'      => $vendor->coverimg,
+            'views'      => $vendor->view_count
         ];
     }
 }

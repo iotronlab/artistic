@@ -16,39 +16,39 @@ class CreateProductFlatTable extends Migration
         Schema::create('product_flat', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->text('description')->nullable();
+
             $table->string('url_key')->nullable();
             $table->boolean('featured')->nullable();
-            $table->boolean('status')->nullable();
-            $table->string('thumbnail')->nullable();
 
-            $table->decimal('price', 12, 4)->nullable();
-            $table->decimal('special_price', 12, 4)->nullable();
 
+
+            $table->integer('price')->nullable();
+            $table->integer('special_price')->nullable();
+            $table->text('description')->nullable();
             $table->text('short_description')->nullable();
             $table->text('meta_title')->nullable();
-            $table->text('meta_keywords')->nullable();
+            $table->json('meta_keyword')->nullable();
             $table->text('meta_description')->nullable();
 
-            $table->decimal('width', 12, 4)->nullable();
-            $table->decimal('height', 12, 4)->nullable();
-            $table->decimal('depth', 12, 4)->nullable();
-            $table->decimal('weight', 12, 4)->nullable();
+            $table->decimal('width', 12, 2)->nullable();
+            $table->decimal('height', 12, 2)->nullable();
+            $table->decimal('length', 12, 2)->nullable();
+            $table->decimal('weight', 12, 2)->nullable();
 
             $table->integer('color')->nullable();
             $table->integer('size')->nullable();
-            $table->string('material')->nullable();
-            $table->string('medium')->nullable();
+            $table->integer('material')->nullable();
+            $table->integer('medium')->nullable();
+            $table->integer('orientation')->nullable();
 
             $table->unsignedBigInteger('product_id')->unique();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->bigInteger('parent_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('parent_id')->unsigned()->nullable();
             $table->boolean('visible_individually')->nullable();
             $table->unsignedBigInteger('tax_category_id')->nullable();
 
             $table->foreign('tax_category_id')->references('id')->on('tax_categories');
             $table->foreign('parent_id')->references('id')->on('product_flat')->onDelete('cascade');
-
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

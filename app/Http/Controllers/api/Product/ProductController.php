@@ -112,7 +112,7 @@ class ProductController extends Controller
         }
         $product->increment('view_count', 1);
         if ($product->type == 'simple') {
-
+            $product->load('categories', 'vendor');
             $categories = $product->categories;
             foreach ($categories as $key => $category) {
                 $parent = $categories->where('parent_id', $category->id);
@@ -272,36 +272,46 @@ class ProductController extends Controller
     public function addCategory(Product $product, Request $request)
     {
 
-        try {
-            $category_id = $request->category_id;
-            $vendor = $request->user();
+        // try {
 
-            $vendor->categories()->attach([
-                $category_id
-            ]);
-            $parent_category = Category::find($category_id)->parent;
-            //Attach parents if exist
-            if ($parent_category != null) {
-                $product->categories()->attach([
-                    $parent_category->id
-                ]);
-                if ($parent_category->parent != null) {
-                    $product->categories()->attach([
-                        $parent_category->parent->id
-                    ]);
-                }
-            }
+        // } catch (Throwable $e) {
+        //     return response()->json([
+        //         'message' => 'Error assigning categories. Contact admin.'
+        //     ], 400);
+        // }
+
+        $category_id = $request->category_id;
+        $vendor = $request->user();
+        $product->categories()->attach(
+            $category_id,
+            ['base_category' => true]
+        );
+        $vendor->categories()->attach([
+            $category_id,
+            ['base_category' => true]
+        ]);
+        $parent_category = Category::find($category_id)->parent;
+        //Attach parents if exist
+        if ($parent_category != null) {
             $product->categories()->attach([
-                $category_id
+                $parent_category->id
             ]);
-            return response()->json([
-                'message' => 'Category assigned to product successfully'
-            ], 200);
-        } catch (Throwable $e) {
-            return response()->json([
-                'message' => 'Error assigning categories. Contact admin.'
-            ], 400);
+            $vendor->categories()->attach([
+                $parent_category->id
+            ]);
+            if ($parent_category->parent != null) {
+                $product->categories()->attach([
+                    $parent_category->parent->id
+                ]);
+                $vendor->categories()->attach([
+                    $parent_category->parent->id
+                ]);
+            }
         }
+
+        return response()->json([
+            'message' => 'Category assigned to product successfully'
+        ], 200);
     }
 
     public function removeCategory(Product $product, Request $request)
@@ -310,7 +320,9 @@ class ProductController extends Controller
         try {
             $category_id = $request->category_id;
             $vendor = $request->user();
-
+            $product->categories()->detach([
+                $category_id
+            ]);
             $vendor->categories()->detach([
                 $category_id
             ]);
@@ -320,15 +332,19 @@ class ProductController extends Controller
                 $product->categories()->detach([
                     $parent_category->id
                 ]);
+                $vendor->categories()->detach([
+                    $parent_category->id
+                ]);
                 if ($parent_category->parent != null) {
                     $product->categories()->detach([
                         $parent_category->parent->id
                     ]);
+                    $vendor->categories()->detach([
+                        $parent_category->parent->id
+                    ]);
                 }
             }
-            $product->categories()->detach([
-                $category_id
-            ]);
+
             return response()->json([
                 'message' => 'Category remove from product successfully'
             ], 200);

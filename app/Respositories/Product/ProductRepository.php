@@ -77,7 +77,7 @@ class ProductRepository extends Repository
 
         if (request()->input('category') != null) {
             $arr = explode(',', request()->input('category'));
-            $category = Category::where('slug', $arr[0])->first();
+            $category = Category::where('url', $arr[0])->first();
             $products = $products->additional([
                 'category_children' => CategoryIndexResource::collection($category->children),
                 'max_price' => $this->productFlatRepository->getCategoryProductMaximumPrice($arr[0]),
@@ -136,7 +136,7 @@ class ProductRepository extends Repository
             $index = count($images) + 1;
         }
 
-        $vendor = Vendor::find($product->vendor_id)->slug;
+        $vendor = Vendor::find($product->vendor_id)->url;
         $images = request()->file('product');
 
         if (request()->hasFile('product')) {

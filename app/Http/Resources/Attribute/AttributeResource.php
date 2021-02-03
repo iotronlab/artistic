@@ -20,6 +20,9 @@ class AttributeResource extends JsonResource
             'type'        => $this->type,
             'name'        => $this->admin_name,
             'is_configurable' => $this->is_configurable,
+            'is_visible' => $this->is_visible_on_front,
+            'required' => $this->is_required,
+            'validation' => $this->validation,
             'options'     => AttributeOptionResource::collection($this->options),
         ];
     }

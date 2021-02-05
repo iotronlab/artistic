@@ -50,7 +50,7 @@ class Vendor extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'vendor_categories');
+        return $this->belongsToMany(Category::class, 'vendor_categories')->withPivot('base_category');
     }
 
     public function subscribers()

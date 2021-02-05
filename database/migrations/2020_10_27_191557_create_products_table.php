@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('vendor_id')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('view_count')->default(10);
             $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
         });
 

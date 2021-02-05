@@ -21,7 +21,7 @@ class CreateVendorsTable extends Migration
             $table->string('url')->unique();
 
             $table->string('password');
-            $table->string('contact')->nullable();
+            $table->string('contact');
 
             $table->string('avatarimg')->nullable();
             $table->string('coverimg')->nullable();
@@ -30,14 +30,14 @@ class CreateVendorsTable extends Migration
             //change to meta_keyword json
             $table->json('meta_keywords')->nullable();
             $table->float('rating', 2, 1)->nullable();
-            $table->unsignedBigInteger('popularity')->nullable();
-            $table->unsignedBigInteger('view_count')->nullable();
-            $table->boolean('sponsored')->default('0');
-            $table->boolean('is_freelance')->default('0');
-            $table->boolean('is_commisioned')->default('0');
-            $table->boolean('auto_approve')->default('0');
-            $table->boolean('show_display_name')->default('0');
-            $table->boolean('status')->default('0');
+            $table->unsignedBigInteger('popularity')->default(10);
+            $table->unsignedBigInteger('view_count')->default(10);
+            $table->boolean('sponsored')->default(false);
+            $table->boolean('is_freelance')->default(false);
+            $table->boolean('is_commisioned')->default(false);
+            $table->boolean('auto_approve')->default(false);
+            $table->boolean('show_display_name')->default(true);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

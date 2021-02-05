@@ -17,13 +17,13 @@ class AttributeFamilyTableSeeder extends Seeder
             [
                 'id'              => '1',
                 'code'            => 'default-1',
-                'name'            => 'Default(color, material, medium, size)',
+                'name'            => 'Others (color, material, medium, size)',
                 'status'          => '0',
             ],
             [
                 'id'              => '2',
                 'code'            => 'default-2',
-                'name'            => 'Default Artworks(color, material, medium, orientation)',
+                'name'            => 'Default Artworks (color, material, medium, orientation)',
                 'status'          => '0',
             ]
         ]);

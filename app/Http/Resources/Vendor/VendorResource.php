@@ -29,16 +29,16 @@ class VendorResource extends VendorIndexResource
                 $this->products
             ),
 
-            'categories' =>
-            CategoryIndexResource::collection(
-                $this->categories
-            ),
+            // 'categories' =>
+            // CategoryIndexResource::collection(
+            //     $this->categories
+            // ),
 
 
-            'reviews' =>
-            VendorReviewResource::collection(
-                $this->reviews
-            ),
+            // 'reviews' =>
+            // VendorReviewResource::collection(
+            //     $this->reviews
+            // ),
 
         ]);
     }

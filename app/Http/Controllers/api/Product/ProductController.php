@@ -288,7 +288,7 @@ class ProductController extends Controller
         );
         $vendor->categories()->attach([
             $category_id,
-            ['base_category' => true]
+            // ['base_category' => true]
         ]);
         $parent_category = Category::find($category_id)->parent;
         //Attach parents if exist

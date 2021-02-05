@@ -19,6 +19,7 @@ class CreateProductImagesTable extends Migration
             $table->string('alt')->default('artistic');
             $table->string('path');
             $table->string('url')->nullable();
+            $table->boolean('is_base_image')->default(false);
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });

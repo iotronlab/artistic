@@ -23,8 +23,9 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('image_path')->nullable();
             $table->string('url')->unique();
-            $table->boolean('status')->default('0');
-            $table->boolean('is_visible_on_front')->default('0');
+            $table->boolean('status')->default(true);
+            $table->boolean('is_visible_on_front')->default(true);
+            $table->unsignedBigInteger('view_count')->default(10);
             $table->timestamps();
         });
     }

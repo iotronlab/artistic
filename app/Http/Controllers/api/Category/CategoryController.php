@@ -11,6 +11,7 @@ use App\Http\Resources\Category\CategoryIndexResource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
+use App\Http\Resources\Vendor\VendorResource;
 use App\Models\Product\Product;
 
 class CategoryController extends Controller
@@ -73,7 +74,8 @@ class CategoryController extends Controller
         //                $query->where('name', $category->url);
 
         //  });
-        $vendors = $category->vendors->load('products');
+        $vendors = $category->vendors()->orderByDesc('view_count')->paginate();
+        $vendors->load('products');
         //  $products = $vendors->products->orderByDesc('view_count')->paginate(10);
         //   dd($products->items());
         // $results = $products->getCollection()->groupBy('vendor_id');
@@ -98,7 +100,7 @@ class CategoryController extends Controller
         //     //  'vendors' =>  VendorIndexResource::collection($vendors),
         //     'category' => new CategoryIndexResource($category),
         // ];
-        //return new CategoryResource($products);
+        // return VendorResource::collection($vendors)->additional(['category' => new CategoryIndexResource($category)]);
         return $vendors;
     }
 

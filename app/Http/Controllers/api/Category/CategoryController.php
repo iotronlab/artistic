@@ -100,8 +100,8 @@ class CategoryController extends Controller
         //     //  'vendors' =>  VendorIndexResource::collection($vendors),
         //     'category' => new CategoryIndexResource($category),
         // ];
-        // return VendorResource::collection($vendors)->additional(['category' => new CategoryIndexResource($category)]);
-        return $vendors;
+        return VendorResource::collection($vendors)->additional(['category' => new CategoryIndexResource($category)]);
+        // return $vendors;
     }
 
     /**

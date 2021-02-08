@@ -29,6 +29,7 @@ class VendorFactory extends Factory
             'password'         => bcrypt('123456'),
             'contact'          => '1234567890',
             'popularity'       => $this->faker->numberBetween(20, 100),
+            'view_count'       => $this->faker->numberBetween(100, 1000),
             'rating'           => $this->faker->numberBetween(1, 5),
         ];
     }

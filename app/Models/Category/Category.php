@@ -18,7 +18,9 @@ class Category extends Model
         'parent_id',
 
     ];
-
+    protected $casts = [
+        'status' => 'boolean',
+    ];
     public function getRouteKeyName()
     {
         return 'url';

@@ -18,7 +18,7 @@ class ProductFlatSeeder extends Seeder
         ProductFlat::factory()
             ->count(1)
             ->for(Product::factory())
-            ->times(25)
+            ->times(100)
             ->create();
     }
 }

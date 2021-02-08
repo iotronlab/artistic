@@ -13,6 +13,8 @@ use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Vendor\VendorIndexResource;
 use App\Http\Resources\Vendor\VendorResource;
 use App\Models\Product\Product;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class CategoryController extends Controller
 {
@@ -59,23 +61,45 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
         //Sort by popularities and then top 3 rows are fetched\
         $category->load('children', 'children.children');
 
 
-        // $products = $category->products->groupBy('vendor.display_name')
-        //     ->sortByDesc(function ($products, $key) {
-        //         return count($products);
-        //     });
+        $productsPaginated = $category->products()->with('vendor')->orderByDesc('view_count')->paginate();
+
+        $productsTransformed = $productsPaginated->getCollection()->groupBy('vendor.url');
+        // $result = ProductIndexResource::collection($productsTransformed);
+        $productsPaginated->setCollection($productsTransformed);
+
+        // $transformedAndPaginated = new LengthAwarePaginator(
+        //     $productsTransformed,
+        //     $productsPaginated->total(),
+
+        //     $productsPaginated->perPage(),
+        //     $productsPaginated->currentPage(),
+        //     [
+        //         'path' => $request->url(),
+        //         'query' => [
+        //             'page' => $productsPaginated->currentPage()
+        //         ]
+        //     ]
+        // );
+
+        //$transformedAndPaginated = new Paginator($productsTransformed);
+        // /->paginate();
+        //    ->join('vendors', 'products.vendor_id', '=', 'vendors.id')$result = $products->groupBy('vendor_id');
+        // ->paginate(10, ['vendor_id']);
         // $products = Product::whereHas('categories', function($query) use($category){
 
-        //                $query->where('name', $category->url);
+        //     ->orderByDesc(function ($products, $key) {
+        //     return count($products);
+        // })              $query->where('name', $category->url);
 
         //  });
-        $vendors = $category->vendors()->orderByDesc('view_count')->paginate();
-        $vendors->load('products');
+        // $vendors = $category->vendors()->orderByDesc('view_count')->paginate();
+        //$vendors->load('products');
         //  $products = $vendors->products->orderByDesc('view_count')->paginate(10);
         //   dd($products->items());
         // $results = $products->getCollection()->groupBy('vendor_id');
@@ -100,8 +124,8 @@ class CategoryController extends Controller
         //     //  'vendors' =>  VendorIndexResource::collection($vendors),
         //     'category' => new CategoryIndexResource($category),
         // ];
-        return VendorResource::collection($vendors)->additional(['category' => new CategoryIndexResource($category)]);
-        // return $vendors;
+        //return VendorResource::collection($vendors);
+        return ProductIndexResource::collection($productsPaginated)->additional(['category' => new CategoryIndexResource($category)]);
     }
 
     /**

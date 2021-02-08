@@ -26,8 +26,8 @@ class CreateCustomersTable extends Migration
             $table->string('password')->nullable();
             $table->string('contact')->nullable();
             $table->enum('gender', ['M', 'F', 'LGBTQ'])->nullable();
-            $table->boolean('status')->default('1');
-            $table->boolean('subscribed_to_news_letter')->default('0');
+            $table->boolean('status')->default(true);
+            $table->boolean('subscribed_to_newsletter')->default(false);
             $table->bigInteger('customer_group_id')->unsigned()->nullable();
             $table->foreign('customer_group_id')->references('id')->on('customer_groups')->onDelete('set null');
             $table->timestamps();

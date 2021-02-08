@@ -16,7 +16,7 @@ class CreateProductFlatTable extends Migration
         Schema::create('product_flat', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-
+            $table->string('sku')->unique();
             $table->string('url_key')->nullable();
             $table->boolean('featured')->nullable();
 

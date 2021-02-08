@@ -15,7 +15,7 @@ class VendorSeeder extends Seeder
     public function run()
     {
         Vendor::factory()
-            ->times(20)
+            ->times(100)
             ->create();
     }
 }

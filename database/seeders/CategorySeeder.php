@@ -15,15 +15,43 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['id' => 1, 'name' => 'Artworks', 'url' => 'art', 'parent_id' => null],
-            ['id' => 2, 'name' => 'Home Decor', 'url' => 'home-decor', 'parent_id' => null],
-            ['id' => 3, 'name' => 'Clothing & Accessories', 'url' => 'accessories', 'parent_id' => null],
-            ['id' => 4, 'name' => 'Gifts', 'url' => 'gifts', 'parent_id' => null],
+            [
+                'id' => 1, 'name' => 'Artworks', 'url' => 'art', 'parent_id' => null,
+                'meta_desc' => "We don't read and write poetry because it's cute. We read and write poetry because we are members of the human race. And the human race is filled with passion. And medicine, law, business, engineering, these are noble pursuits and necessary to sustain life. But poetry, beauty, romance, love, these are what we stay alive for. - Dead Poets Society"
+            ],
+            [
+                'id' => 2, 'name' => 'Home Decor', 'url' => 'home-decor', 'parent_id' => null,
+                'meta_desc' => "Only a soul can make your house feel like home. Nurture that soul with art. Find unique products to
+                artify your home."
+            ],
+            [
+                'id' => 3, 'name' => 'Clothing & Accessories', 'url' => 'accessories', 'parent_id' => null,
+                'meta_desc' => "Artify your wardrobe with our all new collections."
+            ],
+            [
+                'id' => 4, 'name' => 'Gifts', 'url' => 'gifts', 'parent_id' => null,
+                'meta_desc' => "Nothing says it more personally than hand-made gifts."
+            ],
 
-            ['id' => 5, 'name' => 'Traditional Art', 'url' => 'traditional-art', 'parent_id' => 1],
-            ['id' => 6, 'name' => 'Modern Art', 'url' => 'modern-art', 'parent_id' => 1],
-            ['id' => 7, 'name' => 'Contemporary Art', 'url' => 'contemporary-art', 'parent_id' => 1],
-            ['id' => 8, 'name' => 'New Art', 'url' => 'new-art', 'parent_id' => 1],
+            [
+                'id' => 5, 'name' => 'Traditional Art', 'url' => 'traditional-art', 'parent_id' => 1,
+                'meta_desc' => "Many traditional arts are a part of our diverse culture, skills and knowledge of which are passed
+                down through generations from master craftsmen to apprentices. "
+            ],
+            [
+                'id' => 6, 'name' => 'Modern Art', 'url' => 'modern-art', 'parent_id' => 1,
+                'meta_desc' => "Modern art denotes the styles and philosophy of artworks created during 1860s to the 1970s. The term is
+                usually associated with art in which the traditions of the past have been thrown aside in a spirit of experimentation."
+            ],
+            [
+                'id' => 7, 'name' => 'Contemporary Art', 'url' => 'contemporary-art', 'parent_id' => 1,
+                'meta_desc' => "Contemporary Art meaning “the art of today,” more broadly includes artwork produced during the late 20th and
+                early 21st centuries. It generally defines art produced after the Modern Art movement to the present day."
+            ],
+            [
+                'id' => 8, 'name' => 'New Art', 'url' => 'new-art', 'parent_id' => 1,
+                'meta_desc' => "The newer artstyles that have evolved into existence."
+            ],
 
             [
                 'id' => 9, 'name' => 'Madhubani', 'url' => 'madhubani', 'parent_id' => 5,
@@ -76,9 +104,9 @@ class CategorySeeder extends Seeder
             ],
             [
                 'id' => 18, 'name' => 'Gond', 'url' => 'gond', 'parent_id' => 5,
-                'meta_desc' => "This traditional artform of painting found its roots from one of the largest tribes, Gond.
+                'meta_desc' => "This traditional art form of painting found its roots in one of the largest tribes, Gond.
                 These paintings take inspiration from natural elements and mostly Trees, animals, birds
-                and other environmental representation are probably the most identifiable subject
+                and other environmental representations are probably the most identifiable subject
                 matter.",
             ],
 
@@ -106,8 +134,8 @@ class CategorySeeder extends Seeder
             ],
             [
                 'id' => 23, 'name' => 'Picchwal', 'url' => 'picchwal', 'parent_id' => 5,
-                'meta_desc' => "Pichwai are sacred hindu paintings which originated in Rajasthan nearly 400 years ago.
-                These are sublime and visually stunning and depict the tales and epics of lord krishna."
+                'meta_desc' => "Pichwai are sacred Hindu paintings that originated in Rajasthan nearly 400 years ago.
+                These are sublime and visually stunning and depict the tales and epics of Lord Krishna."
             ],
             [
                 'id' => 24, 'name' => 'Kerala Murals', 'url' => 'kerala-murals', 'parent_id' => 5,
@@ -239,7 +267,7 @@ class CategorySeeder extends Seeder
             [
                 'id' => 47, 'name' => 'Stone Art', 'url' => 'stone-art', 'parent_id' => 8,
                 'meta_desc' => "Stone art is simply the art that rocks! Painting stones and rocks is not much different
-                than painting paper, canvas, orwalls and the idea is to keep it fun and simple."
+                than painting paper, canvas, or walls and the idea is to keep it fun and simple."
             ],
             [
                 'id' => 48, 'name' => 'String Art', 'url' => 'string-art', 'parent_id' => 8,
@@ -321,8 +349,8 @@ class CategorySeeder extends Seeder
             [
                 'id' => 62, 'name' => 'Sarees', 'url' => 'sarees', 'parent_id' => 3,
                 'meta_desc' => "What was worn traditionally, has become a fashion statement now. Sarees have been loved
-by myriads of women. The true significance of the saree lies in the management of such a
-huge piece of cloth in such an elegant way."
+            by myriads of women. The true significance of the saree lies in the management of such a
+            huge piece of cloth in such an elegant way."
             ],
             [
                 'id' => 63, 'name' => 'Jewellery', 'url' => 'jewellery', 'parent_id' => 3,

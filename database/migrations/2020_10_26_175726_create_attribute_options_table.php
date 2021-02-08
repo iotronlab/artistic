@@ -17,7 +17,7 @@ class CreateAttributeOptionsTable extends Migration
             $table->id();
             $table->string('admin_name')->nullable();
             $table->string('swatch_value')->nullable();
-            $table->integer('sort_order')->nullable();
+            $table->unsignedBigInteger('sort_order')->nullable();
             $table->unsignedBigInteger('attribute_id');
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });

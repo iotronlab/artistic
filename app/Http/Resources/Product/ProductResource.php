@@ -20,6 +20,7 @@ class ProductResource extends ProductIndexResource
         return array_merge(parent::toArray($request), [
             'categories'      => CategoryIndexResource::collection($this->categories),
             'short_description'      => $this->flat->short_description,
+            'meta_keyword'      => $this->flat->meta_keyword,
             'description'      => $this->flat->description,
             'comments'  => ProductCommentResource::collection($this->comments),
             'family_id' => $this->attribute_family_id,

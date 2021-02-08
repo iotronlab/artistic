@@ -23,11 +23,20 @@ class Vendor extends Authenticatable
         'email',
         'password',
         'contact',
-        'description',
+        'bio',
     ];
 
     protected $hidden = [
         'password',
+    ];
+
+    protected $casts = [
+        'sponsored' => 'boolean',
+        'is_freelance' => 'boolean',
+        'is_commisioned' => 'boolean',
+        'auto_approve' => 'boolean',
+        'show_display_name' => 'boolean',
+        'status' => 'boolean',
     ];
     /**
      * Get the vendor reviews.

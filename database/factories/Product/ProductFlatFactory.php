@@ -23,7 +23,7 @@ class ProductFlatFactory extends Factory
     public function definition()
     {
         return [
-            // 'sku'                   => $this->faker->unique()->word,
+            'sku'                   => $this->faker->slug,
             'name'                  => $this->faker->name,
             'description'           => $this->faker->text,
             'url_key'               => $this->faker->slug,

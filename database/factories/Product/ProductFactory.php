@@ -22,10 +22,11 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'sku'                   => $this->faker->unique()->word,
+            'sku'                   => $this->faker->slug,
             'type'                  => 'simple',
-            'attribute_family_id'   => '1',
-            'vendor_id'             => $this->faker->numberBetween(1, 18),
+            'attribute_family_id'   => 1,
+            'vendor_id'             => $this->faker->numberBetween(1, 100),
+            'view_count'       => $this->faker->numberBetween(100, 1000),
             'popularity'            => $this->faker->numberBetween(20, 100),
         ];
     }

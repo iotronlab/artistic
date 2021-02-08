@@ -261,6 +261,7 @@ class ProductController extends Controller
         $prod_stock = Stock::create([
             'product_id' => $product->id,
             'quantity'   => $request->quantity,
+            'vendor_addresses_id'   => $request->address_id,
         ]);
         return response()->json([
             'Stock added successfully'
@@ -286,10 +287,10 @@ class ProductController extends Controller
             $category_id,
             ['base_category' => true]
         );
-        $vendor->categories()->attach([
+        $vendor->categories()->attach(
             $category_id,
-            // ['base_category' => true]
-        ]);
+            ['base_category' => true]
+        );
         $parent_category = Category::find($category_id)->parent;
         //Attach parents if exist
         if ($parent_category != null) {

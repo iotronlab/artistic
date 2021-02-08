@@ -15,12 +15,16 @@ class Customer extends Authenticatable
 
     protected $table = 'customers';
     protected $fillable = [
-        'id', 'name', 'email', 'password',
+        'name', 'email', 'password',
     ];
     protected $hidden = [
         'password',
     ];
+    protected $casts = [
 
+        'subscribed_to_newsletter' => 'boolean',
+        'status' => 'boolean',
+    ];
     public function social()
     {
         return $this->hasMany(CustomerSocial::class, 'customer_id', 'id');

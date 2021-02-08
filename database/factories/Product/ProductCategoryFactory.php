@@ -22,8 +22,8 @@ class ProductCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'product_id'                   => $this->faker->unique()->numberBetween(1, 20),
-            'category_id'                  => $this->faker->numberBetween(1, 5),
+            'product_id'                   => $this->faker->numberBetween(1, 100),
+            'category_id'                  => $this->faker->numberBetween(1, 6),
         ];
     }
 }

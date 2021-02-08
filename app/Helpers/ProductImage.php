@@ -15,10 +15,10 @@ class ProductImage
         $images = $product ? $product->images : null;
 
         if ($images && $images->count()) {
-            $image = $images[0]->path;
+            $image = $images[0]->url;
         } else {
             //default image if image not found
-            $image = 'default.png';
+            $image = null;
         }
 
         return $image;

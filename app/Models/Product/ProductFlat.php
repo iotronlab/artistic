@@ -16,7 +16,9 @@ class ProductFlat extends Model
     protected $guarded = [
         'id'
     ];
-
+    protected $casts = [
+        'meta_keyword' => 'array',
+    ];
     public $timestamps = false;
     //protected $appends = ['special_price'];
     /**

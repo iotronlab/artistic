@@ -15,7 +15,7 @@ class ProductCategorySeeder extends Seeder
     public function run()
     {
         ProductCategory::factory()
-            ->times(15)
+            ->times(100)
             ->create();
     }
 }

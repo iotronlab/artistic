@@ -26,7 +26,17 @@ class VendorAddressController extends Controller
     public function store(AddressStoreRequest $request)
     {
         $address = VendorAddress::make($request->only([
-            'name', 'contact', 'address_1', 'address_2', 'city', 'postal_code', 'default', 'state', 'country'
+            'name',
+            'address_1',
+            'address_2',
+            'landmark',
+            'type',
+            'contact',
+            'city',
+            'state',
+            'country_code',
+            'postal_code',
+            'default'
         ]));
         $request->user()->addresses()->save($address);
         return new AddressResource(

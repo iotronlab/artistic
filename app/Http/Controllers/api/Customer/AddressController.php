@@ -26,7 +26,17 @@ class AddressController extends Controller
     public function store(AddressStoreRequest $request)
     {
         $address = Address::make($request->only([
-            'name', 'contact', 'address_1', 'address_2', 'city', 'postal_code', 'default', 'state', 'country_id'
+            'name',
+            'address_1',
+            'address_2',
+            'landmark',
+            'type',
+            'contact',
+            'city',
+            'state',
+            'country_code',
+            'postal_code',
+            'default'
         ]));
         $request->user()->addresses()->save($address);
         return new AddressResource(
@@ -43,7 +53,7 @@ class AddressController extends Controller
     {
         $new_address = Address::find($id);
         $new_address->fill($request->all())->save();
-        return response()->json(['success' => 'Address updated Sucessfully'], 400);
+        return response()->json(['success' => 'Address updated Sucessfully'], 200);
     }
 
     /**
@@ -63,6 +73,6 @@ class AddressController extends Controller
                 response()->json(['failure' => 'Default address cannot be deleted'], 400);
         }
         $address->delete();
-        return response()->json(['success' => 'Address deleted Sucessfully'], 400);
+        return response()->json(['success' => 'Address deleted Sucessfully'], 200);
     }
 }

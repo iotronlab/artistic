@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddressesTable extends Migration
+class CreateVendorAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,25 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('vendor_addresses', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id')->unsigned()->index();
+            $table->bigInteger('vendor_id')->unsigned()->index();
             $table->string('name');
             $table->string('contact');
 
-            $table->enum('type', ['Home', 'Work', 'Other'])->nullable();
+            $table->enum('type', ['Home', 'Work', 'Other']);
             $table->string('address_1');
             $table->string('address_2')->nullable();
 
             $table->string('landmark')->nullable();
             $table->string('city');
             $table->string('postal_code');
-            $table->string('state')->nullable();
+            $table->string('state');
             $table->boolean('default')->default(false);
-            $table->unsignedBigInteger('country_id')->nullable();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->string('country_code')->unique();
+            $table->foreign('country_code')->references('iso_code_2')->on('countries');
             $table->timestamps();
-            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
 
@@ -42,6 +42,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('vendor_addresses');
     }
 }

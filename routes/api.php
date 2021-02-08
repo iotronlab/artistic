@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/countries', 'api\Locale\CountryController@index');
 Route::get('/shipping', 'api\Shipping\ShippingController@index');
 Route::get('/trending', 'api\DataChart\TrendingController@index');
 

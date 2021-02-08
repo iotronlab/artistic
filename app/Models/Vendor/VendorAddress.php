@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class VendorAddress extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = "vendor_addresses";
     protected $fillable = [
         'name',
@@ -19,7 +18,7 @@ class VendorAddress extends Model
         'contact',
         'city',
         'state',
-        'country',
+        'country_code',
         'postal_code',
         'default'
     ];
@@ -50,5 +49,12 @@ class VendorAddress extends Model
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
+    }
+
+    //as foreign and local key on countries table are different
+
+    public function country()
+    {
+        return $this->hasOne(Country::class, 'country_code', 'iso_code_2');
     }
 }

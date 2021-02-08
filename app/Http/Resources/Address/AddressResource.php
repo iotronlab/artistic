@@ -17,15 +17,17 @@ class AddressResource extends JsonResource
         return [
 
             'id' => $this->id,
+            'type' => $this->type,
             'name' => $this->name,
+            'contact' => $this->contact,
             'address_1' => $this->address_1,
             'address_2' => $this->address_2,
-            'contact' => $this->contact,
+
             'landmark' => $this->landmark,
             'city' => $this->city,
             'postal_code' => $this->postal_code,
             'state' => $this->state,
-            'country_id' => $this->country_id,
+            'country_code' => $this->country_code,
             'default' => $this->default
         ];
     }

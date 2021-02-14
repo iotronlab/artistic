@@ -264,7 +264,7 @@ class ProductController extends Controller
             'vendor_addresses_id'   => $request->address_id,
         ]);
         return response()->json([
-            'Stock added successfully'
+            'message' => 'Product stock added successfully.'
         ], 200);
     }
 

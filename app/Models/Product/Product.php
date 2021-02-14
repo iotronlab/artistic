@@ -163,6 +163,7 @@ class Product extends Model
     {
         return $this->getTypeInstance()->totalQuantity();
     }
+    //cart function
     public function stock()
     {
         return $this->belongsToMany(

@@ -19,7 +19,7 @@ class VendorAddressController extends Controller
     {
         return AddressResource::collection(
 
-            $request->user()->addresses
+            $request->user()->addresses->sortByDesc('updated_at')
         );
     }
 
@@ -51,9 +51,24 @@ class VendorAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $new_address = VendorAddress::find($id);
-        $new_address->fill($request->all())->save();
-        return response()->json(['success' => 'Address updated Sucessfully'], 400);
+        $updateAddress = VendorAddress::find($id);
+        $updateAddress->fill($request->only([
+            'name',
+            'address_1',
+            'address_2',
+            'landmark',
+            'type',
+            'contact',
+            'city',
+            'state',
+            'country_code',
+            'postal_code',
+            'default'
+        ]))->save();
+        return new AddressResource(
+            $updateAddress
+        );
+        // return response()->json(['success' => 'Address updated Sucessfully'], 200);
     }
 
     /**
@@ -66,13 +81,13 @@ class VendorAddressController extends Controller
         $address = VendorAddress::find($address_id);
         if ($address == null) {
             return
-                response()->json(['failure' => 'Address not found'], 400);
+                response()->json(['message' => 'Address not found'], 400);
         }
         if ($address->default) {
             return
-                response()->json(['failure' => 'Default address cannot be deleted'], 400);
+                response()->json(['message' => 'Default address cannot be deleted'], 400);
         }
         $address->delete();
-        return response()->json(['success' => 'Address deleted Sucessfully'], 400);
+        return response()->json(['message' => 'Address deleted sucessfully.'], 200);
     }
 }

@@ -65,9 +65,11 @@ Route::post('vendor/login', 'api\auth\VendorAuthController@login');
 Route::group(['middleware' => 'auth:vendor-api'], function () {
     Route::get('vendor/details', 'api\auth\VendorAuthController@details');
     Route::get('vendor/logout', 'api\auth\VendorAuthController@logout');
+    //Vendor address
+    Route::resource('vendor/address', 'api\Vendor\VendorAddressController');
 });
-//Vendor address
-Route::resource('vendor-address', 'api\Vendor\VendorAddressController');
+
+
 Route::get('tax', 'api\Tax\TaxCategoryController@index');
 //Category routes
 Route::resource('categories', 'api\Category\CategoryController');
@@ -83,7 +85,7 @@ Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 Route::resource('products', 'api\Product\ProductController');
 
 //Product routes
-Route::post('/products-stock/{product}', 'api\Product\ProductController@addStock');
+Route::post('/products/stock/{product}', 'api\Product\ProductController@addStock');
 //Product add/remove category
 Route::post('/products-category/add/{product}', 'api\Product\ProductController@addCategory');
 Route::post('/products-category/del/{product}', 'api\Product\ProductController@removeCategory');

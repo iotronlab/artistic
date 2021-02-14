@@ -28,7 +28,7 @@ class CreateVendorAddressesTable extends Migration
             $table->string('postal_code');
             $table->string('state');
             $table->boolean('default')->default(false);
-            $table->string('country_code')->unique();
+            $table->string('country_code')->index();
             $table->foreign('country_code')->references('iso_code_2')->on('countries');
             $table->timestamps();
             $table->foreign('vendor_id')->references('id')->on('vendors');

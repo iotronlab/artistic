@@ -36,7 +36,7 @@ class TrendingController extends Controller
 
 
         //  $filter = $categories->whereNull('children');
-        $products = Product::select("*")->orderByDesc("view_count")->take(4)->get();
+        $products = Product::with('images')->orderByDesc("view_count")->take(4)->get();
         $vendors = Vendor::select("*")->orderByDesc("view_count")->take(4)->get();
         return [
 

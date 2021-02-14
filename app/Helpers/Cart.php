@@ -20,32 +20,32 @@ class Cart
         $this->customer = $customer;
     }
 
-    public function ApplyCoupon($coupon_code)
-    {
-        $rule = CartRule::where('coupon_code', $coupon_code)->first();
+    // public function ApplyCoupon($coupon_code)
+    // {
+    //     $rule = CartRule::where('coupon_code', $coupon_code)->first();
 
-        ///validation to check if it belongs to specific customer group
-        $valid = false;
-        foreach ($rule->customer_groups as $customer) {
-            if ($customer->id == $this->customer->customer_group_id) {
-                $valid = true;
-            }
-        }
-        if (!$valid) {
-            return new Money((int)0);
-        }
-        //Check if the coupon satisfies min quantity
-        if ($this->customer->cart->sum('pivot.quantity') < $rule->min_quantity) {
-            return new Money((int)0);
-        }
+    //     ///validation to check if it belongs to specific customer group
+    //     $valid = false;
+    //     foreach ($rule->customer_groups as $customer) {
+    //         if ($customer->id == $this->customer->customer_group_id) {
+    //             $valid = true;
+    //         }
+    //     }
+    //     if (!$valid) {
+    //         return new Money((int)0);
+    //     }
+    //     //Check if the coupon satisfies min quantity
+    //     if ($this->customer->cart->sum('pivot.quantity') < $rule->min_quantity) {
+    //         return new Money((int)0);
+    //     }
 
-        if ($rule->action_type == "by_fixed") {
-            $discount = $rule->discount_amount;
-        } else {
-            $discount = (($rule->discount_amount) * $this->subtotal()->amount()) / 100;
-        }
-        return new Money((int)$discount);
-    }
+    //     if ($rule->action_type == "by_fixed") {
+    //         $discount = $rule->discount_amount;
+    //     } else {
+    //         $discount = (($rule->discount_amount) * $this->subtotal()->amount()) / 100;
+    //     }
+    //     return new Money((int)$discount);
+    // }
 
     public function WithShipping($id)
     {
@@ -87,14 +87,14 @@ class Cart
         return $this->customer->cart->sum('pivot.quantity') === 0;
     }
 
-    public function applyTax()
-    {
-        $tax =  $this->customer->cart->sum(function ($product) {
-            $t = TaxCategory::find($product->flat->tax_category_id);
-            return (($product->flat->price->amount() * $product->pivot->quantity * $t->percent) / 100);
-        });
-        return new Money((int)$tax);
-    }
+    // public function applyTax()
+    // {
+    //     $tax =  $this->customer->cart->sum(function ($product) {
+    //         $t = TaxCategory::find($product->flat->tax_category_id);
+    //         return (($product->flat->price->amount() * $product->pivot->quantity * $t->percent) / 100);
+    //     });
+    //     return new Money((int)$tax);
+    // }
 
     public function subtotal()
     {
@@ -108,12 +108,17 @@ class Cart
     {
         $discount = 0;
         if ($code != null) {
-            $discount = $this->ApplyCoupon($code);
+            $discount = 0;
+            //$this->ApplyCoupon($code);
         }
         if ($this->shipping) {
-            return $this->subtotal()->add($this->shipping->price)->subtract($discount)->add($this->applyTax());
+            return $this->subtotal();
+            //->add($this->shipping->price)->subtract($discount);
+            // ->add($this->applyTax());
         }
-        return $this->subtotal()->subtract($discount)->add($this->applyTax());
+        return $this->subtotal();
+        //->subtract($discount);
+        //->add($this->applyTax());
     }
 
     public function sync()

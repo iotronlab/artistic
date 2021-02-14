@@ -34,8 +34,8 @@ class CartController extends Controller
         return [
             'empty' => $cart->IsEmpty(),
             'subtotal' => $cart->subtotal()->formatted(),
-            'tax' => $cart->applyTax()->formatted(),
-            'discount' => $cart->ApplyCoupon($request->coupon_code)->formatted(),
+            //'tax' => $cart->applyTax()->formatted(),
+            // 'discount' => $cart->ApplyCoupon($request->coupon_code)->formatted(),
             'total' => $cart->withShipping($request->shipping_method_id)->total($request->coupon_code)->formatted(),
             'changed' => $cart->hasChanged(),
         ];
@@ -45,7 +45,7 @@ class CartController extends Controller
     {
         $cart->add($request->products);
         $cart->sync();
-        return response()->json(['success' => 'Products stored in cart successfully'], 400);
+        return response()->json(['message' => 'Added to cart successfully'], 200);
     }
 
     public function update(Product $product, CartUpdateRequest $request, Cart $cart)

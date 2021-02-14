@@ -67,7 +67,7 @@ class CategoryController extends Controller
         $category->load('children', 'children.children');
 
 
-        $productsPaginated = $category->products()->with('vendor')->orderByDesc('view_count')->paginate();
+        $productsPaginated = $category->products()->with('vendor', 'images')->orderByDesc('view_count')->paginate();
 
         $productsTransformed = $productsPaginated->getCollection()->groupBy('vendor.url');
         // $result = ProductIndexResource::collection($productsTransformed);

@@ -32,7 +32,7 @@ class ProductIndexResource extends JsonResource
         }
         $product = $this->product ? $this->product : $this->flat;
         return [
-            'product_id'             => $product->id,
+            'id'             => $product->id,
             'type'                   => $product->type,
             'popularity'             => $product->popularity,
             'name'                   => $this->flat->name,
@@ -43,11 +43,12 @@ class ProductIndexResource extends JsonResource
             'sku'                    => $product->sku,
             'url_key'                => $product->url_key,
             'in_stock'               => $product->isSaleable(),
-            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+
             'vendor'                 => new VendorIndexResource($this->vendor),
             'featured'               => $this->flat->featured,
             'views'                  => $this->view_count,
-
+            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'images'             => $this->images,
             'base_category' =>   $this->productImageHelper->getProductBaseCategory($this->whenLoaded('categories')),
             //'stock' => $this->in_stock,
         ];

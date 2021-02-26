@@ -16,9 +16,9 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('iso_code_2')->unique();
+            $table->string('iso_code_2');
             $table->string('iso_code_3');
-            $table->string('isd_code');
+            $table->integer('isd_code');
             $table->string('address_format')->nullable();
             $table->boolean('postcode_required');
             $table->boolean('status');

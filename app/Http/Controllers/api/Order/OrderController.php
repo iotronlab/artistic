@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\api\Order;
 
+use App\Events\Order\OrderPlaced;
+use App\Helpers\Cart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderStoreRequest;
+use App\Http\Resources\Order\OrderResource;
 use App\Models\Customer\Address;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -12,6 +16,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware(['auth:api']);
+        $this->middleware(['cart.sync'])->only('store');
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +25,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = request()->user()->orders()->latest()->paginate(10);
+        return OrderResource::Collection($orders);
     }
 
     /**
@@ -29,13 +35,26 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderStoreRequest $request)
+    public function store(OrderStoreRequest $request, Cart $cart)
     {
-        $request->user()->orders()->create(
-            $request->only(['address_id', 'shipping_method_id'])
+        if ($cart->isEmpty()) {
+            return response()->json(['message' => 'cart is empty.'], 400);
+        }
+        $order = $this->createOrder($request, $cart);
+        $order->products()->sync($cart->products()->forSyncing());
+        // $order->load('products');
+        event(new OrderPlaced($order));
+        return new OrderResource($order);
+    }
+    protected function createOrder(Request $request, Cart $cart)
+    {
+        return $request->user()->orders()->create(
+            array_merge(
+                $request->only(['address_id', 'shipping_method_id']),
+                ['subtotal' => $cart->subtotal()->amount()]
+            )
         );
     }
-
     /**
      * Display the specified resource.
      *

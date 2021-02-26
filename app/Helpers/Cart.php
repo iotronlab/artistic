@@ -84,7 +84,7 @@ class Cart
 
     public function isEmpty()
     {
-        return $this->customer->cart->sum('pivot.quantity') === 0;
+        return $this->customer->cart->sum('pivot.quantity') <= 0;
     }
 
     // public function applyTax()
@@ -126,7 +126,7 @@ class Cart
         return
             $this->customer->cart->each(function ($product) {
                 $quantity = $product->minStock($product->pivot->quantity);
-                $this->changed = $quantity != $product->quantity;
+                $this->changed = $quantity != $product->pivot->quantity;
                 $product->pivot->update([
                     'quantity' => $quantity
                 ]);

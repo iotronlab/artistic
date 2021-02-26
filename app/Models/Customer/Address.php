@@ -20,7 +20,7 @@ class Address extends Model
         'contact',
         'city',
         'state',
-        'country_code',
+        'country_id',
         'postal_code',
         'default'
     ];
@@ -53,6 +53,6 @@ class Address extends Model
 
     public function country()
     {
-        return $this->hasOne(Country::class, 'country_code', 'iso_code_2');
+        return $this->hasOne(Country::class, 'id', 'country_id');
     }
 }

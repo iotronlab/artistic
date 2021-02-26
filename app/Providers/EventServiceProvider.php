@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CustomerRegistered' => [
             'App\Listeners\CustomerWelcomeMail',
         ],
+        'App\Events\Order\OrderPlaced' => [
+            'App\Listeners\EmptyCart',
+        ],
     ];
 
     /**

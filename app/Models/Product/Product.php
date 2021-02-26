@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use App\Models\Attribute\AttributeFamily;
 use App\Models\Attribute\AttributeOption;
 use App\Models\Category\Category;
+use App\Models\Collections\ProductCollection;
 use App\Models\Customer\Customer;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Vendor\Vendor;
@@ -223,5 +224,9 @@ class Product extends Model
     public function wishlist()
     {
         return $this->belongsToMany(Customer::class, 'customer_wishlist');
+    }
+    public function newCollection(array $models = [])
+    {
+        return new ProductCollection($models);
     }
 }

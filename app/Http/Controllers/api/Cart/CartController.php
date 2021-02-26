@@ -45,18 +45,19 @@ class CartController extends Controller
     {
         $cart->add($request->products);
         $cart->sync();
-        return response()->json(['message' => 'Added to cart successfully'], 200);
+        return response()->json(['message' => 'Added to cart successfully.'], 200);
     }
 
     public function update(Product $product, CartUpdateRequest $request, Cart $cart)
     {
         $cart->update($product->id, $request->quantity);
-        return response()->json(['success' => 'Product updated in cart'], 400);
+        $cart->sync();
+        return response()->json(['message' => 'Product updated in cart.'], 200);
     }
 
     public function destroy(Product  $product,  Cart $cart)
     {
         $cart->delete($product->id);
-        return response()->json(['success' => 'Product deleted successfully'], 400);
+        return response()->json(['message' => 'Product deleted successfully.'], 200);
     }
 }

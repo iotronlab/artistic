@@ -34,7 +34,7 @@ class VendorAddressController extends Controller
             'contact',
             'city',
             'state',
-            'country_code',
+            'country_id',
             'postal_code',
             'default'
         ]));
@@ -61,7 +61,7 @@ class VendorAddressController extends Controller
             'contact',
             'city',
             'state',
-            'country_code',
+            'country_id',
             'postal_code',
             'default'
         ]))->save();

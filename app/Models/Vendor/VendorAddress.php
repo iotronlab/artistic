@@ -55,6 +55,6 @@ class VendorAddress extends Model
 
     public function country()
     {
-        return $this->hasOne(Country::class, 'country_code', 'iso_code_2');
+        return $this->hasOne(Country::class, 'id', 'country_id');
     }
 }

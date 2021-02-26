@@ -4,6 +4,7 @@ namespace App\Models\Order;
 
 use App\Models\Customer\Address;
 use App\Models\Customer\Customer;
+use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,5 +40,13 @@ class Order extends Model
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+    public function shippingMethod()
+    {
+        return $this->belongsTo(ShippingMethod::class);
+    }
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_orders')->withPivot(['quantity'])->withTimestamps();
     }
 }

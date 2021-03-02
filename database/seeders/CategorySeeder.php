@@ -195,7 +195,7 @@ class CategorySeeder extends Seeder
                 sublime and intricate."
             ],
             [
-                'id' => 34, 'name' => 'Doodle Art', 'url' => 'doddle-art', 'parent_id' => 6,
+                'id' => 34, 'name' => 'Doodle Art', 'url' => 'doodle-art', 'parent_id' => 6,
                 'meta_desc' => "doodling is effortless and simple drawings that can have concrete representational
                 meaning or may just be composed of random and abstract lines. This is a fun way
                 of drawing and comes out to be extremely cute and appealing."

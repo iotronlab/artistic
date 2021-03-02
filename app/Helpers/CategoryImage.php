@@ -13,8 +13,8 @@ class CategoryImage
     public function getCategoryImage($url)
     {
         //$image = $category ? $product->images : null;
-        if (Storage::disk('public')->exists('/category-images/' . $url . '.png')) {
-            $path = Storage::disk('public')->url('/category-images/' . $url . '.png');
+        if (Storage::disk('public')->exists('/category-images/' . $url . '.webp')) {
+            $path = Storage::disk('public')->url('/category-images/' . $url . '.webp');
             // $file_url = Storage::url($path);
             $web_url = asset($path);
         }

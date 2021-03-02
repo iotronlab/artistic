@@ -16,7 +16,9 @@ class CreateShippingMethodsTable extends Migration
         Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('price')->default(0);
+            $table->string('courier_partner');
+            $table->enum('type', ['fixed', 'variable'])->nullable();
+            $table->integer('price')->default(0)->nullable();
             $table->timestamps();
         });
 

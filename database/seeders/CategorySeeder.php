@@ -147,6 +147,11 @@ class CategorySeeder extends Seeder
                 'meta_desc' => "The dhokra art is indigenous to tribal Orissa. This art roots back to the Indus valley
                 civilization and is a non ferrous metal casting technique."
             ],
+            [
+                'id' => 74, 'name' => 'Bidri Art', 'url' => 'bidri-art', 'parent_id' => 5,
+                'meta_desc' => "Bidriware is a metal handicraft from Bidar. It was developed in the 14th century C.E. during the
+                rule of the Bahamani Sultans. The metal used is a blackened alloy of zinc and copper inlaid with thin sheets of pure silver."
+            ],
 
             [
                 'id' => 26, 'name' => 'Abstract Art', 'url' => 'abstract-art', 'parent_id' => 6,

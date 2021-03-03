@@ -214,7 +214,7 @@ class CategorySeeder extends Seeder
                 and also a simple harmony or earthly colours."
             ],
             [
-                'id' => 37, 'name' => 'Seascopes', 'url' => 'seacopes', 'parent_id' => 7,
+                'id' => 37, 'name' => 'Seascopes', 'url' => 'seascopes', 'parent_id' => 7,
                 'meta_desc' => "These are a type of marine art that depicts the sea. These are truly beautiful. The colour
                     combination can be complex or simple and often uses the shades of blue."
             ],

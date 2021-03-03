@@ -166,7 +166,7 @@ class ProductController extends Controller
         }
         $this->productRepository->update(request()->all(), $product->id);
         return response()->json([
-            'Updated Successfully'
+            'message' => 'Updated Successfully.'
         ], 200);
     }
 

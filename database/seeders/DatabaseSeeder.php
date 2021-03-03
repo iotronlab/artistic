@@ -15,15 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CustomerSeeder::class,
-            VendorSeeder::class,
+            //VendorSeeder::class,
             //VendorReview::class
             CategorySeeder::class,
             AttributeFamilyTableSeeder::class,
             AttributeGroupTableSeeder::class,
             AttributeTableSeeder::class,
             AttributeOptionTableSeeder::class,
-            ProductFlatSeeder::class,
-            ProductCategorySeeder::class,
+            //ProductFlatSeeder::class,
+            //ProductCategorySeeder::class,
             CategoryFilterAttributesSeeder::class,
             //StockSeeder::class,
             CustomerGroupSeeder::class,

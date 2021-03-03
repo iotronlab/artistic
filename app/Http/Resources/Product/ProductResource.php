@@ -20,8 +20,11 @@ class ProductResource extends ProductIndexResource
         return array_merge(parent::toArray($request), [
             'categories'      => CategoryIndexResource::collection($this->categories),
             'short_description'      => $this->flat->short_description,
-            'meta_keyword'      => $this->flat->meta_keyword,
             'description'      => $this->flat->description,
+            'meta_title'      => $this->flat->meta_title,
+            'meta_keyword'      => $this->flat->meta_keyword,
+            'meta_description'      => $this->flat->meta_description,
+
             'comments'  => ProductCommentResource::collection($this->comments),
             'family_id' => $this->attribute_family_id,
             'attributes' => [
@@ -29,6 +32,7 @@ class ProductResource extends ProductIndexResource
                 'size'     => $this->flat->size ? $product->option($this->flat->size) : null,
                 'material' => $this->flat->material ? $product->option($this->flat->material) : null,
                 'medium'   => $this->flat->medium ? $product->option($this->flat->medium) : null,
+                'orientation'   => $this->flat->orientation ? $product->option($this->flat->orientation) : null,
             ],
             'stock'                  => $product->stockCount(),
             'images'                 => ProductImageResource::collection($product->images),

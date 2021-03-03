@@ -26,7 +26,7 @@ class VendorProfileController extends Controller
                 'url',
                 'email',
                 'contact',
-                'description',
+                'bio',
             ]
         );
         // $input = $request->all();

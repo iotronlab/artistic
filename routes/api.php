@@ -29,8 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('vendor')->group(function () {
-    Route::post('/upload-image', 'api\vendor\VendorProfileController@uploadImage');
-    Route::post('/profile-update', 'api\vendor\VendorProfileController@updateProfile');
+    Route::post('/upload-image', 'api\Vendor\VendorProfileController@uploadImage');
+    Route::post('/profile-update', 'api\Vendor\VendorProfileController@updateProfile');
 });
 
 Route::resource('vendors', 'api\Vendor\VendorController');

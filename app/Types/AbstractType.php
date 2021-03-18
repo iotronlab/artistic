@@ -258,12 +258,12 @@ abstract class AbstractType
     public function totalQuantity()
     {
         $total = 0;
-        foreach ($this->product->inventories as $inventory) {
+        foreach ($this->product->stocks as $inventory) {
             $total += $inventory->quantity;
         }
         $order = 0;
-        //dd($this->product->ordered_inventories);
-        foreach ($this->product->ordered_inventories as $o) {
+        //dd($this->product->ordered_stocks);
+        foreach ($this->product->ordered_stocks as $o) {
             $order += $o->quantity;
         }
         $total -= $order;

@@ -24,7 +24,7 @@ class Product extends Model
         'vendor_id'
     ];
 
-    protected $appends = ['in_stock'];
+    // protected $appends = ['in_stock'];
 
     protected $typeInstance;
 
@@ -132,12 +132,12 @@ class Product extends Model
     /**
      * The inventories that belong to the product.
      */
-    public function inventories()
+    public function stocks()
     {
         return $this->hasMany(Stock::class, 'product_id');
     }
 
-    public function ordered_inventories()
+    public function ordered_stocks()
     {
         return $this->hasMany(ProductOrdered::class, 'product_id');
     }
@@ -151,10 +151,10 @@ class Product extends Model
     {
         return $this->getTypeInstance()->isSaleable();
     }
-    public function getInStockAttribute()
-    {
-        return $this->isSaleable();
-    }
+    // public function getInStockAttribute()
+    // {
+    //     return $this->isSaleable();
+    // }
 
     /**
      * @return integer
@@ -170,8 +170,9 @@ class Product extends Model
         return $this->belongsToMany(
             Product::class,
             'stocks'
-        );
+        )->withPivot('quantity');
     }
+
     public function flat()
     {
         return $this->hasOne(ProductFlat::class);

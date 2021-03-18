@@ -121,7 +121,7 @@ class Configurable extends AbstractType
             $data = [
                 'sku'         => $product->sku . '-variant-' . implode('-', $permutation),
                 'name'        => '',
-                'inventories' => [],
+                'stocks' => [],
                 'price'       => 0,
                 'weight'      => 0,
                 'status'      => 1,

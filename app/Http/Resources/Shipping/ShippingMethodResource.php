@@ -16,7 +16,9 @@ class ShippingMethodResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'type' => $this->type,
+            'price' => $this->price
         ];
     }
 }

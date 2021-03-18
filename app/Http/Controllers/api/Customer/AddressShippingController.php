@@ -21,5 +21,6 @@ class AddressShippingController extends Controller
 
         $this->authorize('show', $address);
         return ShippingMethodResource::collection($address->country->shippingMethods);
+        //return $address->country->shippingMethods;
     }
 }

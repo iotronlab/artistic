@@ -19,7 +19,6 @@ class CreateVendorCategoriesTable extends Migration
             $table->boolean('base_category')->default(false);
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->unique(['vendor_id', 'category_id']);
         });
     }
 

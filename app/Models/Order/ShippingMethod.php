@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ShippingMethod extends Model
 {
-    use HasFactory, HasPrice;
+    use HasFactory;
     protected $fillable = [
 
         'name',

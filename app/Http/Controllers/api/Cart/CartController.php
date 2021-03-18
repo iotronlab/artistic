@@ -22,8 +22,8 @@ class CartController extends Controller
     {
         $cart->sync();
         //dd($request->user('api'));
-        $request->user('api')->load(['cart', 'cart.stock']);
-        return (new CartResource($request->user('api')))
+        $cartProducts = $request->user()->load(['cart.vendor', 'cart.flat', 'cart.images',  'cart.stocks', 'cart.ordered_stocks']);
+        return (new CartResource($cartProducts))
             ->additional([
                 'meta' => $this->meta($cart, $request)
             ]);

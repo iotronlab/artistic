@@ -17,8 +17,8 @@ class ShipRocketServiceProvider extends ServiceProvider
     {
         $this->app->singleton(ShipRocket::class, function () {
             $response = Http::post('https://apiv2.shiprocket.in/v1/external/auth/login', [
-                'email' => 'sarthakkhandelwal_ch@srmuniv.edu.in',
-                'password' => '9046632101',
+                'email' => 'sarthak.k7189@gmail.com',
+                'password' => 'Anik@9046',
             ])['token'];
             return new ShipRocket($response);
         });

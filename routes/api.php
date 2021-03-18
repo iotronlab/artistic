@@ -86,10 +86,20 @@ Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 // Route::group(['middleware' => 'auth:api'], function () {
 
 // });
+//Product Routes
+
 Route::resource('products', 'api\Product\ProductController');
 
-//Product routes
-Route::post('/products/stock/{product}', 'api\Product\ProductController@addStock');
+//Product Stock Routes
+//https://laravel.com/docs/8.x/controllers#shallow-nesting
+
+Route::apiResource('products.stocks', 'api\Product\ProductStockController')->shallow();
+Route::prefix('stock')->group(function () {
+
+    Route::post('/{product}', 'api\Product\ProductStockController@addStock');
+});
+
+
 //Product add/remove category
 Route::post('/products-category/add/{product}', 'api\Product\ProductController@addCategory');
 Route::post('/products-category/del/{product}', 'api\Product\ProductController@removeCategory');

@@ -122,14 +122,16 @@ class Cart
     }
 
     public function sync()
-    {
+    { //query increases 6
         return
             $this->customer->cart->each(function ($product) {
                 $quantity = $product->minStock($product->pivot->quantity);
                 $this->changed = $quantity != $product->pivot->quantity;
-                $product->pivot->update([
-                    'quantity' => $quantity
-                ]);
+                if ($this->changed == true) {
+                    $product->pivot->update([
+                        'quantity' => $quantity
+                    ]);
+                }
             });
     }
 

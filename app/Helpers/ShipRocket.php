@@ -10,4 +10,8 @@ class ShipRocket
     {
         $this->token = $token;
     }
+
+    public function createOrder()
+    {
+    }
 }

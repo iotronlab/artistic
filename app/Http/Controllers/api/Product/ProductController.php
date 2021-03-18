@@ -9,6 +9,7 @@ use App\Http\Resources\Category\CategoryIndexResource;
 use App\Http\Resources\Product\ProductAttributeResource;
 use App\Http\Resources\Product\ProductIndexResource;
 use App\Http\Resources\Product\ProductResource;
+use App\Http\Resources\Product\ProductStockResource;
 use App\Models\Attribute\Attribute;
 use App\Models\Category\Category;
 use App\Models\Product\Product;
@@ -34,7 +35,7 @@ class ProductController extends Controller
 
     public function __construct(ProductRepository $productRepository,  AttributeFamilyRepository $attributeFamilyRepository)
     {
-        $this->middleware('auth:vendor-api')->except(['index', 'show']);
+        $this->middleware('auth:vendor-api')->except(['index', 'show', 'addStock']);
         $this->productRepository = $productRepository;
         $this->attributeFamilyRepository = $attributeFamilyRepository;
     }
@@ -110,9 +111,10 @@ class ProductController extends Controller
         } else {
             $config = $this->configurableConfig($product->id);
         }
+        // $product->load(['stocks', 'stocks.address']);
         $product->increment('view_count', 1);
         if ($product->type == 'simple') {
-            $product->load('categories', 'vendor');
+            $product->load('categories', 'vendor', 'stocks', 'stocks.address');
             $categories = $product->categories;
             foreach ($categories as $key => $category) {
                 $parent = $categories->where('parent_id', $category->id);
@@ -250,23 +252,7 @@ class ProductController extends Controller
         return ProductIndexResource::collection(Product::whereIn('id', $featured_products)->get());
     }
 
-    //To add stock
-    public function addStock(Product $product, Request $request)
-    {
-        try {
-            $product = $this->productRepository->findOrFail($product->id);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['Failure' => 'Product does not exist'], 404);
-        }
-        $prod_stock = Stock::create([
-            'product_id' => $product->id,
-            'quantity'   => $request->quantity,
-            'vendor_addresses_id'   => $request->address_id,
-        ]);
-        return response()->json([
-            'message' => 'Product stock added successfully.'
-        ], 200);
-    }
+
 
     //To assign category to product
     //issue: validation from front end, database has unique column combination validation

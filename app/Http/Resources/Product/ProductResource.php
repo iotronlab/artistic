@@ -46,6 +46,9 @@ class ProductResource extends ProductIndexResource
             $this->mergeWhen($product->getTypeInstance()->isBundle(), [
                 'bundle_products'           => Self::collection($this->bundle_products),
             ]),
+            //eagerload address to less 3 sql
+            'stocks' => ProductStockResource::collection($this->stocks->groupBy('address.postal_code'))
+            //ProductStockResource::collection($this->stocks->groupBy('address.postal_code'))
         ]);
     }
 }

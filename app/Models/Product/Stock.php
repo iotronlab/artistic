@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Stock extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+
     public $table = 'stocks';
     protected $fillable = [
         'quantity',
@@ -26,6 +26,6 @@ class Stock extends Model
 
     public function address()
     {
-        return $this->hasOne(VendorAddress::class, 'vendor_addresses_id');
+        return $this->belongsTo(VendorAddress::class, 'vendor_addresses_id');
     }
 }

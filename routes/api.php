@@ -94,10 +94,10 @@ Route::resource('products', 'api\Product\ProductController');
 //https://laravel.com/docs/8.x/controllers#shallow-nesting
 
 Route::apiResource('products.stocks', 'api\Product\ProductStockController')->shallow();
-Route::prefix('stock')->group(function () {
+// Route::prefix('stock')->group(function () {
 
-    Route::post('/{product}', 'api\Product\ProductStockController@addStock');
-});
+//     Route::post('/{product}', 'api\Product\ProductStockController@addStock');
+// });
 
 
 //Product add/remove category

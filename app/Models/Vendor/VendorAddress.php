@@ -2,6 +2,7 @@
 
 namespace App\Models\Vendor;
 
+use App\Models\Product\Stock;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,10 +17,11 @@ class VendorAddress extends Model
         'landmark',
         'type',
         'contact',
+        'postal_code',
         'city',
         'state',
         'country_id',
-        'postal_code',
+
         'default'
     ];
 
@@ -56,5 +58,10 @@ class VendorAddress extends Model
     public function country()
     {
         return $this->hasOne(Country::class, 'id', 'country_id');
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
     }
 }

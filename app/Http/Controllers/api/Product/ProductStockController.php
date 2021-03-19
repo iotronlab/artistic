@@ -28,7 +28,7 @@ class ProductStockController extends Controller
 
     public function index(Product $product)
     {
-        $stocks = $product->stock;
+        $stocks = $product->stocks;
         //$stocks->groupBy('address.postal_code');
         return $stocks;
         //add total quantity count

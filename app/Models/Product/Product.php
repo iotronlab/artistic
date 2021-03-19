@@ -40,6 +40,11 @@ class Product extends Model
         return $query->where('status', 1);
     }
 
+    public function scopeInStock($query)
+    {
+        return;
+    }
+
     /**
      * Get the product attribute family that owns the product.
      */

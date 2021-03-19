@@ -18,11 +18,11 @@ class ProductCartResource extends JsonResource
      */
     public function toArray($request)
     {
+        $stocks = $this->stocks->groupBy('address.postal_code');
         return [
             'product' => new ProductIndexResource($this),
-            'stocks' => $this->stocks->groupBy('address.postal_code')
-            //ProductStockResource::collection($this->stocks->groupBy('address.country_id'))
-            ,
+            'stocks' => $stocks,
+            // ProductStockResource::collection($stocks),
             'weight' => $this->flat->weight,
             'quantity' => $this->pivot->quantity,
             'total' => $this->getTotal()->formatted(),

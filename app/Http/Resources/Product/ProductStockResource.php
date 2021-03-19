@@ -23,7 +23,7 @@ class ProductStockResource extends JsonResource
             'id'             => $this->id,
 
             'quantity'                   => $this->quantity,
-            'postal_code'                  => $this->address->postal_code,
+            //'postal_code'                  => $this->address->postal_code,
             'address'                  => new AddressResource($this->address),
             'created_at'                  => $this->created_at->toDayDateTimeString(),
             'updated_at'                  => $this->updated_at->toDayDateTimeString(),

@@ -18,7 +18,7 @@ class CreateVendorAddressesTable extends Migration
             $table->bigInteger('vendor_id')->unsigned()->index();
             $table->string('name');
             $table->string('contact');
-
+            $table->string('alternate_contact')->nullable();
             $table->enum('type', ['Home', 'Work', 'Other']);
             $table->string('address_1');
             $table->string('address_2')->nullable();
@@ -27,7 +27,9 @@ class CreateVendorAddressesTable extends Migration
             $table->string('city');
             $table->string('postal_code');
             $table->string('state');
+            $table->string('country_code');
             $table->boolean('default')->default(false);
+            $table->integer('priority')->default(1);
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->timestamps();

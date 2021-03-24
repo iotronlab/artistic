@@ -21,7 +21,7 @@ Route::get('/shipping', 'api\Shipping\ShippingController@index');
 Route::get('/trending', 'api\DataChart\TrendingController@index');
 Route::get(
     'address/{address}/shipping',
-    'api\Customer\AddressShippingController@getShipping'
+    'api\Cart\AddressShippingController@getShipping'
 );
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

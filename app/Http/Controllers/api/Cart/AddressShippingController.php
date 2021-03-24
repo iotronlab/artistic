@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\Customer;
+namespace App\Http\Controllers\api\Cart;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Shipping\ShippingMethodResource;

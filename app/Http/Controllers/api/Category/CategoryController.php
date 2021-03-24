@@ -31,7 +31,6 @@ class CategoryController extends Controller
                 'children.children'
             )->parents()->get()
         );
-        // ->additional(["shipping_token" => (string)App::make('App\Helpers\ShipRocket')->token]);
     }
 
     /**

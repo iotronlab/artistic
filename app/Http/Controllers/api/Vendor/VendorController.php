@@ -44,7 +44,11 @@ class VendorController extends Controller
     public function show(Vendor $vendor)
     {
         //dd($vendor->products());
-        $vendor->load(['products', 'products.flat', 'products.categories', 'reviews']);
+        $vendor->load([
+            'products', 'products.images', 'products.flat', 'products.categories',
+            'products.vendor', 'products.stock_addresses',
+            'products.ordered_stocks'
+        ]);
         $vendor->increment('view_count', 1);
         return new VendorResource($vendor);
     }

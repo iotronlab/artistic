@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'sku'                   => $this->faker->slug,
             'type'                  => 'simple',
             'attribute_family_id'   => 1,
-            'vendor_id'             => $this->faker->numberBetween(1, 100),
+            'vendor_id'             => 1,
             'view_count'       => $this->faker->numberBetween(100, 1000),
             'popularity'            => $this->faker->numberBetween(20, 100),
         ];

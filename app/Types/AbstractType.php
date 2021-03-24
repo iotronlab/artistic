@@ -258,8 +258,8 @@ abstract class AbstractType
     public function totalQuantity()
     {
         $total = 0;
-        foreach ($this->product->stocks as $inventory) {
-            $total += $inventory->quantity;
+        foreach ($this->product->stock_addresses as $inventory) {
+            $total += $inventory->pivot->quantity;
         }
         $order = 0;
         //dd($this->product->ordered_stocks);

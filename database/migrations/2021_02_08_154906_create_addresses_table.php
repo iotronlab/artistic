@@ -18,6 +18,7 @@ class CreateAddressesTable extends Migration
             $table->bigInteger('customer_id')->unsigned()->index();
             $table->string('name');
             $table->string('contact');
+            $table->string('alternate_contact')->nullable();
 
             $table->enum('type', ['Home', 'Work', 'Other']);
             $table->string('address_1');
@@ -27,6 +28,7 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('postal_code');
             $table->string('state');
+            $table->string('country_code');
             $table->boolean('default')->default(false);
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');

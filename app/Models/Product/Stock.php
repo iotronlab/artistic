@@ -14,7 +14,7 @@ class Stock extends Model
     protected $fillable = [
         'quantity',
         'product_id',
-        'vendor_addresses_id'
+        'vendor_address_id'
     ];
     /**
      * Get the product that owns the product stock.
@@ -26,6 +26,6 @@ class Stock extends Model
 
     public function address()
     {
-        return $this->belongsTo(VendorAddress::class, 'vendor_addresses_id');
+        return $this->belongsTo(VendorAddress::class);
     }
 }

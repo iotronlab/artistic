@@ -17,9 +17,9 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->integer('quantity')->unsigned();
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('vendor_addresses_id');
+            $table->unsignedBigInteger('vendor_address_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('vendor_addresses_id')->references('id')->on('vendor_addresses');
+            $table->foreign('vendor_address_id')->references('id')->on('vendor_addresses');
             $table->timestamps();
         });
     }

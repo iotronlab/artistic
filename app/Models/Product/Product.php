@@ -9,6 +9,7 @@ use App\Models\Collections\ProductCollection;
 use App\Models\Customer\Customer;
 use App\Models\Traits\CanBeScoped;
 use App\Models\Vendor\Vendor;
+use App\Models\Vendor\VendorAddress;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -146,11 +147,20 @@ class Product extends Model
     {
         return $this->hasMany(ProductOrdered::class, 'product_id');
     }
-    /**
-     * @param string $key
-     *
-     * @return bool
-     */
+
+    public function stock_addresses()
+    {
+        return $this->belongsToMany(VendorAddress::class, 'stocks')->withPivot('id', 'quantity');;
+    }
+    //cart function
+    public function stock()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'stocks'
+        )->withPivot('quantity');
+    }
+
     //returns if product is in stock data
     public function isSaleable()
     {
@@ -169,14 +179,7 @@ class Product extends Model
     {
         return $this->getTypeInstance()->totalQuantity();
     }
-    //cart function
-    public function stock()
-    {
-        return $this->belongsToMany(
-            Product::class,
-            'stocks'
-        )->withPivot('quantity');
-    }
+
 
     public function flat()
     {

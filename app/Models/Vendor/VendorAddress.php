@@ -21,7 +21,7 @@ class VendorAddress extends Model
         'city',
         'state',
         'country_id',
-
+        'country_code',
         'default'
     ];
 

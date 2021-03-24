@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\Cart;
 
 use App\Helpers\Cart;
 use App\Helpers\Money;
+use App\Helpers\Shipping;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateRequest;
@@ -20,9 +21,17 @@ class CartController extends Controller
 
     public function index(Request $request, Cart $cart)
     {
-        $cart->sync();
+
         //dd($request->user('api'));
-        $cartProducts = $request->user()->load(['cart.vendor', 'cart.flat', 'cart.images',  'cart.stocks', 'cart.ordered_stocks']);
+        $cartProducts = $request->user('api')->load(
+            'cart.vendor',
+            'cart.flat',
+            'cart.images',
+            'cart.stock_addresses',
+            'cart.ordered_stocks'
+        );
+        $cart->sync();
+        // return ($cartProducts);
         return (new CartResource($cartProducts))
             ->additional([
                 'meta' => $this->meta($cart, $request)
@@ -36,10 +45,15 @@ class CartController extends Controller
             'subtotal' => $cart->subtotal()->formatted(),
             //'tax' => $cart->applyTax()->formatted(),
             // 'discount' => $cart->ApplyCoupon($request->coupon_code)->formatted(),
-            'total' => $cart->withShipping($request->shipping_method_id)->total($request->coupon_code)->formatted(),
+            //  'total' => $cart->withShipping($request->shipping_method_id)->total($request->coupon_code)->formatted(),
             'changed' => $cart->hasChanged(),
         ];
     }
+    protected function getShipping(Shipping $shipping, Request $request)
+    {
+        // $shipping->checkService($request->address_id);
+    }
+
 
     public function store(CartStoreRequest $request, Cart $cart)
     {

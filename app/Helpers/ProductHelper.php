@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Storage;
 
-class ProductImage
+class ProductHelper
 {
     /**
      * Get product's base image
@@ -37,5 +37,13 @@ class ProductImage
             }
         }
         return $baseCategory;
+    }
+
+    public function getPriorityStockAddress($addresses)
+    {
+        //returns first address according to priority set by vendor
+        $address = $addresses->sortBy('priority')->first();
+
+        return $address;
     }
 }

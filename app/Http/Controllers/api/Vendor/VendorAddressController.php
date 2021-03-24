@@ -35,6 +35,7 @@ class VendorAddressController extends Controller
             'city',
             'state',
             'country_id',
+            'country_code',
             'postal_code',
             'default'
         ]));

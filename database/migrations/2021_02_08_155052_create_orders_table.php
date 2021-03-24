@@ -19,8 +19,11 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('address_id');
             $table->unsignedBigInteger('shipping_method_id')->nullable();
             $table->integer('subtotal')->nullable();
-            $table->integer('payment_id')->nullable();
-            $table->integer('shiprocket_id')->nullable();
+            $table->string('payment_id')->nullable();
+            $table->integer('payment_method_id')->nullable();
+            $table->string('tracking_id')->nullable();
+
+
             $table->string('status')->default('pending');
             $table->timestamps();
 

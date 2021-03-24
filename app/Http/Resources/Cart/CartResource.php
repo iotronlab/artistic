@@ -19,6 +19,8 @@ class CartResource extends JsonResource
         //dd($this->cart);
         return [
             'products' => ProductCartResource::collection($this->cart),
+
+            //!n+1 from customer cart pivot qnty
             'quantity' => $this->cart->sum('pivot.quantity'),
             //'total' => $this->getTotal()->formatted(),
         ];

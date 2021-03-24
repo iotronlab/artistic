@@ -16,7 +16,7 @@ class ProductIndexResource extends JsonResource
      */
     public function __construct($resource)
     {
-        $this->productImageHelper = app('App\Helpers\ProductImage');
+        $this->productHelper = app('App\Helpers\ProductHelper');
         parent::__construct($resource);
     }
     /**
@@ -47,10 +47,10 @@ class ProductIndexResource extends JsonResource
             'vendor'                 => new VendorIndexResource($this->vendor),
             'featured'               => $this->flat->featured,
             'views'                  => $this->view_count,
-            'base_image'             => $this->productImageHelper->getProductBaseImage($product),
+            'base_image'             => $this->productHelper->getProductBaseImage($product),
             'images'             => $this->images,
-            'base_category' =>   $this->productImageHelper->getProductBaseCategory($this->whenLoaded('categories')),
-            //'stock' => $this->in_stock,
+            'base_category' =>   $this->productHelper->getProductBaseCategory($this->whenLoaded('categories')),
+            //'in_stock' => $this->in_stock,
         ];
     }
 }

@@ -28,11 +28,11 @@ class ProductStockController extends Controller
 
     public function index(Product $product)
     {
-        $stocks = $product->stocks;
+        $stocks = $product;
         //$stocks->groupBy('address.postal_code');
         return $stocks;
         //add total quantity count
-        // return ProductStockResource::collection($stocks);
+        //return ProductStockResource::collection($stocks);
     }
 
 
@@ -58,7 +58,7 @@ class ProductStockController extends Controller
         $prod_stock = Stock::make([
             'product_id' => $product->id,
             'quantity'   => $request->quantity,
-            'vendor_addresses_id'   => $request->address_id,
+            'vendor_address_id'   => $request->address_id,
         ]);
         $prod_stock->save();
         $prod_stock->load('address');
@@ -96,7 +96,7 @@ class ProductStockController extends Controller
             'address_id' => ['required'],
         ]);
         $stock->quantity = $request->quantity;
-        $stock->vendor_addresses_id   = $request->address_id;
+        $stock->vendor_address_id   = $request->address_id;
         $stock->save();
         return (new ProductStockResource($stock))
             ->additional(['message' => 'Success! Product stock saved.']);

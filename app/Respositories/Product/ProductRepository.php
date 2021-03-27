@@ -68,7 +68,7 @@ class ProductRepository extends Repository
     public function getAll()
     {
         $params = request()->input();
-        $results = Product::with('variants', 'categories', 'flat', 'vendor', 'images', 'ordered_stocks', 'stocks', 'stocks.address')
+        $results = Product::with('variants', 'categories', 'flat', 'vendor', 'images', 'stock_addresses', 'ordered_stocks')
             ->withScopes($this->scopes())
             ->paginate(isset($params['limit']) ? $params['limit'] : 20);
 

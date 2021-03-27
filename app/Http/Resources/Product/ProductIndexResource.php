@@ -50,6 +50,8 @@ class ProductIndexResource extends JsonResource
             'base_image'             => $this->productHelper->getProductBaseImage($product),
             'images'             => $this->images,
             'base_category' =>   $this->productHelper->getProductBaseCategory($this->whenLoaded('categories')),
+            'updated_at'             => $this->updated_at,
+            'created_at'             => $this->created_at,
             //'in_stock' => $this->in_stock,
         ];
     }

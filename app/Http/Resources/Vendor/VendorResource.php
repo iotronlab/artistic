@@ -25,9 +25,10 @@ class VendorResource extends VendorIndexResource
             //         })
             // ),
             'products' =>
-            ProductIndexResource::collection(
-                $this->products
-            ),
+            $this->products->groupBy('created')
+            // ProductIndexResource::collection(
+            //     $this->products->groupBy('created')
+            // ),
 
             // 'categories' =>
             // CategoryIndexResource::collection(

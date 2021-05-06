@@ -11,7 +11,7 @@ class ArtisticInstall extends Command
      *
      * @var string
      */
-    protected $signature = 'artistic:install';
+    protected $signature = 'artify:install';
 
     /**
      * The console command description.
@@ -67,9 +67,9 @@ class ArtisticInstall extends Command
         $result = $this->call('passport:install');
         $this->info($result);
 
-        // running `php artisan voyager:install`
-        $this->warn('Step: Installing Admin Package Voyager');
-        $result = $this->call('voyager:install');
+        // running `php artisan orchid:install`
+        $this->warn('Step: Installing Admin Package');
+        $result = $this->call('orchid:install');
         $this->info($result);
 
         // running `php artisan storage:link`

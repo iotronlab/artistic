@@ -12,9 +12,23 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
+use Orchid\Attachment\Attachable;
+use Orchid\Attachment\Models\Attachment;
+use Orchid\Filters\Filterable;
+use \Orchid\Screen\AsSource;
+
+
 class Vendor extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use
+
+        HasFactory,
+        HasApiTokens,
+        Notifiable,
+
+        AsSource,
+        Attachable,
+        Filterable;
 
     protected $fillable = [
         'display_name',
@@ -24,20 +38,59 @@ class Vendor extends Authenticatable
         'password',
         'contact',
         'bio',
+        'status',
+        'sponsored',
+        'is_freelance',
+        'is_commisioned',
+        'auto_approve'
+
+    ];
+
+    protected $allowedFilters = [
+        'display_name',
+        'contact_name',
+        'url',
+        'email',
+        'contact',
+        'status',
+        'sponsored',
+        'is_freelance',
+        'is_commisioned',
+        'auto_approve',
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $allowedSorts = [
+        'display_name',
+        'contact_name',
+        'url',
+        'email',
+        'status',
+        'sponsored',
+        'is_freelance',
+        'is_commisioned',
+        'auto_approve',
+        'created_at',
+        'updated_at',
     ];
 
     protected $hidden = [
         'password',
     ];
 
-    protected $casts = [
-        'sponsored' => 'boolean',
-        'is_freelance' => 'boolean',
-        'is_commisioned' => 'boolean',
-        'auto_approve' => 'boolean',
-        'show_display_name' => 'boolean',
-        'status' => 'boolean',
-    ];
+    public static function boot()
+    {
+
+        parent::boot();
+        //For update & create functions
+        static::saving(function ($vendor) {
+
+            if ($vendor->password) {
+                $vendor->password = bcrypt($vendor->password);
+            }
+        });
+    }
     /**
      * Get the vendor reviews.
      */

@@ -18,14 +18,14 @@ class VendorSeeder extends Seeder
         // Vendor::factory()
         //     ->times(100)
         //     ->create();
-        DB::table('vendors')->insert([
+
+        Vendor::create([
             'display_name' => 'Helsinki',
             'contact_name' => 'Helsinki',
             'url' => 'helsinki',
             'contact' => '1234567890',
-
-            'email' => 'vendor@urartistic.com',
-            'password' => bcrypt('123456')
+            'email' => 'vendor@artify.co.in',
+            'password' => bcrypt('123456'),
         ]);
     }
 }

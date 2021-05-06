@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api\Vendor;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Category\CategoryIndexResource;
+use App\Http\Resources\Product\ProductIndexResource;
 use App\Models\Vendor\Vendor;
 use Illuminate\Http\Request;
 
@@ -43,14 +45,21 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        //dd($vendor->products());
-        $vendor->load([
-            'products', 'products.images', 'products.flat', 'products.categories',
-            'products.vendor', 'products.stock_addresses',
-            'products.ordered_stocks'
-        ]);
+
+        $productsPaginated = $vendor->products()->with(
+            'images',
+            'flat',
+            'stock_addresses',
+            'ordered_stocks',
+        )->paginate();
+        // $productsTransformed = $productsPaginated->getCollection()->groupBy(function ($item) {
+        //     return $item->created_at->format('Y-m-d');
+        // });
+        // $productsPaginated->setCollection($productsTransformed);
         $vendor->increment('view_count', 1);
-        return new VendorResource($vendor);
+        //return new VendorResource($vendor);
+        //return $vendor;
+        return ProductIndexResource::collection($productsPaginated)->additional(['vendor' => new VendorIndexResource($vendor)]);
     }
 
     /**

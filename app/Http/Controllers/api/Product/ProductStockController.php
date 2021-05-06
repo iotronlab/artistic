@@ -28,11 +28,11 @@ class ProductStockController extends Controller
 
     public function index(Product $product)
     {
-        $stocks = $product;
+        $stocks = $product->stocks;
         //$stocks->groupBy('address.postal_code');
-        return $stocks;
+        //return $stocks;
         //add total quantity count
-        //return ProductStockResource::collection($stocks);
+        return ProductStockResource::collection($stocks);
     }
 
 

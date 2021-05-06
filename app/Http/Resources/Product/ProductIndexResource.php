@@ -44,14 +44,14 @@ class ProductIndexResource extends JsonResource
             'url_key'                => $product->url_key,
             'in_stock'               => $product->isSaleable(),
 
-            'vendor'                 => new VendorIndexResource($this->vendor),
+            'vendor'                 => new VendorIndexResource($this->whenLoaded('vendor')),
             'featured'               => $this->flat->featured,
             'views'                  => $this->view_count,
             'base_image'             => $this->productHelper->getProductBaseImage($product),
             'images'             => $this->images,
             'base_category' =>   $this->productHelper->getProductBaseCategory($this->whenLoaded('categories')),
-            'updated_at'             => $this->updated_at,
-            'created_at'             => $this->created_at,
+            'updated_at'             => $this->updated_at->toDayDateTimeString(),
+            'created_at'             => $this->created_at->format('Y-m-d'),
             //'in_stock' => $this->in_stock,
         ];
     }

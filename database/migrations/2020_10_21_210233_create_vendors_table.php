@@ -19,7 +19,6 @@ class CreateVendorsTable extends Migration
             $table->string('contact_name');
             $table->string('email')->unique();
             $table->string('url')->unique();
-
             $table->string('password');
             $table->string('contact');
 
@@ -36,8 +35,8 @@ class CreateVendorsTable extends Migration
             $table->boolean('is_freelance')->default(false);
             $table->boolean('is_commisioned')->default(false);
             $table->boolean('auto_approve')->default(false);
-            $table->boolean('show_display_name')->default(true);
-            $table->boolean('status')->default(false);
+
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

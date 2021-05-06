@@ -36,6 +36,7 @@ class AddressController extends Controller
             'state',
             'country_id',
             'postal_code',
+            'country_code',
             'default'
         ]));
         $request->user()->addresses()->save($address);
@@ -63,6 +64,7 @@ class AddressController extends Controller
             'state',
             'country_id',
             'postal_code',
+            'country_code',
             'default'
         ]))->save();
         return new AddressResource(

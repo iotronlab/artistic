@@ -22,6 +22,7 @@ class Address extends Model
         'state',
         'country_id',
         'postal_code',
+        'country_code',
         'default'
     ];
 

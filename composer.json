@@ -20,8 +20,8 @@
         "lcobucci/jwt": "3.3.3",
         "league/flysystem-cached-adapter": "~1.0",
         "moneyphp/money": "^3.3",
-        "spatie/laravel-searchable": "^1.7",
-        "tcg/voyager": "^1.4"
+        "orchid/platform": "^10.0",
+        "spatie/laravel-searchable": "^1.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

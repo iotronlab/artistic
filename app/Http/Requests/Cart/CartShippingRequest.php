@@ -4,7 +4,7 @@ namespace App\Http\Requests\Cart;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartStoreRequest extends FormRequest
+class CartShippingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +26,10 @@ class CartStoreRequest extends FormRequest
         return [
             'products' => 'required|array',
             'products.*.id' => 'required|exists:products,id',
-            'products.*.quantity' => 'numeric|min:1',
-
+            'products.*.id' => 'required|exists:cart_user,product_id',
+            'products.*.courier_id' => 'required|numeric',
+            'products.*.courier_name' => 'required|string',
+            'products.*.shipping_rate' => 'required|numeric',
         ];
     }
 }

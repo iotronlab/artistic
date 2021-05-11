@@ -18,6 +18,11 @@ class CreateCartUserTable extends Migration
             $table->bigInteger('customer_id')->unsigned()->index();
             $table->bigInteger('product_id')->unsigned()->index();
             $table->integer('quantity')->unsigned()->default(1);
+            $table->bigInteger('courier_id')->unsigned()->nullable();
+            $table->string('courier_name')->nullable();
+            $table->bigInteger('shipping_rate')->unsigned()->nullable();
+            $table->boolean('free_shipping')->nullable();
+
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers');

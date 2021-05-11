@@ -26,6 +26,7 @@ class ProductCartResource extends JsonResource
     {
         $stock_address = $this->productHelper->getPriorityStockAddress($this->whenLoaded('stock_addresses'));
         return [
+            'id' => $this->id,
             'product' => new ProductIndexResource($this),
             'pickup_address' => new VendorAddressResource($stock_address),
             // ProductStockResource::collection($stocks),

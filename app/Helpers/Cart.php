@@ -139,6 +139,24 @@ class Cart
     {
         return $this->changed;
     }
+    public function setShipping($products)
+    {
+        $this->customer->cart()->syncWithoutDetaching(
+            $this->getShippingPayload($products)
+        );
+    }
+    protected function getShippingPayload($products)
+    {
+        return collect($products)->keyBy('id')->map(function ($product) {
+            // $shipping = $product->shipping;
+            return [
+                'courier_id' => $product['courier_id'],
+                'courier_name' => $product['courier_name'],
+                'shipping_rate' => $product['shipping_rate'],
+            ];
+        })
+            ->toArray();
+    }
 
     protected function getStorePayload($products)
     {

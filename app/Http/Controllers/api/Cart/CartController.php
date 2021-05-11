@@ -6,6 +6,7 @@ use App\Helpers\Cart;
 use App\Helpers\Money;
 use App\Helpers\Shipping;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\CartShippingRequest;
 use App\Http\Requests\Cart\CartStoreRequest;
 use App\Http\Requests\Cart\CartUpdateRequest;
 use App\Http\Resources\Cart\CartResource;
@@ -73,5 +74,12 @@ class CartController extends Controller
     {
         $cart->delete($product->id);
         return response()->json(['message' => 'Product deleted successfully.'], 200);
+    }
+
+    public function setShipping(CartShippingRequest $request, Cart $cart)
+    {
+        $cart->setShipping($request->products);
+        $cart->sync();
+        return response()->json(['message' => 'Product shipping updated in cart.'], 200);
     }
 }

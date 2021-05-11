@@ -110,6 +110,11 @@ Route::resource('cart', 'api\Cart\CartController', [
         'cart' => 'product'
     ]
 ]);
+Route::post('cart/shipping', 'api\Cart\CartController@setShipping', [
+    // 'parameters' => [
+    //     'cart' => 'product'
+    // ]
+]);
 
 //images
 Route::post('/products/upload-image/{product}', 'api\Product\ProductController@upload');

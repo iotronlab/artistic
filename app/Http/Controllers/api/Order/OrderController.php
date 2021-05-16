@@ -15,7 +15,7 @@ class OrderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
         $this->middleware(['cart.sync'])->only('store');
     }
     /**

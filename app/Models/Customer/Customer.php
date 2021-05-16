@@ -7,7 +7,7 @@ use App\Models\Product\Product;
 use App\Models\Vendor\Vendor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable
 {
@@ -21,7 +21,6 @@ class Customer extends Authenticatable
         'password',
     ];
     protected $casts = [
-
         'subscribed_to_newsletter' => 'boolean',
         'status' => 'boolean',
     ];

@@ -15,12 +15,10 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\Vendor\VendorEditScreen;
-use App\Orchid\Screens\Vendor\VendorListScreen;
-
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-
+use App\Orchid\Screens\Vendor\VendorEditScreen;
+use App\Orchid\Screens\Vendor\VendorListScreen;
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes

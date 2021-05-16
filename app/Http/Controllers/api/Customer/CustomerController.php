@@ -12,7 +12,7 @@ class CustomerController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
     }
     /**
      * Display a listing of the resource.
@@ -92,7 +92,7 @@ class CustomerController extends Controller
 
     public function subscribeVendor(Request $request, Vendor $vendor)
     {
-        $request->user('api')->subscriptions()->attach([
+        $request->user('cust-api')->subscriptions()->attach([
             $vendor->id
         ]);
         return response()->json(['success' => 'Customer subscribed successfully'], 400);
@@ -100,7 +100,7 @@ class CustomerController extends Controller
 
     public function unsubscribeVendor(Request $request, Vendor $vendor)
     {
-        $request->user('api')->subscriptions()->detach([
+        $request->user('cust-api')->subscriptions()->detach([
             $vendor->id
         ]);
         return

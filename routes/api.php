@@ -24,7 +24,7 @@ Route::get(
     'api\Cart\AddressShippingController@getShipping'
 );
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:cust-api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -37,7 +37,7 @@ Route::resource('vendors', 'api\Vendor\VendorController');
 //Customer auth and social login
 Route::post('login', 'api\auth\AuthController@login');
 Route::post('register', 'api\auth\RegisterController@register');
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'auth:cust-api'], function () {
     Route::get('details', 'api\auth\AuthController@details');
     Route::get('logout', 'api\auth\AuthController@logout');
 });
@@ -53,7 +53,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 //Customer account details
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'auth:cust-api'], function () {
     Route::get('addresses', 'api\Customer\CustomerController@getAddresses');
     Route::get('wishlist', 'api\Customer\CustomerController@getWishlist');
     Route::get('orders', 'api\Customer\CustomerController@getOrders');
@@ -83,7 +83,7 @@ Route::apiResource('attributes', 'api\Attribute\AttributeController');
 Route::get('/families', 'api\Attribute\AttributeController@families');
 Route::get('/families/{id}', 'api\Attribute\AttributeController@group_mapping');
 
-// Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:cust-api'], function () {
 
 // });
 //Product Routes

@@ -12,7 +12,7 @@ class AddressController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
     }
 
     public function index(Request $request)

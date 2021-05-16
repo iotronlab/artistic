@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Cart::class, function ($app) {
 
-            auth('api')->user();
+            // auth('api')->user();
 
 
-            return new Cart(auth('api')->user());
+            return new Cart(auth('cust-api')->user());
         });
     }
 

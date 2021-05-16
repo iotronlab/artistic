@@ -17,14 +17,14 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
     }
 
     public function index(Request $request, Cart $cart)
     {
 
-        //dd($request->user('api'));
-        $cartProducts = $request->user('api')->load(
+        //dd($request->user('cust-api'));
+        $cartProducts = $request->user('cust-api')->load(
             'cart.vendor',
             'cart.flat',
             'cart.images',

@@ -7,10 +7,11 @@ use App\Models\Customer\Address;
 class Shipping
 {
     public $token;
+    public $shippingDiscount = 100;
 
     public function __construct($token)
     {
-        $this->token = $token;
+        $this->shippingToken = $token;
     }
 
     // public function checkService($address_id)
@@ -22,15 +23,15 @@ class Shipping
     //         $this->checkInternationalService($address);
     // }
 
-    public function checkLocalService($address)
-    {
-        # code...
-    }
+    // public function checkLocalService($address)
+    // {
+    //     # code...
+    // }
 
-    public function checkInternationalService($address)
-    {
-        # code...
-    }
+    // public function checkInternationalService($address)
+    // {
+    //     # code...
+    // }
     public function createOrder()
     {
     }

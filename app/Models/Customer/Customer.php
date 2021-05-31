@@ -41,13 +41,13 @@ class Customer extends Authenticatable
 
     public function wishlist()
     {
-        return $this->belongsToMany(Product::class, 'customer_wishlist');
+        return $this->belongsToMany(Product::class, 'customer_wishlist')->withTimestamps();;
     }
 
     public function cart()
     {
         return $this->belongsToMany(Product::class, 'cart_user')
-            ->withPivot('quantity');
+            ->withPivot('quantity', 'courier_id', 'courier_name', 'shipping_rate')->withTimestamps();
     }
 
     public function subscriptions()

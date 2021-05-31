@@ -30,9 +30,12 @@ class ProductCartResource extends JsonResource
             'product' => new ProductIndexResource($this),
             'pickup_address' => new VendorAddressResource($stock_address),
             // ProductStockResource::collection($stocks),
-            'weight' => $this->flat->weight,
+            'weight' => $this->flat->weight * $this->pivot->quantity,
             //quantity from cart_user
             'quantity' => $this->pivot->quantity,
+            'courier_id' => $this->pivot->courier_id,
+            'courier_name' => $this->pivot->courier_name,
+            'shipping_rate' => $this->pivot->shipping_rate,
             'total' => $this->getTotal()->formatted(),
         ];
     }

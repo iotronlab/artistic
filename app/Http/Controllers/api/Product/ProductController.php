@@ -113,6 +113,7 @@ class ProductController extends Controller
         }
         // $product->load(['stocks', 'stocks.address']);
         $product->increment('view_count', 1);
+
         if ($product->type == 'simple') {
             $product->load('categories', 'vendor', 'stocks', 'stocks.address');
             $categories = $product->categories;
@@ -267,32 +268,32 @@ class ProductController extends Controller
         //     ], 400);
         // }
 
-        $category_id = $request->category_id;
+        $category_url = $request->category_url;
         $vendor = $request->user();
         $product->categories()->attach(
-            $category_id,
+            $category_url,
             ['base_category' => true]
         );
-        $vendor->categories()->attach(
-            $category_id,
-            ['base_category' => true]
-        );
-        $parent_category = Category::find($category_id)->parent;
+        // $vendor->categories()->attach(
+        //     $category_url,
+        //     ['base_category' => true]
+        // );
+        $parent_category = Category::firstWhere('url', $category_url)->parent;
         //Attach parents if exist
         if ($parent_category != null) {
             $product->categories()->attach([
-                $parent_category->id
+                $parent_category->url
             ]);
-            $vendor->categories()->attach([
-                $parent_category->id
-            ]);
+            // $vendor->categories()->attach([
+            //     $parent_category->url
+            // ]);
             if ($parent_category->parent != null) {
                 $product->categories()->attach([
-                    $parent_category->parent->id
+                    $parent_category->parent->url
                 ]);
-                $vendor->categories()->attach([
-                    $parent_category->parent->id
-                ]);
+                // $vendor->categories()->attach([
+                //     $parent_category->parent->url
+                // ]);
             }
         }
 

@@ -30,8 +30,8 @@ class CreateAddressesTable extends Migration
             $table->string('state');
             $table->string('country_code');
             $table->boolean('default')->default(false);
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
+            // $table->unsignedBigInteger('country_id');
+            $table->foreign('country_code')->references('iso_code_2')->on('countries');
             $table->timestamps();
             $table->foreign('customer_id')->references('id')->on('customers');
         });

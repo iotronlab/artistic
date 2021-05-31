@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ArtisticInstall extends Command
+class ArtifyInstall extends Command
 {
     /**
      * The name and signature of the console command.

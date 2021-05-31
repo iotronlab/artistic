@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
             AttributeTableSeeder::class,
             AttributeOptionTableSeeder::class,
             ProductFlatSeeder::class,
-            ProductCategorySeeder::class,
+            //relation changed to url
+            //ProductCategorySeeder::class,
             CategoryFilterAttributesSeeder::class,
             //StockSeeder::class,
             CustomerGroupSeeder::class,

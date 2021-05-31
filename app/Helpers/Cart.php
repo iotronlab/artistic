@@ -14,6 +14,8 @@ class Cart
     protected $changed = false;
     protected $customer;
     protected $shipping;
+    protected $subtotal;
+    public $shippingRate = 0;
 
     public function __construct(Customer $customer)
     {
@@ -98,25 +100,29 @@ class Cart
 
     public function subtotal()
     {
-        $subtotal =  $this->customer->cart->sum(function ($product) {
+        $this->subtotal =  $this->customer->cart->sum(function ($product) {
             return ($product->flat->price->amount() * $product->pivot->quantity);
         });
-        return new Money($subtotal);
+        return new Money($this->subtotal);
     }
 
-    public function total($code = null)
+    public function total()
     {
+        $total = $this->subtotal;
         $discount = 0;
-        if ($code != null) {
-            $discount = 0;
-            //$this->ApplyCoupon($code);
-        }
-        if ($this->shipping) {
-            return $this->subtotal();
-            //->add($this->shipping->price)->subtract($discount);
+        // if ($code != null) {
+        //     $discount = 0;
+        //     //$this->ApplyCoupon($code);
+        // }
+        $shipping =  $this->customer->cart->sum('pivot.shipping_rate');
+
+        if ($shipping > 0) {
+            $total = $total + $shipping;
+            //$this->subtotal()->add(new Money($this->shippingRate));
+            //->subtract($discount);
             // ->add($this->applyTax());
         }
-        return $this->subtotal();
+        return new Money($total);
         //->subtract($discount);
         //->add($this->applyTax());
     }
@@ -141,21 +147,22 @@ class Cart
     }
     public function setShipping($products)
     {
-        $this->customer->cart()->syncWithoutDetaching(
-            $this->getShippingPayload($products)
+
+        $productShipping =  $this->getShippingPayload($products);
+
+        $this->customer->cart()->sync(
+            $productShipping
         );
     }
     protected function getShippingPayload($products)
     {
         return collect($products)->keyBy('id')->map(function ($product) {
-            // $shipping = $product->shipping;
             return [
                 'courier_id' => $product['courier_id'],
                 'courier_name' => $product['courier_name'],
-                'shipping_rate' => $product['shipping_rate'],
+                'shipping_rate' => $product['shipping_rate'] * 100,
             ];
-        })
-            ->toArray();
+        })->toArray();
     }
 
     protected function getStorePayload($products)
@@ -164,8 +171,7 @@ class Cart
             return [
                 'quantity' => $product['quantity'] + $this->getCurrentQuantity($product['id'])
             ];
-        })
-            ->toArray();
+        })->toArray();
     }
 
     protected function getCurrentQuantity($productId)

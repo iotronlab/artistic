@@ -54,6 +54,6 @@ class Address extends Model
 
     public function country()
     {
-        return $this->hasOne(Country::class, 'id', 'country_id');
+        return $this->hasOne(Country::class, 'iso_code_2', 'country_code');
     }
 }

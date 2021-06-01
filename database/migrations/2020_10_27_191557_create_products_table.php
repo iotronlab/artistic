@@ -32,10 +32,10 @@ class CreateProductsTable extends Migration
 
         Schema::create('product_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
-            $table->string('category_url');
+            $table->unsignedBigInteger('category_id');
             $table->boolean('base_category')->default(false);
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('category_url')->references('url')->on('categories')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('restrict');
             // $table->unique(['product_id', 'category_id']);
         });
 

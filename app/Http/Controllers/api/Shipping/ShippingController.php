@@ -11,6 +11,9 @@ class ShippingController extends Controller
 
     public function index(Shipping $shipping)
     {
-        return response()->json(['token' => $shipping->token], 200);
+        return response()->json([
+            'token' => $shipping->shippingToken,
+            'discount' => $shipping->shippingDiscount
+        ], 200);
     }
 }

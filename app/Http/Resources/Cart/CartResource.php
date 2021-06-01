@@ -22,6 +22,7 @@ class CartResource extends JsonResource
 
             //!n+1 from customer cart pivot qnty
             'quantity' => $this->cart->sum('pivot.quantity'),
+            'shipping_total' => $this->cart->sum('pivot.shipping_rate'),
             //'total' => $this->getTotal()->formatted(),
         ];
     }

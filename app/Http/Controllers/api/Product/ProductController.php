@@ -113,8 +113,11 @@ class ProductController extends Controller
         }
         // $product->load(['stocks', 'stocks.address']);
         $product->increment('view_count', 1);
+
         if ($product->type == 'simple') {
             $product->load('categories', 'vendor', 'stocks', 'stocks.address');
+
+            dd($product);
             $categories = $product->categories;
             foreach ($categories as $key => $category) {
                 $parent = $categories->where('parent_id', $category->id);
@@ -273,26 +276,26 @@ class ProductController extends Controller
             $category_id,
             ['base_category' => true]
         );
-        $vendor->categories()->attach(
-            $category_id,
-            ['base_category' => true]
-        );
-        $parent_category = Category::find($category_id)->parent;
+        // $vendor->categories()->attach(
+        //     $category_url,
+        //     ['base_category' => true]
+        // );
+        $parent_category = Category::firstWhere('id', $category_id)->parent;
         //Attach parents if exist
         if ($parent_category != null) {
             $product->categories()->attach([
                 $parent_category->id
             ]);
-            $vendor->categories()->attach([
-                $parent_category->id
-            ]);
+            // $vendor->categories()->attach([
+            //     $parent_category->url
+            // ]);
             if ($parent_category->parent != null) {
                 $product->categories()->attach([
                     $parent_category->parent->id
                 ]);
-                $vendor->categories()->attach([
-                    $parent_category->parent->id
-                ]);
+                // $vendor->categories()->attach([
+                //     $parent_category->parent->url
+                // ]);
             }
         }
 

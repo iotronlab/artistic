@@ -22,11 +22,14 @@ class CreateCartUserTable extends Migration
             $table->string('courier_name')->nullable();
             $table->bigInteger('shipping_rate')->unsigned()->nullable();
             $table->boolean('free_shipping')->nullable();
-
+            $table->integer('etd')->nullable();
+            $table->string('etd_date')->nullable();
+            $table->unsignedBigInteger('address_id')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('product_id')->references('id')->on('products');
+            // $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

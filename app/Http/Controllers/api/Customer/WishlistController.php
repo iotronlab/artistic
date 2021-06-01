@@ -12,7 +12,7 @@ class WishlistController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
     }
     public function index(Request $request)
     {
@@ -23,7 +23,7 @@ class WishlistController extends Controller
     }
     public function store(Request $request)
     {
-        $request->user('api')->wishlist()->attach([
+        $request->user('cust-api')->wishlist()->attach([
             $request->product_id
         ]);
         return response()->json(['success' => 'Product added to whishlist successfully'], 400);

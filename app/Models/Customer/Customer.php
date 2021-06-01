@@ -7,7 +7,7 @@ use App\Models\Product\Product;
 use App\Models\Vendor\Vendor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable
 {
@@ -21,7 +21,6 @@ class Customer extends Authenticatable
         'password',
     ];
     protected $casts = [
-
         'subscribed_to_newsletter' => 'boolean',
         'status' => 'boolean',
     ];
@@ -42,13 +41,13 @@ class Customer extends Authenticatable
 
     public function wishlist()
     {
-        return $this->belongsToMany(Product::class, 'customer_wishlist');
+        return $this->belongsToMany(Product::class, 'customer_wishlist')->withTimestamps();;
     }
 
     public function cart()
     {
         return $this->belongsToMany(Product::class, 'cart_user')
-            ->withPivot('quantity');
+            ->withPivot('quantity', 'courier_id', 'courier_name', 'shipping_rate')->withTimestamps();
     }
 
     public function subscriptions()

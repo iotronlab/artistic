@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ArtisticInstall extends Command
+class ArtifyInstall extends Command
 {
     /**
      * The name and signature of the console command.
@@ -39,9 +39,12 @@ class ArtisticInstall extends Command
     {
         // cached new changes
         $this->warn('Step: Caching new changes...');
-        $cached = $this->call('config:cache');
+        $config = $this->call('config:clear');
+        $this->info($config);
+        $cached = $this->call('cache:clear');
         $this->info($cached);
-
+        $route = $this->call('route:clear');
+        $this->info($route);
         // waiting for 2 seconds
         $this->warn('Please wait...');
         sleep(2);
@@ -63,9 +66,9 @@ class ArtisticInstall extends Command
 
 
         // running `php artisan passport:install`
-        $this->warn('Step: Installing Passport');
-        $result = $this->call('passport:install');
-        $this->info($result);
+        // $this->warn('Step: Installing Passport');
+        // $result = $this->call('passport:install');
+        // $this->info($result);
 
         // running `php artisan orchid:install`
         $this->warn('Step: Installing Admin Package');
@@ -84,6 +87,6 @@ class ArtisticInstall extends Command
 
         $this->info('-----------------------------');
         $this->info('Congratulations!');
-        $this->info('The installation has been finished and you can now use Artistic.');
+        $this->info('The installation has been finished and you can now use Artify.');
     }
 }

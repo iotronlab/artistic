@@ -19,7 +19,16 @@ class VendorSeeder extends Seeder
         //     ->times(100)
         //     ->create();
 
-        Vendor::create([
+        // Vendor::create([
+        //     'display_name' => 'Helsinki',
+        //     'contact_name' => 'Helsinki',
+        //     'url' => 'helsinki',
+        //     'contact' => '1234567890',
+        //     'email' => 'vendor@artify.co.in',
+        //     'password' => bcrypt('123456'),
+        // ]);
+
+        DB::table('vendors')->insert([
             'display_name' => 'Helsinki',
             'contact_name' => 'Helsinki',
             'url' => 'helsinki',

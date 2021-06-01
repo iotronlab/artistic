@@ -17,14 +17,14 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:api']);
+        $this->middleware(['auth:cust-api']);
     }
 
     public function index(Request $request, Cart $cart)
     {
 
-        //dd($request->user('api'));
-        $cartProducts = $request->user('api')->load(
+        //dd($request->user('cust-api'));
+        $cartProducts = $request->user('cust-api')->load(
             'cart.vendor',
             'cart.flat',
             'cart.images',
@@ -44,6 +44,8 @@ class CartController extends Controller
         return [
             'empty' => $cart->IsEmpty(),
             'subtotal' => $cart->subtotal()->formatted(),
+            'total' => $cart->total()->formatted(),
+            'shipping' => $cart->shippingRate,
             //'tax' => $cart->applyTax()->formatted(),
             // 'discount' => $cart->ApplyCoupon($request->coupon_code)->formatted(),
             //  'total' => $cart->withShipping($request->shipping_method_id)->total($request->coupon_code)->formatted(),
@@ -79,7 +81,7 @@ class CartController extends Controller
     public function setShipping(CartShippingRequest $request, Cart $cart)
     {
         $cart->setShipping($request->products);
-        $cart->sync();
+        // $cart->sync();
         return response()->json(['message' => 'Product shipping updated in cart.'], 200);
     }
 }

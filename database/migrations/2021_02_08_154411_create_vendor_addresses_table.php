@@ -30,8 +30,8 @@ class CreateVendorAddressesTable extends Migration
             $table->string('country_code');
             $table->boolean('default')->default(false);
             $table->integer('priority')->default(1);
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries');
+            //    $table->unsignedBigInteger('country_id');
+            $table->foreign('country_code')->references('iso_code_2')->on('countries');
             $table->timestamps();
             $table->foreign('vendor_id')->references('id')->on('vendors');
         });

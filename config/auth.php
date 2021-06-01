@@ -44,21 +44,23 @@ return [
         'customer' => [
             'driver' => 'session',
             'provider' => 'customers',
+            'hash' => false,
         ],
 
         'vendor' => [
             'driver' => 'session',
             'provider' => 'vendors',
+            'hash' => false,
         ],
 
-        'api' => [
-            'driver' => 'passport',
+        'cust-api' => [
+            'driver' => 'sanctum',
             'provider' => 'customers',
             'hash' => false,
         ],
 
         'vendor-api' => [
-            'driver' => 'passport',
+            'driver' => 'sanctum',
             'provider' => 'vendors',
             'hash' => false,
         ],

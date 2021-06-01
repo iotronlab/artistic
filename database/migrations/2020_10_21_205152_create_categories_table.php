@@ -17,15 +17,16 @@ class CreateCategoriesTable extends Migration
             $table->id();
 
 
-            $table->string('name');
-            $table->string('image_path')->nullable();
-            $table->string('url')->unique();
-            $table->string('meta_title')->nullable();
-            $table->json('meta_keyword')->nullable();
-            $table->text('meta_desc')->nullable();
+            $table->string('name', 100);
+            $table->string('image_path', 400)->nullable();
+            $table->string('url', 100)->unique();
+            $table->string('meta_title', 100)->nullable();
+            $table->json('meta_keyword', 200)->nullable();
+            $table->text('meta_desc', 600)->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('is_visible_on_front')->default(true);
             $table->unsignedBigInteger('view_count')->default(10);
+            $table->unsignedInteger('order')->nullable();
 
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->timestamps();

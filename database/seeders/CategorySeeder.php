@@ -423,28 +423,32 @@ class CategorySeeder extends Seeder
 
 
         //         ];
+        $this->categoryImageHelper = app('App\Helpers\CategoryImage');
         $json = Storage::disk('local')->get('data/categories.json');
         $categories = json_decode($json);
 
         foreach ($categories as $category) {
-            $data = Category::create(array(
+            $data = Category::updateOrCreate(array(
                 'name' => $category->name,
                 'url' => $category->url,
                 'meta_desc' => $category->meta_desc,
+                'image_path' => $this->categoryImageHelper->getCategoryImage($category->url),
 
             ));
             foreach ($category->children as $categoryChild) {
-                $nestedData = $data->children()->create(array(
+                $nestedData = $data->children()->updateOrCreate(array(
                     'name' => $categoryChild->name,
                     'url' => $categoryChild->url,
                     'meta_desc' => $categoryChild->meta_desc,
+                    'image_path' => $this->categoryImageHelper->getCategoryImage($category->url),
 
                 )); 
                 foreach ($categoryChild->children as $categorySubChild) {
-                    $nestedData->children()->create(array(
+                    $nestedData->children()->updateOrCreate(array(
                         'name' => $categorySubChild->name,
                         'url' => $categorySubChild->url,
                         'meta_desc' => $categorySubChild->meta_desc,
+                        'image_path' => $this->categoryImageHelper->getCategoryImage($category->url),
 
                     ));
                 }

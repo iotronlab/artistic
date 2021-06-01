@@ -23,10 +23,10 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('attribute_family_id')->nullable();
             $table->unsignedBigInteger('vendor_id')->nullable();
-            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('parent_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
             $table->unsignedBigInteger('view_count')->default(10);
-            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onDelete('restrict');
+            $table->foreign('attribute_family_id')->references('id')->on('attribute_families')->onUpdate('cascade')->onDelete('restrict');
         });
 
 
@@ -34,8 +34,8 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('category_id');
             $table->boolean('base_category')->default(false);
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('restrict');
             // $table->unique(['product_id', 'category_id']);
         });
 
@@ -43,8 +43,8 @@ class CreateProductsTable extends Migration
         Schema::create('product_super_attributes', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('attribute_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

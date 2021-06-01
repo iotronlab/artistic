@@ -11,6 +11,9 @@ use App\Models\Vendor\Vendor;
 
 class Category extends Model
 {
+    // protected $primaryKey = 'url';
+    // public $incrementing = false;
+    // protected $keyType = 'string';
     use HasFactory, HasChildren;
     protected $fillable = [
         'name',
@@ -18,6 +21,7 @@ class Category extends Model
         'parent_id',
 
     ];
+
     protected $casts = [
         'status' => 'boolean',
     ];

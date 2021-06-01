@@ -439,7 +439,7 @@ class CategorySeeder extends Seeder
                     'url' => $categoryChild->url,
                     'meta_desc' => $categoryChild->meta_desc,
 
-                ));
+                )); 
                 foreach ($categoryChild->children as $categorySubChild) {
                     $nestedData->children()->create(array(
                         'name' => $categorySubChild->name,

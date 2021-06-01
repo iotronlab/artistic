@@ -15,9 +15,6 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
-use App\Orchid\Screens\Vendor\VendorEditScreen;
-use App\Orchid\Screens\Vendor\VendorListScreen;
-
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -111,9 +108,3 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
-
-Route::screen('vendor/{post?}', VendorEditScreen::class)
-    ->name('platform.vendor.edit');
-
-Route::screen('vendors', VendorListScreen::class)
-    ->name('platform.vendor.list');

@@ -115,21 +115,21 @@ class ProductController extends Controller
         $product->increment('view_count', 1);
 
         if ($product->type == 'simple') {
-            $product->load('categories', 'vendor', 'stocks', 'stocks.address');
+            $product->load('categories', 'flat', 'vendor', 'stocks', 'stocks.address');
 
-            dd($product);
-            $categories = $product->categories;
-            foreach ($categories as $key => $category) {
-                $parent = $categories->where('parent_id', $category->id);
-                if ($parent->isNotEmpty()) {
-                    $categories->forget($key);
-                }
-            }
+            // dd($product);
+            // $categories = $product->categories;
+            // foreach ($categories as $key => $category) {
+            //     $parent = $categories->where('parent_id', $category->id);
+            //     if ($parent->isNotEmpty()) {
+            //         $categories->forget($key);
+            //     }
+            // }
 
-
+            //  dd($product);
             return response()->json([
-                'product' => (new ProductResource($product)),
-                'categories' => CategoryIndexResource::collection($categories),
+                'product' => new ProductResource($product),
+                //'categories' => CategoryIndexResource::collection($categories),
                 'attributes' => ProductAttributeResource::collection($product->attribute_values),
             ], 200);
         } else {

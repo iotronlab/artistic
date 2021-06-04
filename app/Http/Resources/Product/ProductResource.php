@@ -13,12 +13,17 @@ class ProductResource extends ProductIndexResource
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+    public function __construct($resource)
+    {
+        $this->productHelper = app('App\Helpers\ProductHelper');
+        parent::__construct($resource);
+    }
     public function toArray($request)
     {
         $product = $this->product ? $this->product : $this->flat;
 
         return array_merge(parent::toArray($request), [
-            'categories'      => CategoryIndexResource::collection($this->categories),
+            'base_category' =>   $this->productHelper->getProductBaseCategory($this->whenLoaded('categories')),
             'short_description'      => $this->flat->short_description,
             'description'      => $this->flat->description,
             'meta_title'      => $this->flat->meta_title,
@@ -37,7 +42,7 @@ class ProductResource extends ProductIndexResource
             'stock'                  => $product->stockCount(),
             'images'                 => ProductImageResource::collection($product->images),
             'reviews'                => VendorReviewResource::collection($product->vendor->reviews),
-            'categories' => CategoryIndexResource::collection($product->categories),
+            'categories' => CategoryIndexResource::collection($this->whenLoaded('categories')),
             //merge variants for configurable product
             $this->mergeWhen($product->getTypeInstance()->isComposite(), [
                 'variants'           => Self::collection($this->variants),

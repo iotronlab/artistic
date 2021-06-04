@@ -27,15 +27,16 @@ class ProductHelper
     public function getProductBaseCategory($categories)
     {
         // $images = $product ? $product->images : null;
+
         $baseCategory = null;
         foreach ($categories as $key => $category) {
             // $parent = $categories->where('parent_id', $category->id);
             if ($category->pivot->base_category == true) {
                 $baseCategory = $category;
-            } else {
-                $baseCategory = null;
+                //  dd($baseCategory);
             }
         }
+        // dd($baseCategory);
         return $baseCategory;
     }
 

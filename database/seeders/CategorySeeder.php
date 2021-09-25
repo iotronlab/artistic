@@ -442,7 +442,7 @@ class CategorySeeder extends Seeder
                     'meta_desc' => $categoryChild->meta_desc,
                     'image_path' => $this->categoryImageHelper->getCategoryImage($category->url),
 
-                ));
+                )); 
                 foreach ($categoryChild->children as $categorySubChild) {
                     $nestedData->children()->updateOrCreate(array(
                         'name' => $categorySubChild->name,

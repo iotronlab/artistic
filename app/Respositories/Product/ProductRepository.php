@@ -20,6 +20,7 @@ use App\Scoping\Scopes\MaterialScope;
 use App\Scoping\Scopes\MediumScope;
 use App\Scoping\Scopes\NewScope;
 use App\Scoping\Scopes\PriceScope;
+use App\Scoping\Scopes\ProductSortScope;
 use App\Scoping\Scopes\SizeScope;
 use App\Scoping\Scopes\StockScope;
 use Illuminate\Container\Container as App;
@@ -97,6 +98,7 @@ class ProductRepository extends Repository
             'material' => new MaterialScope(),
             'medium' => new MediumScope(),
             'category' => new CategoryScope(),
+            'sort' => new ProductSortScope(),
             // 'stock' => new StockScope()
         ];
     }

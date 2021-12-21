@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
             CategoryFilterAttributesSeeder::class,
             //StockSeeder::class,
             CustomerGroupSeeder::class,
-            ShippingMethodSeeder::class,
-            TaxCategoryTableSeeder::class
+            // ShippingMethodSeeder::class,
+            // TaxCategoryTableSeeder::class
         ]);
     }
 }

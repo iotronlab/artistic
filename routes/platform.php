@@ -17,6 +17,24 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+// Screens
+//use App\Orchid\Screens\Catalog\Products\Simple\Product_Simple_ListScreen;
+//use App\Orchid\Screens\Catalog\Products\Simple\Product_Simple_EditScreen;
+//use App\Orchid\Screens\Catalog\Products\Configuable\Product_Configurable_ListScreen;
+//use App\Orchid\Screens\Catalog\Products\Configuable\Product_Configurable_EditScreen;
+
+use App\Orchid\Screens\Catalog\Product\ProductListScreen;
+use App\Orchid\Screens\Catalog\Product\SimpleProductEditScreen;
+use App\Orchid\Screens\Catalog\Product\ConfigurableProductEditScreen;
+
+use App\Orchid\Screens\Catalog\Product\ProductWizardScreen;
+
+
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -108,3 +126,16 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+
+// Artistic Api Routes
+
+// Product Section
+// Simple
+Route::screen('catalog/products',ProductListScreen::class)->name('platform.catalog.product.list');
+
+// Individual Creation
+Route::screen('catalog/product/simple/{product?}',SimpleProductEditScreen::class)->name('platform.catalog.product.simple.edit');
+Route::screen('catalog/product/configurable/{product?}',ConfigurableProductEditScreen::class)->name('platform.catalog.product.configurable.edit');
+// Mixed Creation
+
+Route::screen('catalog/product/wizard',ProductWizardScreen::class)->name('platform.catalog.product.wizard');

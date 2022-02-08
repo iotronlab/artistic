@@ -56,6 +56,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'client_url' => env('CLIENT_URL','http://localhost/web/'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -174,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\ShipRocketServiceProvider::class,
     ],

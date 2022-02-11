@@ -47,12 +47,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('code')
                 ->list([
                     Menu::make('Products')
-                        ->icon('bag')
+                        ->icon('bag')->route('platform.catalog.product.list'),
 //                        ->title('Product Section')
-                        ->list([
-                            Menu::make('Simple')->icon('bag'),
-                            Menu::make('Configurable')->icon('bag')
-                        ]),
+//                        ->list([
+//                            Menu::make('Simple')->icon('bag')->route('platform.catalog.product.simple.list'),
+//                            Menu::make('Configurable')->icon('bag')
+//                        ]),
                     Menu::make('Categories')->icon('heart'),
                     Menu::make('Attributes')->icon('heart'),
                     Menu::make('Attribute Families')->icon('heart'),

@@ -39,9 +39,9 @@ class ProductRepository extends Repository
     /**
      * Create a new repository instance.
      *
-     * @param  \App\Repositories\Attribute\AttributeRepository  $attributeRepository
-     * @param  \Illuminate\Container\Container  $app
-     * @return void
+     * @param \App\Repositories\Attribute\AttributeRepository $attributeRepository
+     * @param ProductFlatRepository $productFlatRepository
+     * @param \Illuminate\Container\Container $app
      */
 
     public function __construct(
@@ -65,6 +65,9 @@ class ProductRepository extends Repository
     {
         return Product::class;
     }
+
+
+
 
     public function getAll()
     {
@@ -108,8 +111,11 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
+        // Get Vendor Data
         $data['vendor_id'] = request()->user()->id;
+        // Get And Set Product Type Instance/Class From App/Types
         $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
+        // Create Product From App\Type Class->create
         $product = $typeInstance->create($data);
         return $product;
     }

@@ -13,16 +13,21 @@ use App\Models\Vendor\VendorAddress;
 use App\Repositories\Product\ProductRepository;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 class Product extends Model
 {
-    use HasFactory, CanBeScoped;
+    use HasFactory, CanBeScoped,AsSource,Filterable;
+
     protected $fillable = [
         'type',
         'attribute_family_id',
         'sku',
         'parent_id',
         'vendor_id'
+    ];
+    protected $filterable = [
+        'type','vendor_id'
     ];
 
     // protected $appends = ['in_stock'];
